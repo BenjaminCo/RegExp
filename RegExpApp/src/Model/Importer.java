@@ -4,8 +4,9 @@ import java.io.*;
 public class Importer {
 
 	/**
-	 * @param args
-	 * @return 
+	 * Lit un fichier et retourne son contenu
+	 * @param path L'adresse du fichier a lire
+	 * @return Retourne une String contenant le texte du fichier lu.
 	 */
 	public static String importerTexte(String path) {
 		String texte="";
