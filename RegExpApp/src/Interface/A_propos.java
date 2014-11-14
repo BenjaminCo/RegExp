@@ -24,8 +24,8 @@ import javax.swing.border.TitledBorder;
 public class A_propos extends JDialog {
 
 /**
- * Crée et affiche la fenetre A Propos
- * @param parent est la fenetre mère de la fenetre A Propos
+ * CrÃ©e et affiche la fenetre A Propos
+ * @param parent est la fenetre mÃ¨re de la fenetre A Propos
  * @param titre est le titre de la fenetre A Propos
  */
 	public A_propos(JFrame parent,String titre){
@@ -39,7 +39,7 @@ public class A_propos extends JDialog {
 	}
 	
 	/**
-	 * crée le panneau principal de la fenetre A Propos
+	 * crÃ©e le panneau principal de la fenetre A Propos
 	 * @return retourne le panneau principale de la fenetre A propos
 	 */
 	public JPanel panneau(){
@@ -74,9 +74,9 @@ public class A_propos extends JDialog {
 		
 		// On ajoute pan2 pan3  dans GrandCentre
 		
-		JPanel pan2 = new JPanel() ; // panneau correspondant à Université Toulouse 2
+		JPanel pan2 = new JPanel() ; // panneau correspondant Ã  UniversitÃ© Toulouse 2
 		
-		JPanel pan3 = new JPanel() ; // panneau correspondant à IUT de Blagnac
+		JPanel pan3 = new JPanel() ; // panneau correspondant Ã  IUT de Blagnac
 		
 		
 		GridLayout grid = new GridLayout(1,2);
@@ -95,8 +95,8 @@ public class A_propos extends JDialog {
 		// On ajoute pan4 et pan5  dans GrandSud
 		
 		
-		JPanel pan4 = new JPanel() ; // panneau correspondant à DUT INFO S3/Module MPA
-		JPanel pan5 = new JPanel() ; // panneau correspondant à la liste des membres de l'équipe et numéro de groupe
+		JPanel pan4 = new JPanel() ; // panneau correspondant Ã  DUT INFO S3/Module MPA
+		JPanel pan5 = new JPanel() ; // panneau correspondant Ã  la liste des membres de l'Ã©quipe et numÃ©ro de groupe
 	
 		GrandSud.setLayout(new BorderLayout());
 		
@@ -104,7 +104,7 @@ public class A_propos extends JDialog {
 		GrandSud.add(pan5);
 		
 		{
-			pan4.add(new JLabel("DUT Info S3 / Module MPA"));
+			pan4.add(new JLabel("DUT Info S3 / Module PTUT"));
 			
 			Border lol = BorderFactory.createRaisedBevelBorder();
 			pan4.setBorder(lol);
