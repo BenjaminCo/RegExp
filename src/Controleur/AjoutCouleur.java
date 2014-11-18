@@ -12,7 +12,7 @@ public class AjoutCouleur {
 		     m.appendReplacement(sb, "<font color='red'>"+m.group()+"</font>");
 		 }
 		 m.appendTail(sb);
-		return "<html>"+sb.toString()+"</html>";
+		return ("<html>"+sb.toString()+"</html>").replaceAll("\n", "<br/>");
 		
 	}
 	

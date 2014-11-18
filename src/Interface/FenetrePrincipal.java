@@ -59,14 +59,15 @@ public class FenetrePrincipal extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			texte.setText(AjoutCouleur.ajouterCouleur(texte.getText(), champDeSaisie.getText()));
-			
+			texte.setText(AjoutCouleur.ajouterCouleur(ControleurPrincipal.getTexte(), champDeSaisie.getText()));
+			System.out.println(AjoutCouleur.ajouterCouleur(ControleurPrincipal.getTexte(), champDeSaisie.getText()));
 				
 			}
 		});
 		this.add(panSud,BorderLayout.SOUTH);
 		
 		this.setVisible(true);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
