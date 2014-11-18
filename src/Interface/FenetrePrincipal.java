@@ -18,12 +18,15 @@ public class FenetrePrincipal extends JFrame {
 	private JFrame cetteFenetre;
 	private JLabel texte;
 	private JTextField champDeSaisie;
+	private ControleurPrincipal monControleur;
 	/**
+	 * @param controleurPrincipal 
 	 * @param args
 	 */
-	public FenetrePrincipal(){
+	public FenetrePrincipal(ControleurPrincipal controleurPrincipal){
 		super("RegExp");
 		cetteFenetre=this;
+		monControleur=controleurPrincipal;
 		this.setSize(new Dimension(500,400));
 		this.setLayout(new BorderLayout());
 		
@@ -41,7 +44,7 @@ public class FenetrePrincipal extends JFrame {
 			}
 		});
 		
-		texte=new JLabel(ControleurPrincipal.getTexte());
+		texte=new JLabel(monControleur.getTexteAfficher());
 		JPanel panMilieu=new JPanel();
 		this.add(panMilieu,BorderLayout.CENTER);
 		panMilieu.setLayout(new FlowLayout());
@@ -59,8 +62,8 @@ public class FenetrePrincipal extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			texte.setText(AjoutCouleur.ajouterCouleur(ControleurPrincipal.getTexte(), champDeSaisie.getText()));
-			System.out.println(AjoutCouleur.ajouterCouleur(ControleurPrincipal.getTexte(), champDeSaisie.getText()));
+			texte.setText(AjoutCouleur.ajouterCouleur(monControleur.getTexteAfficher(), champDeSaisie.getText()));
+			System.out.println(AjoutCouleur.ajouterCouleur(monControleur.getTexteAfficher(), champDeSaisie.getText()));
 				
 			}
 		});
@@ -69,9 +72,6 @@ public class FenetrePrincipal extends JFrame {
 		this.setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		FenetrePrincipal  fen=new FenetrePrincipal();
-	}
+	
 
 }

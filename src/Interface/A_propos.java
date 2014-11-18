@@ -118,9 +118,5 @@ public class A_propos extends JDialog {
 		return conteneur ;
 	}
 	
-public static void main(String[] args){
 
-	//A_propos() ap = new A_propos(parent, titre); 
-
-}
 }
