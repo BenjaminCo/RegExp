@@ -10,7 +10,11 @@ import javax.swing.*;
 
 import Controleur.AjoutCouleur;
 import Controleur.ControleurPrincipal;
-
+/**
+ * Permet l'affichage de l'interface utilisateur
+ * @author Benjamin
+ *
+ */
 public class FenetrePrincipal extends JFrame {
 	private JMenuBar barreDeMenu=new JMenuBar();
 	private JMenu aide=new JMenu("Aide");
@@ -20,8 +24,9 @@ public class FenetrePrincipal extends JFrame {
 	private JTextField champDeSaisie;
 	private ControleurPrincipal monControleur;
 	/**
-	 * @param controleurPrincipal 
-	 * @param args
+	 * Affiche la fenetre principale de l'application
+	 * @param controleurPrincipal Le controleurPrincipal de l'application
+	 * 
 	 */
 	public FenetrePrincipal(ControleurPrincipal controleurPrincipal){
 		super("RegExp");
