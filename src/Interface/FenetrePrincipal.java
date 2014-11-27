@@ -67,8 +67,8 @@ public class FenetrePrincipal extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			texte.setText(AjoutCouleur.ajouterCouleur(monControleur.getTexteAfficher(), champDeSaisie.getText()));
-			System.out.println(AjoutCouleur.ajouterCouleur(monControleur.getTexteAfficher(), champDeSaisie.getText()));
+			texte.setText(AjoutCouleur.ajouterCouleur(monControleur.getTexteAfficher(), champDeSaisie.getText(),"red"));
+			System.out.println(AjoutCouleur.ajouterCouleur(monControleur.getTexteAfficher(), champDeSaisie.getText(),"red"));
 			//ccc	
 			}
 		});
