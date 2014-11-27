@@ -11,7 +11,7 @@ public class Importer {
 	public static String importerTexte(String path) {
 		String texte="";
 		// TODO Auto-generated constructor stub
-		
+		//CC
 			try {
 				InputStream inputStream=new FileInputStream(path);
 				InputStreamReader inputStreamReader=new InputStreamReader(inputStream);
