@@ -90,6 +90,11 @@ public class FenetrePrincipal extends JFrame {
 		champDeSaisie.addKeyListener(new KeyListener() {
 			@Override
 			public void keyPressed(KeyEvent e) {
+
+				
+			}
+			@Override
+			public void keyReleased(KeyEvent e) {
 				vertrouge = vert;
 				vertrouge = AjoutCouleur.ajouterCouleur(vert, champDeSaisie.getText(),"red");
 				System.out.println("saisie : "+champDeSaisie.getText());
@@ -99,10 +104,7 @@ public class FenetrePrincipal extends JFrame {
 			//System.out.println(AjoutCouleur.ajouterCouleur(monControleur.getTexteAfficher(), champDeSaisie.getText(),"red"));
 				
 			//ccc	
-				
 			}
-			@Override
-			public void keyReleased(KeyEvent e) {}
 
 			@Override
 			public void keyTyped(KeyEvent e) {}
