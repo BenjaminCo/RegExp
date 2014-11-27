@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.beans.Expression;
 
 import javax.swing.*;
 
@@ -33,6 +34,8 @@ public class FenetrePrincipal extends JFrame {
 	 * @param controleurPrincipal Le controleurPrincipal de l'application
 	 * 
 	 */
+	
+	private String exprSolution;
 	public FenetrePrincipal(ControleurPrincipal controleurPrincipal){
 		super("RegExp");
 		cetteFenetre=this;
@@ -55,8 +58,9 @@ public class FenetrePrincipal extends JFrame {
 		});
 		
 		//AFFICHAGE
+		exprSolution=monControleur.getRegExp();
 		sanscouleur = monControleur.getTexteAfficher();
-		vert = AjoutCouleur.ajouterCouleur(sanscouleur, monControleur.getRegExp(),"green");
+		vert = AjoutCouleur.ajouterCouleur(sanscouleur, null ,exprSolution);
 		//texte=new JLabel(monControleur.getTexteAfficher());
 		texte=new JLabel(vert);
 		JPanel panMilieu=new JPanel();
@@ -95,12 +99,20 @@ public class FenetrePrincipal extends JFrame {
 			}
 			@Override
 			public void keyReleased(KeyEvent e) {
-				vertrouge = vert;
-				vertrouge = AjoutCouleur.ajouterCouleur(vert, champDeSaisie.getText(),"red");
-				System.out.println("saisie : "+champDeSaisie.getText());
-				System.out.println("vert rouge : "+vertrouge);
+				
+				
+				if (champDeSaisie.getText().equals("")) {
+					texte.setText( AjoutCouleur.ajouterCouleur(sanscouleur,null,exprSolution));
+				}else{
+					texte.setText( AjoutCouleur.ajouterCouleur(sanscouleur,champDeSaisie.getText(),exprSolution));
+				}
+					
+			
+				//System.out.println("saisie : "+champDeSaisie.getText());
+				//System.out.println("vert rouge : "+vertrouge);
 			//texte.setText(AjoutCouleur.ajouterCouleur(monControleur.getTexteAfficher(), champDeSaisie.getText(),"red"));
-				texte.setText(vertrouge);
+				
+				
 			//System.out.println(AjoutCouleur.ajouterCouleur(monControleur.getTexteAfficher(), champDeSaisie.getText(),"red"));
 				
 			//ccc	

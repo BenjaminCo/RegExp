@@ -32,10 +32,10 @@ public class ControleurPrincipal {
 		//texteModifie=AjoutCouleur.ajouterCouleur(texteNonModifie, RegExp);
 		//System.out.println("cc");
 		//System.out.println(texteModifie);
-		texteAffiche=("<html>"+texteNonModifie+"</html>").replaceAll("\n", "<br/>");
+		
 		//System.out.println(texteAffiche);
 		
-		return texteAffiche;
+		return texteNonModifie;
 	}
 	
 	public String getRegExp() {
