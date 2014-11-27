@@ -32,6 +32,26 @@ public class Importer {
 		
 		return texte;
 	}
-	
+	public static String importerExpression(String path){
+		String texte="";
+		try {
+			InputStream inputStream=new FileInputStream(path);
+			InputStreamReader inputStreamReader=new InputStreamReader(inputStream);
+			BufferedReader bufferedReader=new BufferedReader(inputStreamReader);
+			String ligne;
+			while((ligne=bufferedReader.readLine())!=null){
+				texte+=ligne;
+			}
+			bufferedReader.close();
+		} catch (FileNotFoundException e) {
+			
+			e.printStackTrace();
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		return texte;
+		
+	}
 
 }

@@ -40,7 +40,7 @@ public class ControleurPrincipal {
 	
 	public String getRegExp() {
 		// TODO Auto-generated method stub
-		texteNonModifie=Importer.importerTexte("textes/texteTest.regexp");
+		texteNonModifie=Importer.importerExpression("textes/texteTest.regexp");
 		//RegExp=Importer.importerTexte("textes/texteTest.regexp");
 		//texteModifie=AjoutCouleur.ajouterCouleur(texteNonModifie, RegExp);
 		//System.out.println("cc");
