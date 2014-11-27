@@ -25,7 +25,9 @@ public class FenetrePrincipal extends JFrame {
 	private JLabel texte;
 	private JTextField champDeSaisie;
 	private ControleurPrincipal monControleur;
-	private String biloute ="";
+	private String sanscouleur ="";
+	private String vert ="";
+	private String vertrouge="";
 	/**
 	 * Affiche la fenetre principale de l'application
 	 * @param controleurPrincipal Le controleurPrincipal de l'application
@@ -52,9 +54,11 @@ public class FenetrePrincipal extends JFrame {
 			}
 		});
 		
-		biloute = AjoutCouleur.ajouterCouleur(monControleur.getTexteAfficher(), monControleur.getRegExp(),"green");
+		//AFFICHAGE
+		sanscouleur = monControleur.getTexteAfficher();
+		vert = AjoutCouleur.ajouterCouleur(sanscouleur, monControleur.getRegExp(),"green");
 		//texte=new JLabel(monControleur.getTexteAfficher());
-		texte=new JLabel(biloute);
+		texte=new JLabel(vert);
 		JPanel panMilieu=new JPanel();
 		this.add(panMilieu,BorderLayout.CENTER);
 		panMilieu.setLayout(new FlowLayout());
@@ -68,17 +72,17 @@ public class FenetrePrincipal extends JFrame {
 		panSud.add(champDeSaisie);
 		JButton BoutonDeValidation=new JButton("Valider");
 		panSud.add(BoutonDeValidation);
-		System.out.println(biloute);
+		
 		BoutonDeValidation.addActionListener(new ActionListener() {
 			
 			
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("debut  " +biloute);
-				biloute = AjoutCouleur.ajouterCouleur(biloute, champDeSaisie.getText(),"red");
+				vertrouge = vert;
+				vertrouge = AjoutCouleur.ajouterCouleur(vert, champDeSaisie.getText(),"red");
 			//texte.setText(AjoutCouleur.ajouterCouleur(monControleur.getTexteAfficher(), champDeSaisie.getText(),"red"));
-				texte.setText(biloute);
+				texte.setText(vertrouge);
 			//System.out.println(AjoutCouleur.ajouterCouleur(monControleur.getTexteAfficher(), champDeSaisie.getText(),"red"));
-				System.out.println("fin  "+biloute);
+				
 			//ccc	
 			}
 		});
