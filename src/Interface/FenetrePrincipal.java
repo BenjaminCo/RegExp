@@ -73,7 +73,7 @@ public class FenetrePrincipal extends JFrame {
 		JButton BoutonDeValidation=new JButton("Valider");
 		panSud.add(BoutonDeValidation);
 		
-		BoutonDeValidation.addActionListener(new ActionListener() {
+		/*BoutonDeValidation.addActionListener(new ActionListener() {
 			
 			
 			public void actionPerformed(ActionEvent e) {
@@ -85,12 +85,20 @@ public class FenetrePrincipal extends JFrame {
 				
 			//ccc	
 			}
-		});
+		});*/
 		
 		champDeSaisie.addKeyListener(new KeyListener() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				System.err.println("ok");
+				vertrouge = vert;
+				vertrouge = AjoutCouleur.ajouterCouleur(vert, champDeSaisie.getText(),"red");
+				System.out.println("saisie : "+champDeSaisie.getText());
+				System.out.println("vert rouge : "+vertrouge);
+			//texte.setText(AjoutCouleur.ajouterCouleur(monControleur.getTexteAfficher(), champDeSaisie.getText(),"red"));
+				texte.setText(vertrouge);
+			//System.out.println(AjoutCouleur.ajouterCouleur(monControleur.getTexteAfficher(), champDeSaisie.getText(),"red"));
+				
+			//ccc	
 				
 			}
 			@Override
