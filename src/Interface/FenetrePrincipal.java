@@ -76,16 +76,11 @@ public class FenetrePrincipal extends JFrame {
 		});
 		
 		champDeSaisie.addKeyListener(new KeyListener() {
-			
-		
-
-			
 			@Override
 			public void keyPressed(KeyEvent e) {
 				System.err.println("ok");
 				
 			}
-
 			@Override
 			public void keyReleased(KeyEvent e) {}
 
