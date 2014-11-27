@@ -69,7 +69,7 @@ public class FenetrePrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			texte.setText(AjoutCouleur.ajouterCouleur(monControleur.getTexteAfficher(), champDeSaisie.getText()));
 			System.out.println(AjoutCouleur.ajouterCouleur(monControleur.getTexteAfficher(), champDeSaisie.getText()));
-			//cc	
+			//ccc	
 			}
 		});
 		this.add(panSud,BorderLayout.SOUTH);
