@@ -27,13 +27,13 @@ public class AjoutCouleur {
 		 if(couleur.equals("green")){
 		 while (m.find()) {
 			// System.out.println("ololol   " +m.group());
-		     m.appendReplacement(sb, "<font color='green'>"+m.group()+"</font>");
+		     m.appendReplacement(sb, "<span style='background:green'>"+m.group()+"</span>");
 		 }
 		 }
 		 else {
 			 while (m.find()) {
 				// System.out.println("ololol" +m.group());
-			     m.appendReplacement(sb, "<font color='red'>"+m.group()+"</font>");
+			     m.appendReplacement(sb, "<u style='color:red'>"+m.group()+"</u>");
 			 }
 		 }
 		 
