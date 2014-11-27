@@ -16,7 +16,7 @@ public class AjoutCouleur {
 	 */
 	public static String ajouterCouleur(String texteATester, String texteATrouver){
 		
-		
+		//PEDALE
 		 Pattern p = Pattern.compile(texteATrouver);
 		 Matcher m = p.matcher(texteATester);
 		 StringBuffer sb = new StringBuffer();
