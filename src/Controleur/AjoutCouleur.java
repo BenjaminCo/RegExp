@@ -19,7 +19,7 @@ public class AjoutCouleur {
 		//System.out.println(texteATester);
 		//System.out.println(texteATrouver);
 		
-		 Pattern p = Pattern.compile("(\n)|"+"("+texteATrouver+")");
+		 Pattern p = Pattern.compile("(\n)|"+"("+solutionATrouver+")");
 		 Matcher m = p.matcher(texteATester);
 		 StringBuffer sb = new StringBuffer();
 		 
@@ -45,14 +45,14 @@ public class AjoutCouleur {
 		
 		
 		 
-		 p = Pattern.compile("(<u style='color:red'>)|(</u>)|"+"("+solutionATrouver+")");
+		 p = Pattern.compile("(<span style='background:green'>)|(</span>)|(<br/>)|"+"("+texteATrouver+")");
 		 m = p.matcher(sb.toString());
 		 sb = new StringBuffer();
 		while (m.find()) {
 			// System.out.println("ololol" +m.group());
-			System.out.println(m.group(3));
-			if (m.group(3)!=null) {
-		    	m.appendReplacement(sb, "<u style='color:red'>"+m.group(3)+"</u>");
+			System.out.println(m.group(4));
+			if (m.group(4)!=null) {
+		    	m.appendReplacement(sb, "<u style='color:red'>"+m.group(4)+"</u>");
 			}
 		 }
 		m.appendTail(sb);
