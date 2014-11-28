@@ -19,7 +19,7 @@ public class AjoutCouleur {
 		//System.out.println(texteATester);
 		//System.out.println(texteATrouver);
 		
-		 Pattern p = Pattern.compile("(\n)|"+"("+solutionATrouver+")|"+"("+texteATrouver+")");
+		 Pattern p = Pattern.compile("(\n)|"+"("+texteATrouver+")");
 		 Matcher m = p.matcher(texteATester);
 		 StringBuffer sb = new StringBuffer();
 		 
@@ -37,26 +37,26 @@ public class AjoutCouleur {
 				if (m.group(2)!=null) {
 					 m.appendReplacement(sb, "<span style='background:green'>"+m.group(2)+"</span>");
 				}
-				System.out.println(m.group(3));
-				if (m.group(3)!=null) {
-			    	m.appendReplacement(sb, "<u style='color:red'>"+m.group(3)+"</u>");
-				}
+				
 			    
 			 }
-		 
-		 
-			 while (m.find()) {
-				// System.out.println("ololol" +m.group());
-			    
-			 }
-		 
 		 
 		 m.appendTail(sb);
-		//System.out.println("lololol");
-		// sb.replaceAll("<font color='red'><font color='green'>", "</font></font>");
-		 System.out.println(sb.toString());
-		return "<html>"+sb.toString()+"</html>";
 		
+		
+		 
+		 p = Pattern.compile("(<u style='color:red'>)|(</u>)|"+"("+solutionATrouver+")");
+		 m = p.matcher(sb.toString());
+		 sb = new StringBuffer();
+		while (m.find()) {
+			// System.out.println("ololol" +m.group());
+			System.out.println(m.group(3));
+			if (m.group(3)!=null) {
+		    	m.appendReplacement(sb, "<u style='color:red'>"+m.group(3)+"</u>");
+			}
+		 }
+		m.appendTail(sb);
+		return "<html>"+sb.toString()+"</html>";
 	}
 	/*
 	public static void main(String[] args) {
