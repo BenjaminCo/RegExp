@@ -3,6 +3,7 @@ package Interface;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -32,6 +33,8 @@ public class FenetrePrincipal extends JFrame {
 	
 	private String vert1="";
 	private String rouge1="";
+	private String affReponse="";
+	private JLabel labReponse;
 	
 	/**
 	 * Affiche la fenetre principale de l'application
@@ -75,26 +78,28 @@ public class FenetrePrincipal extends JFrame {
 		
 		
 		JPanel panSud=new JPanel();
+		panSud.setLayout(new GridLayout(2, 1));
 		champDeSaisie=new JTextField();
 		champDeSaisie.setPreferredSize(new Dimension(200,30));
-		panSud.add(champDeSaisie);
-		JButton BoutonDeValidation=new JButton("Valider");
-		panSud.add(BoutonDeValidation);
+		JButton BoutonDeReponse=new JButton("Réponse");
 		
-		/*BoutonDeValidation.addActionListener(new ActionListener() {
-			
-			
+		JPanel pan=new JPanel();
+		pan.add(champDeSaisie);
+		pan.add(BoutonDeReponse);
+		panSud.add(pan);
+		labReponse=new JLabel(affReponse);
+		panSud.add(labReponse);
+		labReponse.setHorizontalAlignment(JLabel.CENTER);
+		labReponse.setVerticalAlignment(JLabel.CENTER);
+		BoutonDeReponse.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
-				vertrouge = vert;
-				vertrouge = AjoutCouleur.ajouterCouleur(vert, champDeSaisie.getText(),"red");
-			//texte.setText(AjoutCouleur.ajouterCouleur(monControleur.getTexteAfficher(), champDeSaisie.getText(),"red"));
-				texte.setText(vertrouge);
-			//System.out.println(AjoutCouleur.ajouterCouleur(monControleur.getTexteAfficher(), champDeSaisie.getText(),"red"));
+				affReponse="La reponse était : "+exprSolution ;
+				labReponse.setText(affReponse);
 				
-			//ccc	
+				
 			}
-		});*/
-		
+		});
 		champDeSaisie.addKeyListener(new KeyListener() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -133,7 +138,13 @@ public class FenetrePrincipal extends JFrame {
 				
 				//System.out.println(rouge1);
 				
-				//if(rouge1.equals(vert1)){System.out.println("cc");}
+				if(rouge1.equals(vert1)){
+					affReponse="Bonne Réponse";
+					labReponse.setText(affReponse);
+				}else{
+					affReponse="";
+					labReponse.setText(affReponse);
+				}
 				
 				
 			
