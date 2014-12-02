@@ -96,6 +96,7 @@ public class FenetrePrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				affReponse="La reponse était : "+exprSolution ;
 				labReponse.setText(affReponse);
+				champDeSaisie.setText(exprSolution);
 				
 				
 			}
@@ -141,6 +142,7 @@ public class FenetrePrincipal extends JFrame {
 				if(rouge1.equals(vert1)){
 					affReponse="Bonne Réponse";
 					labReponse.setText(affReponse);
+					
 				}else{
 					affReponse="";
 					labReponse.setText(affReponse);
