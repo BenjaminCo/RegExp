@@ -33,7 +33,7 @@ public class AjoutCouleur {
 					m.appendReplacement(sb, "<br/>");
 				}
 				
-				System.out.println(m.group(2));
+				//System.out.println(m.group(2));
 				if (m.group(2)!=null) {
 					 m.appendReplacement(sb, "<span style='background:green'>"+m.group(2)+"</span>");
 				}
@@ -50,7 +50,7 @@ public class AjoutCouleur {
 		 sb = new StringBuffer();
 		while (m.find()) {
 			// System.out.println("ololol" +m.group());
-			System.out.println(m.group(4));
+			//System.out.println(m.group(4));
 			if (m.group(4)!=null) {
 		    	m.appendReplacement(sb, "<u style='color:red'>"+m.group(4)+"</u>");
 			}

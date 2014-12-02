@@ -29,6 +29,10 @@ public class FenetrePrincipal extends JFrame {
 	private String sanscouleur ="";
 	private String vert ="";
 	private String vertrouge="";
+	
+	private String vert1="";
+	private String rouge1="";
+	
 	/**
 	 * Affiche la fenetre principale de l'application
 	 * @param controleurPrincipal Le controleurPrincipal de l'application
@@ -100,12 +104,45 @@ public class FenetrePrincipal extends JFrame {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				
-				
+
+				vert1 = AjoutCouleur.ajouterCouleur(sanscouleur,null,exprSolution);
 				if (champDeSaisie.getText().equals("")) {
 					texte.setText( AjoutCouleur.ajouterCouleur(sanscouleur,null,exprSolution));
+					
+					
+					
 				}else{
 					texte.setText( AjoutCouleur.ajouterCouleur(sanscouleur,champDeSaisie.getText(),exprSolution));
+					rouge1 = AjoutCouleur.ajouterCouleur(sanscouleur,champDeSaisie.getText(),null);
 				}
+				
+				
+				// verifier => valider & exprSolution 
+				/////////////////////////////////////////////////
+				//VALIDATION
+				///////////////////////////////////////////////
+				
+				
+				
+				//System.out.println(vert1);
+				
+				
+				rouge1=rouge1.replaceAll("<u style='color:red'>", "<span style='background:green'>");
+				
+				rouge1=rouge1.replaceAll("</u>","</span>");
+				
+				//System.out.println(rouge1);
+				
+				//if(rouge1.equals(vert1)){System.out.println("cc");}
+				
+				
+			
+				
+				
+				//////////////////////////////////////////:
+				
+				
+				
 					
 			
 				//System.out.println("saisie : "+champDeSaisie.getText());
