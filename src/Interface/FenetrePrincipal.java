@@ -120,6 +120,8 @@ public class FenetrePrincipal extends JFrame {
 				}else{
 					texte.setText( AjoutCouleur.ajouterCouleur(sanscouleur,champDeSaisie.getText(),exprSolution));
 					rouge1 = AjoutCouleur.ajouterCouleur(sanscouleur,champDeSaisie.getText(),null);
+					
+					
 				}
 				
 				

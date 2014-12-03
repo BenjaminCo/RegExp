@@ -71,11 +71,11 @@ public class AjoutCouleur {
 			html=true;
 		 }
 		m.appendTail(sb);
-		/*if(html){return sb.toString();}
+		if(html){return sb.toString();}
 		else {
 		return "<html>"+sb.toString()+"</html>";
-		}*/
-		return "<html>"+sb.toString()+"</html>";
+		}
+		//return "<html>"+sb.toString()+"</html>";
 	}
 	
 	
@@ -255,7 +255,7 @@ public class AjoutCouleur {
 	public static void main(String[] args) {
 		
 		String sanscouleur1=Importer.importerTexte("textes/texteTest.txt");
-		//sanscouleur1=AjoutCouleur.ajouterCouleur(sanscouleur1,null,null);
+		sanscouleur1=AjoutCouleur.ajouterCouleur(sanscouleur1,null,null);
 		System.out.println(sanscouleur1);
 
 		
@@ -264,7 +264,7 @@ public class AjoutCouleur {
 		System.out.println(vert1);
 		String rouge1 = AjoutCouleur.ajouterCouleur(sanscouleur1,"ceci",null);
 		System.out.println(rouge1);
-		System.out.println("cc");
+		//System.out.println("cc");
 		System.out.println(fusion(sanscouleur1, rouge1, vert1));
 		//System.out.println(fusion("plo<br/>p", "p<p>lo<br/>p", "pl<p>o<br/>p"));
 	}
