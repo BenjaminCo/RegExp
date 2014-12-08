@@ -1,5 +1,7 @@
 package Controleur;
 
+import java.util.ArrayList;
+
 import Interface.FenetrePrincipal;
 import Model.Importer;
 
@@ -14,13 +16,25 @@ public class ControleurPrincipal {
 	private String RegExp;
 	private String texteATrouver;
 	private String texteModifie;
+	
+	
+	private ArrayList<Plage> solution;//à initialiser
+	private ArrayList<Plage> utilisateur;//à initialiser
+	
 	/**
 	 * Lancement de l'application
 	 */
 	public ControleurPrincipal() {
 		// TODO Auto-generated constructor stub
 		new FenetrePrincipal(this);
+		
+		
 	}
+	
+	
+	
+	
+	
 	/**
 	 * Permet d'obtenir le texte issu d'un fichier texte transposé au format HTML
 	 * @return Une String comportant le texte issu d'un fichier texte transposé au format HTML

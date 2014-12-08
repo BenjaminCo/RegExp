@@ -46,4 +46,9 @@ private int fin;
 	public void setFin(int fin) {
 		this.fin = fin;
 	}
+	@Override
+	public String toString() {
+		return "Plage [debut=" + debut + ", fin=" + fin + "]";
+	}
+	
 }
