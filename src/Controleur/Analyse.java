@@ -14,13 +14,13 @@ public class Analyse {
 	/**
 	 * Analyse un texte à l'aide d'une expression régulière et retourne une liste de Plages
 	 * @param texte le texte à analyser
-	 * @param pathRegex l'expressin régulière à compiler
+	 * @param exprRegex l'expression régulière à compiler
 	 * @return La liste de plages résultant de l'analyse
 	 * @see Plage
 	 */
-	public static ArrayList<Plage> analyser(String texte,String pathRegex){
+	public static ArrayList<Plage> analyser(String texte,String exprRegex){
 		ArrayList<Plage> listePlage=new ArrayList<Plage>();
-		Pattern p = Pattern.compile(pathRegex);
+		Pattern p = Pattern.compile(exprRegex);
 		Matcher m = p.matcher(texte);
 		
 		while (m.find()) {
