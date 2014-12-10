@@ -1,6 +1,9 @@
 package Controleur;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+
+import javax.swing.DebugGraphics;
 
 import Model.Importer;
 /**
@@ -13,8 +16,8 @@ public class Exercice {
 	private String regExp;
 	
 	private ArrayList<Plage> solution;
-	private ArrayList<Plage> utilisateur;//à initialiser
-	
+	private ArrayList<Plage> utilisateur;
+	private ArrayList<Plage> commune;
 	/**
 	 * Crée un nouvel exercice 
 	 * @param pathTexte l'emplacement du fichier comportant le texte
@@ -34,9 +37,36 @@ public class Exercice {
 				+ "]";
 	}
 	
+	public void realiserExercice(String exprReg){
+		utilisateur=Analyse.analyser(texte, exprReg);
+		
+	}
+	/**
+	 * Définit les plages commmunes entre les plages solutions et les plages utilisateurs
+	 */
+	public void comparerPlages(){
+		//version non optimisée
+		for(int i=0;i<solution.size();i++){
+			
+			for(int j=0;j<utilisateur.size();i++){
+				//Plages strictements égales
+				if((utilisateur.get(j).getDebut()==solution.get(i).getDebut())&&(utilisateur.get(j).getFin()==solution.get(i).getFin())){
+					commune.add(new Plage(solution.get(i).getDebut(),solution.get(i).getFin()));
+					
+				}
+				
+				
+				
+			}
+		}
+	}
 	//Ceci est un test
 	public static void main(String[] args) {
-		System.out.println(new Exercice("textes/texteTest.txt","textes/texteTest.regexp"));
+		Exercice exo=new Exercice("textes/texteTest.txt","textes/texteTest.regexp");
+		exo.realiserExercice("Ce");
+		System.out.println(exo);
+		
+		
 	}
 	
 }
