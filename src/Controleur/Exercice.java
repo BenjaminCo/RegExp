@@ -51,10 +51,17 @@ public class Exercice {
 			for(int j=0;j<utilisateur.size();i++){
 				//Plages strictements égales
 				if((utilisateur.get(j).getDebut()==solution.get(i).getDebut())&&(utilisateur.get(j).getFin()==solution.get(i).getFin())){
+					//Ajout de la plage à commune
 					commune.add(new Plage(solution.get(i).getDebut(),solution.get(i).getFin()));
-					
+				//plage utilisateur compris dans la plage solution	
+				}else if((utilisateur.get(j).getDebut()>=solution.get(i).getDebut())&&(utilisateur.get(j).getFin()<=solution.get(i).getFin())){
+					//Ajout de la plage utilisateur à commune
+					commune.add(utilisateur.get(j));
+					//plage solution compris dans la plage utilisateur
+				}else if((utilisateur.get(j).getDebut()<=solution.get(i).getDebut())&&(utilisateur.get(j).getFin()>=solution.get(i).getFin())){
+					commune.add(solution.get(i));
 				}
-				
+				// implémenter les plages qui se chevauchent
 				
 				
 			}
