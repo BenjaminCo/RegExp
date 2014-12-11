@@ -43,12 +43,12 @@ public class Exercice {
 
 	public void realiserExercice(String exprReg){
 		utilisateur=Analyse.analyser(texte, exprReg);
-		
+		comparerPlages();
 	}
 	/**
 	 * Définit les plages commmunes entre les plages solutions et les plages utilisateurs
 	 */
-	public void comparerPlages(){
+	private void comparerPlages(){
 		commune=new ArrayList<Plage>();
 		for(int i=0;i<solution.size();i++){
 			
@@ -76,11 +76,12 @@ public class Exercice {
 			}
 		}
 	}
+	
 	//Ceci est un test
 	public static void main(String[] args) {
 		Exercice exo=new Exercice("textes/texteTest.txt","textes/texteTest.regexp");
 		exo.realiserExercice("ce|te");
-		exo.comparerPlages();
+		
 		System.out.println(exo);
 		
 		
