@@ -30,13 +30,17 @@ public class Exercice {
 		
 	}
 
+	
+	
 	@Override
 	public String toString() {
 		return "Exercice [texte=" + texte + ", regExp=" + regExp
 				+ ", solution=" + solution + ", utilisateur=" + utilisateur
-				+ "]";
+				+ ", commune=" + commune + "]";
 	}
-	
+
+
+
 	public void realiserExercice(String exprReg){
 		utilisateur=Analyse.analyser(texte, exprReg);
 		
@@ -45,10 +49,10 @@ public class Exercice {
 	 * Définit les plages commmunes entre les plages solutions et les plages utilisateurs
 	 */
 	public void comparerPlages(){
-		//version non optimisée
+		commune=new ArrayList<Plage>();
 		for(int i=0;i<solution.size();i++){
 			
-			for(int j=0;j<utilisateur.size();i++){
+			for(int j=0;j<utilisateur.size();j++){
 				//Plages strictements égales
 				if((utilisateur.get(j).getDebut()==solution.get(i).getDebut())&&(utilisateur.get(j).getFin()==solution.get(i).getFin())){
 					//Ajout de la plage à commune
@@ -62,6 +66,11 @@ public class Exercice {
 					commune.add(solution.get(i));
 				}
 				// implémenter les plages qui se chevauchent
+				else if((utilisateur.get(j).getDebut()<=solution.get(i).getDebut())&&(utilisateur.get(j).getFin()<=solution.get(i).getFin())&&(utilisateur.get(j).getFin()>=solution.get(i).getDebut())){
+					commune.add(new Plage(solution.get(i).getDebut(), utilisateur.get(j).getFin()));
+				}else if((utilisateur.get(j).getDebut()>=solution.get(i).getDebut())&&(utilisateur.get(j).getFin()>=solution.get(i).getFin())&&(solution.get(i).getFin()>=utilisateur.get(j).getDebut())){
+					commune.add(new Plage(utilisateur.get(j).getDebut(),solution.get(i).getFin()));
+				}
 				
 				
 			}
@@ -70,7 +79,8 @@ public class Exercice {
 	//Ceci est un test
 	public static void main(String[] args) {
 		Exercice exo=new Exercice("textes/texteTest.txt","textes/texteTest.regexp");
-		exo.realiserExercice("Ce");
+		exo.realiserExercice("ce|te");
+		exo.comparerPlages();
 		System.out.println(exo);
 		
 		
