@@ -5,6 +5,8 @@ import java.util.Iterator;
 
 import javax.swing.DebugGraphics;
 
+import org.hamcrest.core.IsEqual;
+
 import Model.Importer;
 /**
  * Un exercice
@@ -18,6 +20,11 @@ public class Exercice {
 	private ArrayList<Plage> solution;
 	private ArrayList<Plage> utilisateur;
 	private ArrayList<Plage> commune;
+	
+	private String texteColore;
+	private String baliseOuvranteCouleurUtilisateur, baliseFermanteCouleurUtilisateur, baliseOuvranteCouleurSolution, baliseFermanteCouleurSolution;
+	private String balisesOuvranteCouleurCommune;
+	private String balisesFermanteCouleurCommune;
 	/**
 	 * Crée un nouvel exercice 
 	 * @param pathTexte l'emplacement du fichier comportant le texte
@@ -28,6 +35,12 @@ public class Exercice {
 		regExp=Importer.importerExpression(pathRegexp);
 		solution=Analyse.analyser(texte, regExp);
 		
+		baliseOuvranteCouleurSolution="<span style='background:green'>";
+		baliseFermanteCouleurSolution="</span>";
+		baliseOuvranteCouleurUtilisateur="<u style='color:red'>";
+		baliseFermanteCouleurUtilisateur="</u>";
+		balisesOuvranteCouleurCommune=baliseOuvranteCouleurSolution+baliseOuvranteCouleurUtilisateur;
+		balisesFermanteCouleurCommune=baliseFermanteCouleurUtilisateur+baliseFermanteCouleurSolution;
 	}
 
 	
@@ -40,11 +53,63 @@ public class Exercice {
 	}
 
 
-
+	/**
+	 * Permet de réaliser l'exercice à partir de l'expression régulière rentrée par l'utilisateur.
+	 * @param exprReg L'expression régulière rentrée par l'utilisateur.
+	 */
 	public void realiserExercice(String exprReg){
 		utilisateur=Analyse.analyser(texte, exprReg);
 		comparerPlages();
+		coloration();
 	}
+	
+	/**
+	 * Permet de créer un texte coloré en fonction des listes de plages: commune,utilisateur,solution
+	 */
+	private void coloration(){
+		texteColore=texte;
+		
+		for(int i=0;i<commune.size();i++){
+			//insertion
+			texteColore=insererChaine(texteColore, balisesOuvranteCouleurCommune, commune.get(i).getDebut());
+			
+			
+		}
+		
+	}
+	
+
+
+
+	/**
+	 *  Insérer une chaine de caractère dans une String à un index <strong>Et répercute les décalages sur les plages de l'exercice</strong>.
+	 * @param chaineAInserer String à insérer.
+	 * @param index Entier localisant l'insertion.
+	 * @param chaineCible La String devant subir l'insertion.
+	 * @return La String avec l'insertion de la chaine à l'index voulu.
+	 * 
+	 * 
+	 */
+	private String insererChaine(String chaineCible, String chaineAInserer,int index){
+		decaler(index, chaineAInserer.length());
+		
+		String b=chaineCible.substring(0,index);
+		String c=chaineCible.substring(index);
+		chaineCible=b+chaineAInserer+c;
+		
+		return chaineCible;
+		
+	}
+	/**
+	 * Permet de décaler toutes les plages de l'exercice
+	 * @param index l'index à partir du quel les Plages doivent etre décalés
+	 * @param decalage le nombre de décalges voulus
+	 */
+	private void decaler(int index, int decalage) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	/**
 	 * Définit les plages commmunes entre les plages solutions et les plages utilisateurs
 	 */
