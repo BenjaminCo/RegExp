@@ -21,6 +21,11 @@ public class Exercice {
 	private ArrayList<Plage> utilisateur;
 	private ArrayList<Plage> commune;
 	
+	//pour coloration
+	private ArrayList<Plage> solutionBis;
+	private ArrayList<Plage> utilisateurBis;
+	private ArrayList<Plage> communeBis;
+	
 	private String texteColore;
 	private String baliseOuvranteCouleurUtilisateur, baliseFermanteCouleurUtilisateur, baliseOuvranteCouleurSolution, baliseFermanteCouleurSolution;
 	private String balisesOuvranteCouleurCommune;
@@ -35,6 +40,7 @@ public class Exercice {
 		regExp=Importer.importerExpression(pathRegexp);
 		solution=Analyse.analyser(texte, regExp);
 		
+		//ici on choisi la couleur de la coloration
 		baliseOuvranteCouleurSolution="<span style='background:green'>";
 		baliseFermanteCouleurSolution="</span>";
 		baliseOuvranteCouleurUtilisateur="<u style='color:red'>";
@@ -43,14 +49,39 @@ public class Exercice {
 		balisesFermanteCouleurCommune=baliseFermanteCouleurUtilisateur+baliseFermanteCouleurSolution;
 	}
 
-	
-	
+
+
 	@Override
 	public String toString() {
 		return "Exercice [texte=" + texte + ", regExp=" + regExp
 				+ ", solution=" + solution + ", utilisateur=" + utilisateur
-				+ ", commune=" + commune + "]";
+				+ ", commune=" + commune + ", solutionBis=" + solutionBis
+				+ ", utilisateurBis=" + utilisateurBis + ", communeBis="
+				+ communeBis + ", texteColore=" + texteColore
+				+ ", baliseOuvranteCouleurUtilisateur="
+				+ baliseOuvranteCouleurUtilisateur
+				+ ", baliseFermanteCouleurUtilisateur="
+				+ baliseFermanteCouleurUtilisateur
+				+ ", baliseOuvranteCouleurSolution="
+				+ baliseOuvranteCouleurSolution
+				+ ", baliseFermanteCouleurSolution="
+				+ baliseFermanteCouleurSolution
+				+ ", balisesOuvranteCouleurCommune="
+				+ balisesOuvranteCouleurCommune
+				+ ", balisesFermanteCouleurCommune="
+				+ balisesFermanteCouleurCommune + "]";
 	}
+
+
+
+
+
+
+
+
+
+
+
 
 
 	/**
@@ -69,11 +100,54 @@ public class Exercice {
 	private void coloration(){
 		texteColore=texte;
 		
+		utilisateurBis= (ArrayList<Plage>) utilisateur.clone();
+		solutionBis= (ArrayList<Plage>) solution.clone();
+		communeBis= (ArrayList<Plage>) commune.clone();
+		
+		//supression des doublons
+		for(int i=0;i<communeBis.size();i++){
+			Plage plageCommune=communeBis.get(i);
+			for(int j=0;j<solutionBis.size();j++){
+				Plage plageSolution=solutionBis.get(j);
+					//Plage solution comprise dans commune
+				 if(((plageCommune.getDebut()<=plageSolution.getDebut())&&(plageCommune.getFin()>=plageSolution.getFin()))){
+					  solutionBis.remove(j);
+					  //commune comprise dans solution
+				 }else if(((plageCommune.getDebut()>plageSolution.getDebut())&&(plageCommune.getFin()<plageSolution.getFin()))){
+					 solutionBis.add(new Plage(plageSolution.getDebut(), plageCommune.getDebut()));
+					 solutionBis.add(new Plage(plageCommune.getFin(), plageSolution.getFin()));
+					 solutionBis.remove(j);
+					  //les plages qui se chevauchent
+				 }else if((plageSolution.getDebut()<plageCommune.getDebut())&&(plageSolution.getFin()>plageCommune.getDebut())&&(plageCommune.getFin()>=plageSolution.getFin())){
+					 solutionBis.get(j).setFin(plageCommune.getDebut());
+				 }else if((plageSolution.getDebut()>=plageCommune.getDebut())&&(plageSolution.getDebut()<plageCommune.getFin())&&(plageCommune.getFin()<plageSolution.getFin())){
+					 solutionBis.get(j).setDebut(plageCommune.getFin());
+				 }
+			}
+			for(int k=0;k<utilisateurBis.size();k++){
+				Plage plageUtilisateur=utilisateurBis.get(k);
+				//Plage utilisateur comprise dans commune
+				 if(((plageCommune.getDebut()<=plageUtilisateur.getDebut())&&(plageCommune.getFin()>=plageUtilisateur.getFin()))){
+					  utilisateurBis.remove(k);
+					  //commune comprise dans utilisateur
+				 }else if(((plageCommune.getDebut()>plageUtilisateur.getDebut())&&(plageCommune.getFin()<plageUtilisateur.getFin()))){
+					 utilisateurBis.add(new Plage(plageUtilisateur.getDebut(), plageCommune.getDebut()));
+					 utilisateurBis.add(new Plage(plageCommune.getFin(), plageUtilisateur.getFin()));
+					 utilisateurBis.remove(k);
+					  //les plages qui se chevauchent
+				 }else if((plageUtilisateur.getDebut()<plageCommune.getDebut())&&(plageUtilisateur.getFin()>plageCommune.getDebut())&&(plageCommune.getFin()>=plageUtilisateur.getFin())){
+					 utilisateurBis.get(k).setFin(plageCommune.getDebut());
+				 }else if((plageUtilisateur.getDebut()>=plageCommune.getDebut())&&(plageUtilisateur.getDebut()<plageCommune.getFin())&&(plageCommune.getFin()<plageUtilisateur.getFin())){
+					 utilisateurBis.get(k).setDebut(plageCommune.getFin());
+				 }
+			}
+		}
+		
 		for(int i=0;i<commune.size();i++){
 			//insertion
-			texteColore=insererChaine(texteColore, balisesOuvranteCouleurCommune, commune.get(i).getDebut());
+			insererChaine( balisesOuvranteCouleurCommune, commune.get(i).getDebut());
 			
-			
+			decalerDebut(commune.get(i).getDebut(), balisesOuvranteCouleurCommune.length());
 		}
 		
 	}
@@ -82,22 +156,23 @@ public class Exercice {
 
 
 	/**
-	 *  Insérer une chaine de caractère dans une String à un index <strong>Et répercute les décalages sur les plages de l'exercice</strong>.
+	 *  Insérer une String dans texteColore à un index.
 	 * @param chaineAInserer String à insérer.
 	 * @param index Entier localisant l'insertion.
-	 * @param chaineCible La String devant subir l'insertion.
-	 * @return La String avec l'insertion de la chaine à l'index voulu.
+	 * 
+	 * 
 	 * 
 	 * 
 	 */
-	private String insererChaine(String chaineCible, String chaineAInserer,int index){
-		decaler(index, chaineAInserer.length());
+	private void insererChaine(String chaineAInserer,int index){
 		
-		String b=chaineCible.substring(0,index);
-		String c=chaineCible.substring(index);
-		chaineCible=b+chaineAInserer+c;
 		
-		return chaineCible;
+		String b=texteColore.substring(0,index);
+		String c=texteColore.substring(index);
+		texteColore=b+chaineAInserer+c;
+		
+		
+		
 		
 	}
 	/**
@@ -105,8 +180,19 @@ public class Exercice {
 	 * @param index l'index à partir du quel les Plages doivent etre décalés
 	 * @param decalage le nombre de décalges voulus
 	 */
-	private void decaler(int index, int decalage) {
+	private void decalerDebut(int index, int decalage) {
 		// TODO Auto-generated method stub
+		
+		/*
+		for(int i=0;i<commune.size();i++){
+			if (commune.get(i).getDebut()>=index) {
+				commune.get(i).setDebut(commune.get(i).getDebut()+decalage);
+			}
+			if (commune.get(i).getFin()>=index) {
+				commune.get(i).setFin(commune.get(i).getFin()+decalage);
+			}
+			
+		}*/
 		
 	}
 	
@@ -115,13 +201,16 @@ public class Exercice {
 	 */
 	private void comparerPlages(){
 		commune=new ArrayList<Plage>();
+		
+		
+				
 		for(int i=0;i<solution.size();i++){
 			
 			for(int j=0;j<utilisateur.size();j++){
 				//Plages strictements égales
 				if((utilisateur.get(j).getDebut()==solution.get(i).getDebut())&&(utilisateur.get(j).getFin()==solution.get(i).getFin())){
 					//Ajout de la plage à commune
-					commune.add(new Plage(solution.get(i).getDebut(),solution.get(i).getFin()));
+					commune.add(solution.get(i));
 				//plage utilisateur compris dans la plage solution	
 				}else if((utilisateur.get(j).getDebut()>=solution.get(i).getDebut())&&(utilisateur.get(j).getFin()<=solution.get(i).getFin())){
 					//Ajout de la plage utilisateur à commune
@@ -130,7 +219,7 @@ public class Exercice {
 				}else if((utilisateur.get(j).getDebut()<=solution.get(i).getDebut())&&(utilisateur.get(j).getFin()>=solution.get(i).getFin())){
 					commune.add(solution.get(i));
 				}
-				// implémenter les plages qui se chevauchent
+				// les plages qui se chevauchent
 				else if((utilisateur.get(j).getDebut()<=solution.get(i).getDebut())&&(utilisateur.get(j).getFin()<=solution.get(i).getFin())&&(utilisateur.get(j).getFin()>=solution.get(i).getDebut())){
 					commune.add(new Plage(solution.get(i).getDebut(), utilisateur.get(j).getFin()));
 				}else if((utilisateur.get(j).getDebut()>=solution.get(i).getDebut())&&(utilisateur.get(j).getFin()>=solution.get(i).getFin())&&(solution.get(i).getFin()>=utilisateur.get(j).getDebut())){
