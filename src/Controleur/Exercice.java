@@ -152,10 +152,12 @@ public class Exercice {
 		//insertion des couleur pour commune
 		for(int i=0;i<communeBis.size();i++){
 			//insertion des balises ouvrante
-			insererChaine( balisesOuvranteCouleurCommune, communeBis.get(i).getDebut());
+			int index=communeBis.get(i).getDebut();
+			insererChaine( balisesOuvranteCouleurCommune,index);
 			//décalage des Plages communes
+			
 			for(int j=0;j<communeBis.size();j++){
-				if (communeBis.get(j).getDebut()>communeBis.get(i).getDebut()) {
+				if (communeBis.get(j).getDebut()>=index) {
 					communeBis.get(j).setDebut(communeBis.get(j).getDebut()+balisesOuvranteCouleurCommune.length());
 					//car le début est avant la fin pas besoin de faire de deuxième condition
 					communeBis.get(j).setFin(communeBis.get(j).getFin()+balisesOuvranteCouleurCommune.length());
@@ -164,7 +166,7 @@ public class Exercice {
 			}
 			//décalage des plages solution
 			for (int k = 0; k < solutionBis.size(); k++) {
-				if (solutionBis.get(k).getDebut()>communeBis.get(i).getDebut()) {
+				if (solutionBis.get(k).getDebut()>=index) {
 					solutionBis.get(k).setDebut(solutionBis.get(k).getDebut()+balisesOuvranteCouleurCommune.length());
 					//car le début est avant la fin pas besoin de faire de deuxième condition
 					solutionBis.get(k).setFin(solutionBis.get(k).getFin()+balisesOuvranteCouleurCommune.length());
@@ -172,16 +174,44 @@ public class Exercice {
 			}
 			//décalage des plagesutilisateur
 			for (int k = 0; k < utilisateurBis.size(); k++) {
-				if (utilisateurBis.get(k).getDebut()>communeBis.get(i).getDebut()) {
+				if (utilisateurBis.get(k).getDebut()>=index) {
 					utilisateurBis.get(k).setDebut(utilisateurBis.get(k).getDebut()+balisesOuvranteCouleurCommune.length());
 					//car le début est avant la fin pas besoin de faire de deuxième condition
 					utilisateurBis.get(k).setFin(utilisateurBis.get(k).getFin()+balisesOuvranteCouleurCommune.length());
 				}
 			}
 			//insetion des balises fermantes
-			
+			index=communeBis.get(i).getFin();
+			insererChaine( balisesFermanteCouleurCommune,index );
+			//décalage des Plages communes
+			for(int j=0;j<communeBis.size();j++){
+				if (communeBis.get(j).getDebut()>=index) {
+					communeBis.get(j).setDebut(communeBis.get(j).getDebut()+balisesFermanteCouleurCommune.length());
+					//car le début est avant la fin pas besoin de faire de deuxième condition
+					communeBis.get(j).setFin(communeBis.get(j).getFin()+balisesFermanteCouleurCommune.length());
+				}
+				
+			}
+			//décalage des plages solution
+			for(int j=0;j<solutionBis.size();j++){
+				if (solutionBis.get(j).getDebut()>=index) {
+					solutionBis.get(j).setDebut(solutionBis.get(j).getDebut()+balisesFermanteCouleurCommune.length());
+					//car le début est avant la fin pas besoin de faire de deuxième condition
+					solutionBis.get(j).setFin(solutionBis.get(j).getFin()+balisesFermanteCouleurCommune.length());
+				}
+				
+			}
+			for(int j=0;j<utilisateurBis.size();j++){
+				if (utilisateurBis.get(j).getDebut()>=index) {
+					utilisateurBis.get(j).setDebut(utilisateurBis.get(j).getDebut()+balisesFermanteCouleurCommune.length());
+					//car le début est avant la fin pas besoin de faire de deuxième condition
+					utilisateurBis.get(j).setFin(utilisateurBis.get(j).getFin()+balisesFermanteCouleurCommune.length());
+				}
+				
+			}
 			
 		}
+		// on ne se préoccupe plus de communeBis vu que toutes les plages on était placés
 		//insertion des couleurs pour solution
 		for (int i = 0; i < solutionBis.size(); i++) {
 			
