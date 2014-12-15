@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.print.attribute.standard.PrinterResolution;
+
 /**
  * Analyse un texte à l'aide d'une expression régulière et retourne une liste de Plages 
  * 
@@ -11,6 +13,7 @@ import java.util.regex.Pattern;
  *
  */
 public class Analyse {
+	private static boolean montreException=true;
 	/**
 	 * Analyse un texte à l'aide d'une expression régulière et retourne une liste de Plages
 	 * @param texte le texte à analyser
@@ -20,13 +23,20 @@ public class Analyse {
 	 */
 	public static ArrayList<Plage> analyser(String texte,String exprRegex){
 		ArrayList<Plage> listePlage=new ArrayList<Plage>();
-		Pattern p = Pattern.compile(exprRegex);
-		Matcher m = p.matcher(texte);
+		try {
+			Pattern p = Pattern.compile(exprRegex);
 		
-		while (m.find()) {
-				listePlage.add(new Plage(m.start(), m.end()));
+			Matcher m = p.matcher(texte);
+			
+			while (m.find()) {
+					listePlage.add(new Plage(m.start(), m.end()));
+			}
+		} catch (Exception e) {
+			if(montreException){
+				System.out.println(e);
+			
+			}
 		}
-		
 		return listePlage;
 		
 	}
