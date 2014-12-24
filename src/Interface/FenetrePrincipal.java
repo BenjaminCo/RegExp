@@ -36,13 +36,12 @@ public class FenetrePrincipal extends JFrame {
 	private String affReponse="";
 	private JLabel labReponse;
 	
+	private String exprSolution;
 	/**
 	 * Affiche la fenetre principale de l'application
 	 * @param controleurPrincipal Le controleurPrincipal de l'application
 	 * 
 	 */
-	
-	private String exprSolution;
 	public FenetrePrincipal(ControleurPrincipal controleurPrincipal){
 		super("RegExp");
 		cetteFenetre=this;

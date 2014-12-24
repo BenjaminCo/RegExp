@@ -2,6 +2,7 @@ package Controleur;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.DebugGraphics;
 
@@ -53,6 +54,17 @@ public class Exercice {
 		balisesFermanteCouleurCommune=baliseFermanteCouleurUtilisateur+baliseFermanteCouleurSolution;
 	}
 
+	/**
+	 * Permet de cloner une liste
+	 * @param list La liste à cloner.
+	 * @return la liste clonée
+	 */
+	private static List<Plage> cloneList(List<Plage> list) {
+	    List<Plage> clone = new ArrayList<Plage>(list.size());
+	    for(Plage item: list) clone.add(item.clone());
+	    return clone;
+	}
+	
 
 
 	@Override
@@ -76,40 +88,43 @@ public class Exercice {
 				+ balisesFermanteCouleurCommune + "]";
 	}
 
-
-
-
-
-
-
-
-
-
+	/**
+	 * Vérifie si l'exercice est résolu ou non par l'utilisateur. Attention il se peut que le résultat soit mauvais en cas de plages concomittantes.
+	 *
+	 * @return un booléen vrais si l'exercice est résolu faux sinon.
+	 * 
+	 */
+	public boolean estResolu(){
+		
+		return solution.equals(utilisateur);
+	}
 
 
 
 	/**
 	 * Permet de réaliser l'exercice à partir de l'expression régulière rentrée par l'utilisateur.
-	 * @param exprReg L'expression régulière rentrée par l'utilisateur.
+	 * @param exprReg L'expression régulière entrée par l'utilisateur.
+	 * @return le texte avec les balises de coloration.
 	 */
-	public void realiserExercice(String exprReg){
+	public String realiserExercice(String exprReg){
 		utilisateur=Analyse.analyser(texte, exprReg);
 		comparerPlages();
 		coloration();
+		return texteColore;
 	}
 	
 	/**
 	 * Permet de créer un texte coloré en fonction des listes de plages: commune,utilisateur,solution
 	 */
-	@SuppressWarnings("unchecked")
+
 	private void coloration(){
 		
 		texteColore=texte;
 		
 		//clonage des variables
-		utilisateurBis= (ArrayList<Plage>) utilisateur.clone();
-		solutionBis= (ArrayList<Plage>) solution.clone();
-		communeBis= (ArrayList<Plage>) commune.clone();
+		utilisateurBis=(ArrayList<Plage>)cloneList(utilisateur);
+		solutionBis= (ArrayList<Plage>)cloneList(solution);
+		communeBis= (ArrayList<Plage>) cloneList(commune);
 		
 		//supression des doublons
 		for(int i=0;i<communeBis.size();i++){
@@ -201,6 +216,7 @@ public class Exercice {
 				}
 				
 			}
+			//décalage des plages utilisateur
 			for(int j=0;j<utilisateurBis.size();j++){
 				if (utilisateurBis.get(j).getDebut()>=index) {
 					utilisateurBis.get(j).setDebut(utilisateurBis.get(j).getDebut()+balisesFermanteCouleurCommune.length());
@@ -211,15 +227,82 @@ public class Exercice {
 			}
 			
 		}
-		// on ne se préoccupe plus de communeBis vu que toutes les plages on était placés
+		// /!\ on ne se préoccupe plus de communeBis vu que toutes les plages on était placé 
+		//=> les plages de commmuneBis ne reflèterons plus la réalité après
+		
 		//insertion des couleurs pour solution
 		for (int i = 0; i < solutionBis.size(); i++) {
+			int index=solutionBis.get(i).getDebut();
+			//insertion balises ouvrante
+			insererChaine(baliseOuvranteCouleurSolution,index);
+			//décalage plages solution
+			for(int j=0;j<solutionBis.size();j++){
+				if (solutionBis.get(j).getDebut()>=index) {
+					solutionBis.get(j).setDebut(solutionBis.get(j).getDebut()+baliseOuvranteCouleurSolution.length());
+					//car le début est avant la fin pas besoin de faire de deuxième condition
+					solutionBis.get(j).setFin(solutionBis.get(j).getFin()+baliseOuvranteCouleurSolution.length());
+				}
+				
+			}
+			//décalage plages utilisateur
+			for(int j=0;j<utilisateurBis.size();j++){
+				if (utilisateurBis.get(j).getDebut()>=index) {
+					utilisateurBis.get(j).setDebut(utilisateurBis.get(j).getDebut()+baliseOuvranteCouleurSolution.length());
+					//car le début est avant la fin pas besoin de faire de deuxième condition
+					utilisateurBis.get(j).setFin(utilisateurBis.get(j).getFin()+baliseOuvranteCouleurSolution.length());
+				}
+				
+			}
+			//insetion des balises fermantes
+			index=solutionBis.get(i).getFin();
+			insererChaine(baliseFermanteCouleurSolution,index);
+			
+			for(int j=0;j<solutionBis.size();j++){
+				if (solutionBis.get(j).getDebut()>=index) {
+					solutionBis.get(j).setDebut(solutionBis.get(j).getDebut()+baliseFermanteCouleurSolution.length());
+					//car le début est avant la fin pas besoin de faire de deuxième condition
+					solutionBis.get(j).setFin(solutionBis.get(j).getFin()+baliseFermanteCouleurSolution.length());
+				}
+				
+			}
+			//décalage plages utilisateur
+			for(int j=0;j<utilisateurBis.size();j++){
+				if (utilisateurBis.get(j).getDebut()>=index) {
+					utilisateurBis.get(j).setDebut(utilisateurBis.get(j).getDebut()+baliseFermanteCouleurSolution.length());
+					//car le début est avant la fin pas besoin de faire de deuxième condition
+					utilisateurBis.get(j).setFin(utilisateurBis.get(j).getFin()+baliseFermanteCouleurSolution.length());
+				}
+			}
 			
 		}
+		// /!\ on ne se préoccupe plus de utilisateurBis vu que toutes les plages on était placé 
+			//=> les plages de utilisateurBis ne reflèterons plus la réalité après
 		
 		//insertion des couleurs pour utilisateur
 		for (int i = 0; i < utilisateurBis.size(); i++) {
+			int index=utilisateurBis.get(i).getDebut();
+			//insertion balises ouvrante
+			insererChaine(baliseOuvranteCouleurUtilisateur,index);
+			//décalage plages utilisateur
+			for(int j=0;j<utilisateurBis.size();j++){
+				if (utilisateurBis.get(j).getDebut()>=index) {
+					utilisateurBis.get(j).setDebut(utilisateurBis.get(j).getDebut()+baliseOuvranteCouleurUtilisateur.length());
+					//car le début est avant la fin pas besoin de faire de deuxième condition
+					utilisateurBis.get(j).setFin(utilisateurBis.get(j).getFin()+baliseOuvranteCouleurUtilisateur.length());
+				}
+				
+			}
+			//insetion des balises fermantes
+			index=utilisateurBis.get(i).getFin();
+			insererChaine(baliseFermanteCouleurUtilisateur,index);
 			
+			for(int j=0;j<utilisateurBis.size();j++){
+				if (utilisateurBis.get(j).getDebut()>=index) {
+					utilisateurBis.get(j).setDebut(utilisateurBis.get(j).getDebut()+baliseFermanteCouleurUtilisateur.length());
+					//car le début est avant la fin pas besoin de faire de deuxième condition
+					utilisateurBis.get(j).setFin(utilisateurBis.get(j).getFin()+baliseFermanteCouleurUtilisateur.length());
+				}
+			}
 		}
 	}
 	
@@ -251,14 +334,7 @@ public class Exercice {
 	 * @param index l'index à partir du quel les Plages doivent etre décalés
 	 * @param decalage le nombre de décalges voulus
 	 */
-	private void decalerDebut(int index, int decalage) {
-		// TODO Auto-generated method stub
-		
-		
-		
-		
-		
-	}
+
 	
 	/**
 	 * Définit les plages commmunes entre les plages solutions et les plages utilisateurs
@@ -301,6 +377,7 @@ public class Exercice {
 		exo.realiserExercice("ce|te");
 		
 		System.out.println(exo);
+		System.out.println(exo.estResolu());
 		
 		
 	}

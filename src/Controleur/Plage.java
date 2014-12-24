@@ -51,20 +51,26 @@ private int fin;
 		return "Plage [debut=" + debut + ", fin=" + fin + "]";
 	}
 	@Override
-	protected Object clone() throws CloneNotSupportedException {
+	protected Plage clone()  {
 		// TODO Auto-generated method stub
-		Object o = null;
-		try {
-			// On récupère l'instance à renvoyer par l'appel de la 
-			// méthode super.clone()
-			o = super.clone();
-		} catch(CloneNotSupportedException cnse) {
-			// Ne devrait jamais arriver car nous implémentons 
-			// l'interface Cloneable
-			cnse.printStackTrace(System.err);
-		}
-		// on renvoie le clone
-		return o;
+		
+		return new Plage(debut, fin);
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Plage other = (Plage) obj;
+		if (debut != other.debut)
+			return false;
+		if (fin != other.fin)
+			return false;
+		return true;
 	}
 	
 	

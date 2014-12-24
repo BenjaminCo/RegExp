@@ -11,7 +11,7 @@ import Model.Importer;
  *
  */
 public class ControleurPrincipal {
-	Exercice exoActuel;
+	private Exercice exoActuel;
 	/**
 	 * Lancement de l'application
 	 */

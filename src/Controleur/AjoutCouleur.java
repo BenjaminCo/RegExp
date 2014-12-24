@@ -7,7 +7,7 @@ import Model.Importer;
 /**
  * Permet d'ajouter des balise de coloration dans un texte
  * @author Benjamin
- *
+ * @deprecated
  */
 public class AjoutCouleur {
 	private static ControleurPrincipal monControleur;
