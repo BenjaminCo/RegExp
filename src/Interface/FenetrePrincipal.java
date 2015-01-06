@@ -239,7 +239,7 @@ public class FenetrePrincipal extends JFrame {
 					texte.setText("<html>"
 							+ exo.realiserExercice(champDeSaisie.getText())
 							+ "</html>");
-					System.out.println(exo);
+					//System.out.println(exo);
 					// texte.setText(
 					// AjoutCouleur.ajouterCouleur(sanscouleur,champDeSaisie.getText(),exprSolution));
 					rouge1 = AjoutCouleur.ajouterCouleur(sanscouleur,
