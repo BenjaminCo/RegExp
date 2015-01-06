@@ -376,7 +376,7 @@ public class Exercice {
 		Exercice exo=new Exercice("textes/texteTest.txt","textes/texteTest.regexp");
 		exo.realiserExercice("ce|te");
 		
-		System.out.println(exo);
+		System.out.println(exo +"\n");
 		System.out.println(exo.estResolu());
 		
 		

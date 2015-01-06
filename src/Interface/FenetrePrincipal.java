@@ -14,6 +14,7 @@ import javax.swing.*;
 
 import Controleur.AjoutCouleur;
 import Controleur.ControleurPrincipal;
+import Controleur.Exercice;
 /**
  * Permet l'affichage de l'interface utilisateur
  * @author Benjamin
@@ -42,6 +43,15 @@ public class FenetrePrincipal extends JFrame {
 	 * @param controleurPrincipal Le controleurPrincipal de l'application
 	 * 
 	 */
+	
+	/*
+	Exercice exo=new Exercice("textes/texteTest.txt","textes/texteTest.regexp");
+	exo.realiserExercice("ce|te");
+	
+	System.out.println(exo);
+	System.out.println(exo.estResolu());
+	*/
+	
 	public FenetrePrincipal(ControleurPrincipal controleurPrincipal){
 		super("RegExp");
 		cetteFenetre=this;
@@ -62,13 +72,23 @@ public class FenetrePrincipal extends JFrame {
 				
 			}
 		});
+		//COLIGNON
+		
+		final Exercice exo=new Exercice("textes/texteTest.txt","textes/texteTest.regexp");
+		
+		
+		
 		
 		//AFFICHAGE
 		exprSolution=monControleur.getRegExp();
 		sanscouleur = monControleur.getTexteAfficher();
 		vert = AjoutCouleur.ajouterCouleur(sanscouleur, null ,exprSolution);
 		//texte=new JLabel(monControleur.getTexteAfficher());
+		
 		texte=new JLabel(vert);
+		
+		
+		
 		JPanel panMilieu=new JPanel();
 		this.add(panMilieu,BorderLayout.CENTER);
 		panMilieu.setLayout(new FlowLayout());
@@ -117,7 +137,10 @@ public class FenetrePrincipal extends JFrame {
 					
 					
 				}else{
-					texte.setText( AjoutCouleur.ajouterCouleur(sanscouleur,champDeSaisie.getText(),exprSolution));
+					
+					texte.setText("<html>"+exo.realiserExercice(champDeSaisie.getText())+"</html>");
+					System.out.println(exo);
+					//texte.setText( AjoutCouleur.ajouterCouleur(sanscouleur,champDeSaisie.getText(),exprSolution));
 					rouge1 = AjoutCouleur.ajouterCouleur(sanscouleur,champDeSaisie.getText(),null);
 					
 					
