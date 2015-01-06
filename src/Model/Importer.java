@@ -10,14 +10,30 @@ public class Importer {
 	 */
 	public static String importerTexte(String path) {
 		String texte="";
+		double aleat =  Math.random()*10;
+		
+		
+		System.out.println(aleat);
 		// TODO Auto-generated constructor stub
 		//CC
 			try {
+				
+				
+				
 				InputStream inputStream=new FileInputStream(path);
 				InputStreamReader inputStreamReader=new InputStreamReader(inputStream);
 				BufferedReader bufferedReader=new BufferedReader(inputStreamReader);
 				String ligne;
-				while((ligne=bufferedReader.readLine())!=null){
+				
+				/*
+				if(aleat>5){
+					while((ligne=bufferedReader.readLine())!=null&& ligne!="$"){
+						
+					}
+				}*/
+				
+				
+				while((ligne=bufferedReader.readLine())!=null&& ligne!="$"){
 					texte+=ligne+"\n";
 				}
 				bufferedReader.close();

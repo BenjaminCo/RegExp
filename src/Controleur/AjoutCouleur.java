@@ -252,7 +252,7 @@ public class AjoutCouleur {
 	}
 	
 	
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		
 		String sanscouleur1=Importer.importerTexte("textes/texteTest.txt");
 		sanscouleur1=AjoutCouleur.ajouterCouleur(sanscouleur1,null,null);
@@ -267,7 +267,7 @@ public class AjoutCouleur {
 		//System.out.println("cc");
 		System.out.println(fusion(sanscouleur1, rouge1, vert1));
 		//System.out.println(fusion("plo<br/>p", "p<p>lo<br/>p", "pl<p>o<br/>p"));
-	}
+	}*/
 	
 	
 
