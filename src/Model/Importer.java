@@ -13,7 +13,7 @@ public class Importer {
 		double aleat =  Math.random()*10;
 		
 		
-		System.out.println(aleat);
+		//System.out.println(aleat);
 		// TODO Auto-generated constructor stub
 		//CC
 			try {
