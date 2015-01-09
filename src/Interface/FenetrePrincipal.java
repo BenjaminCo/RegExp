@@ -236,9 +236,7 @@ public class FenetrePrincipal extends JFrame {
 
 				} else {
 
-					texte.setText("<html>"
-							+ exo.realiserExercice(champDeSaisie.getText())
-							+ "</html>");
+					texte.setText(exo.realiserExercice(champDeSaisie.getText()));
 					//System.out.println(exo);
 					// texte.setText(
 					// AjoutCouleur.ajouterCouleur(sanscouleur,champDeSaisie.getText(),exprSolution));

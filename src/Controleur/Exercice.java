@@ -304,6 +304,11 @@ public class Exercice {
 				}
 			}
 		}
+		//mise en place des balises html de début et de fin
+		texteColore="<html>"+texteColore+"</html>";
+		//mise en place des saut de lignes
+		texteColore=texteColore.replaceAll("\n", "<br/>");
+		
 	}
 	
 
