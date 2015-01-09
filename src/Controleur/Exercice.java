@@ -31,27 +31,23 @@ public class Exercice {
 	private String texteColore;
 	
 	//Paramètres de coloration
-	private String baliseOuvranteCouleurUtilisateur, baliseFermanteCouleurUtilisateur, baliseOuvranteCouleurSolution, baliseFermanteCouleurSolution;
-	private String balisesOuvranteCouleurCommune;
-	private String balisesFermanteCouleurCommune;
+	public static final String baliseOuvranteCouleurSolution="<span style='background:green'>";
+	public static final String baliseFermanteCouleurSolution="</span>";
+	public static final String baliseOuvranteCouleurUtilisateur="<u style='color:red'>";
+	public static final String baliseFermanteCouleurUtilisateur="</u>";
+	public static final String balisesOuvranteCouleurCommune=baliseOuvranteCouleurSolution+baliseOuvranteCouleurUtilisateur;
+	public static final String balisesFermanteCouleurCommune=baliseFermanteCouleurUtilisateur+baliseFermanteCouleurSolution;
 	/**
 	 * Crée un nouvel exercice 
-	 * @param pathTexte l'emplacement du fichier comportant le texte
-	 * @param pathRegexp l'emplacement du fichier comportant le path
+	 * @param texte la String comportant le texte
+	 * @param regExp la String comportant l' expression régulière Solution.
 	 */
-	public Exercice(String pathTexte,String pathRegexp) {
-		texte=Importer.importerTexte(pathTexte);
-		regExp=Importer.importerExpression(pathRegexp);
+	public Exercice(String texte,String regExp) {
 		
+		this.texte=texte;
+		this.regExp=regExp;
 		solution=Analyse.analyser(texte, regExp);
 		
-		//ici on choisi la couleur de la coloration
-		baliseOuvranteCouleurSolution="<span style='background:green'>";
-		baliseFermanteCouleurSolution="</span>";
-		baliseOuvranteCouleurUtilisateur="<u style='color:red'>";
-		baliseFermanteCouleurUtilisateur="</u>";
-		balisesOuvranteCouleurCommune=baliseOuvranteCouleurSolution+baliseOuvranteCouleurUtilisateur;
-		balisesFermanteCouleurCommune=baliseFermanteCouleurUtilisateur+baliseFermanteCouleurSolution;
 	}
 
 	/**
