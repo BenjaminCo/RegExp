@@ -1,6 +1,8 @@
 package Model;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Importer {
 
@@ -91,4 +93,21 @@ public class Importer {
 	public static void main(String[] args) {
 		importerTextesRepertoire("textes");
 	}
+	
+	
+	public static Map<String , String > importationTexte_Regxp(){
+		Map <String,String> map = new HashMap<>();
+		
+		
+		
+		
+		return null;
+		
+	}
+	
+	
+	
+	
+	
+	
 }

@@ -9,8 +9,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -23,7 +21,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -38,9 +36,9 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
-import Controleur.AjoutCouleur;
+
 import Controleur.ControleurPrincipal;
-import Controleur.Exercice;
+
 
 /**
  * Permet l'affichage de l'interface utilisateur
@@ -54,7 +52,7 @@ public class FenetrePrincipal extends JFrame {
 	
 	private JMenu aide = new JMenu("Aide");
 	private JMenuItem ItemAPropos = new JMenuItem("A Propos");
-	private JMenuItem Javadoc = new JMenuItem("Javadoc");
+
 	
 	private JFrame cetteFenetre;
 	private JLabel texte;
@@ -67,12 +65,6 @@ public class FenetrePrincipal extends JFrame {
 	private ControleurPrincipal monControleur;
 	
 	
-	private String sanscouleur = "";
-	private String vert = "";
-	private String vertrouge = "";
-
-	private String vert1 = "";
-	private String rouge1 = "";
 	private String affReponse = "";
 	private JLabel labReponse = new JLabel();;
 
@@ -104,91 +96,18 @@ public class FenetrePrincipal extends JFrame {
 		this.add(barreDeMenu, BorderLayout.NORTH);
 		barreDeMenu.add(aide);
 		aide.add(ItemAPropos);
-		aide.add(Javadoc);
+	
 		ItemAPropos.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				A_propos fenetreApropos = new A_propos(cetteFenetre, "A Propos");
 
 			}
 		});
-		/*
-		 * Javadoc.addActionListener(new ActionListener() {
-		 * 
-		 * @Override public void actionPerformed(ActionEvent e) {
-		 * 
-		 * 
-		 * } });
-		 */
-
-		Javadoc.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				try {
-				//Desktop.getDesktop().browse(new URI("C:/Users/nathan/Documents/GitHub/RegExp/doc/index.html"));
-					String curDir = System.getProperty("user.dir");
-					
-					
-				
-					System.out.println(curDir);
-					
-					
-						curDir=curDir+"\\doc\\index.html";
-						
-						
-					
-					System.out.println(curDir);
-					
-					
-					Pattern p = Pattern.compile(curDir);
-					
-					Matcher m = p.matcher("\\");
-					
-					StringBuffer sb = new StringBuffer();
-					
-					while (m.find()) {
-					
-					m.appendReplacement(sb,"/");
-					
-					}
-					m.appendTail(sb);
-					
-					System.out.println(sb.toString());
-					
-					curDir=sb.toString();
-
-					System.out.println(curDir);
-					Desktop.getDesktop().browse(new URI("file:///"+curDir));
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-					
-				} catch (URISyntaxException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-					
-				}
-			}
-		});
 		
-
+		
 		// AFFICHAGE
-		
-		
-		//vert=monControleur.resoudreExercice(null);
-		
-		//exprSolution = monControleur.getRegExp();
-	 	//sanscouleur = monControleur.getTexteAfficher();
-		
-		
-		
-		//vert = AjoutCouleur.ajouterCouleur(sanscouleur, null, exprSolution);
-		// texte=new JLabel(monControleur.getTexteAfficher());
-		
-		
+
 		JPanel conteneur = new JPanel(new BorderLayout());
 		
 		JPanel top = new JPanel();
@@ -242,14 +161,16 @@ public class FenetrePrincipal extends JFrame {
 				affReponse = "La reponse était : " + monControleur.getExerciceSolution();
 				labReponse.setText(affReponse);
 				champDeSaisie.setText(exprSolution);
+				//labReponse.setCursor(null);
+				
+				
 			}
 		});
 		BoutonDAide.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				labReponse
-						.setText("http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html");
+				labReponse.setText("http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html");
 				labReponse.setCursor(new Cursor(Cursor.HAND_CURSOR));
 				addListener(labReponse);
 
@@ -337,14 +258,17 @@ public class FenetrePrincipal extends JFrame {
 		this.add(conteneur);	
 		this.setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
 	}
 
 	
 	
 	
 	private void addListener(JLabel lb_url) {
+
 		lb_url.addMouseListener(new MouseAdapter() {
 			// Click sur le lien
+
 			public void mouseClicked(MouseEvent e) {
 				JLabel label = (JLabel) e.getSource();
 				String plainText = label.getText().replaceAll("\\<.*?\\>", "");

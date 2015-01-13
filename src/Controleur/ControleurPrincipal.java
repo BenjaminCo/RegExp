@@ -13,7 +13,7 @@ import Model.Importer;
 
 public class ControleurPrincipal {
 	private Exercice exoActuel;
-	private ArrayList<String> nomsFichiers;
+	private ArrayList<String> nomsFichiersTxt;
 	/**
 	 * Lancement de l'application
 	 */
@@ -22,7 +22,9 @@ public class ControleurPrincipal {
 		
 		
 		//création d'un nouveau exercice
-		nomsFichiers=Importer.importerTextesRepertoire("textes");
+		nomsFichiersTxt=Importer.importerTextesRepertoire("textes");
+		
+		
 		
 		String texte=Importer.importerTexte("textes/texteTest.txt");
 		String regExp=Importer.importerExpression("textes/texteTest.regexp",1);
