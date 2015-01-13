@@ -117,19 +117,17 @@ public class Importer {
 	}
 	
 	
-	public static Map<String , String > importationTexte_Regxp(){
+	public static Map<String , String > Association_Texte_Regxp(){
 		Map <String,String> map = new HashMap<>();
-		
-		
-		
-		
-		return null;
-		
+		ArrayList<String> nomsFichiers=importerTextesRepertoire("textes/Test");
+
+		for(int i=0;i<nomsFichiers.size();i++){
+			String F=nomsFichiers.get(i)+".txt";
+			//System.out.println( F);
+			//System.out.println( F.replaceAll(".txt", ".regExp"));
+			map.put(F, F.replaceAll(".txt", ".regExp"));
+		}
+		return map;
 	}
-	
-	
-	
-	
-	
 	
 }
