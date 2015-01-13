@@ -46,5 +46,13 @@ public class ControleurPrincipal {
 	public String getExerciceSolution(){
 		return exoActuel.getSolution();
 	}
+	
+	public void changerExercice(/*String difficulte*/){
+		
+		String texte=Importer.importerTexte("textes/texteTest1.txt");
+
+		String regExp=Importer.importerExpression("textes/texteTest.regexp",1);
+		exoActuel=new Exercice(texte,regExp);
+	}
 }
 
