@@ -144,16 +144,6 @@ public class FenetrePrincipal extends JFrame {
 
 					System.out.println(curDir);
 					Desktop.getDesktop().browse(new URI("file:///"+curDir));
-					
-					
-					
-
-					
-					
-					
-					
-					
-					
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -165,18 +155,25 @@ public class FenetrePrincipal extends JFrame {
 				}
 			}
 		});
-		// COLIGNON
+		
 
-		final Exercice exo = new Exercice("textes/texteTest.txt",
-				"textes/texteTest.regexp");
 
 		// AFFICHAGE
-		exprSolution = monControleur.getRegExp();
-		sanscouleur = monControleur.getTexteAfficher();
-		vert = AjoutCouleur.ajouterCouleur(sanscouleur, null, exprSolution);
+		
+		
+		
+		
+		//vert=monControleur.resoudreExercice(null);
+		
+		//exprSolution = monControleur.getRegExp();
+	 	//sanscouleur = monControleur.getTexteAfficher();
+		
+		
+		
+		//vert = AjoutCouleur.ajouterCouleur(sanscouleur, null, exprSolution);
 		// texte=new JLabel(monControleur.getTexteAfficher());
 
-		texte = new JLabel(vert);
+		texte = new JLabel(monControleur.resoudreExercice(null));
 
 		JPanel panMilieu = new JPanel();
 		this.add(panMilieu, BorderLayout.CENTER);
@@ -202,7 +199,7 @@ public class FenetrePrincipal extends JFrame {
 		BoutonDeReponse.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				affReponse = "La reponse était : " + exprSolution;
+				affReponse = "La reponse était : " + monControleur.getExerciceSolution();
 				labReponse.setText(affReponse);
 				champDeSaisie.setText(exprSolution);
 			}
@@ -227,21 +224,21 @@ public class FenetrePrincipal extends JFrame {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-
-				vert1 = AjoutCouleur.ajouterCouleur(sanscouleur, null,
-						exprSolution);
+				
+				
 				if (champDeSaisie.getText().equals("")) {
-					texte.setText(AjoutCouleur.ajouterCouleur(sanscouleur,
-							null, exprSolution));
+					texte.setText(monControleur.resoudreExercice(null));
 
 				} else {
-
-					texte.setText(exo.realiserExercice(champDeSaisie.getText()));
+					System.out.println("cc");
+					texte.setText(monControleur.resoudreExercice(champDeSaisie.getText()));
+					//System.out.println(exo.realiserExercice(champDeSaisie.getText()));
+					System.out.println("ha");
+					System.out.println(texte.getText());
 					//System.out.println(exo);
 					// texte.setText(
 					// AjoutCouleur.ajouterCouleur(sanscouleur,champDeSaisie.getText(),exprSolution));
-					rouge1 = AjoutCouleur.ajouterCouleur(sanscouleur,
-							champDeSaisie.getText(), null);
+					
 
 				}
 
@@ -252,14 +249,11 @@ public class FenetrePrincipal extends JFrame {
 
 				// System.out.println(vert1);
 
-				rouge1 = rouge1.replaceAll("<u style='color:red'>",
-						"<span style='background:green'>");
-
-				rouge1 = rouge1.replaceAll("</u>", "</span>");
+				
 
 				// System.out.println(rouge1);
 
-				if (rouge1.equals(vert1)) {
+				if (monControleur.estExerciceResolu()) {
 					affReponse = "Bonne Réponse";
 					labReponse.setText(affReponse);
 
@@ -291,6 +285,9 @@ public class FenetrePrincipal extends JFrame {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
+	
+	
+	
 	private void addListener(JLabel lb_url) {
 		lb_url.addMouseListener(new MouseAdapter() {
 			// Click sur le lien

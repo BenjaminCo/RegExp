@@ -18,28 +18,21 @@ public class ControleurPrincipal {
 	 */
 	public ControleurPrincipal() {
 		
-		new FenetrePrincipal(this);
+		
 		
 		//création d'un nouveau exercice
 		String texte=Importer.importerTexte("textes/texteTest.txt");
 		String regExp=Importer.importerExpression("textes/texteTest.regexp",1);
+		
 		exoActuel=new Exercice(texte,regExp);
 		
+		new FenetrePrincipal(this);
+		
 	}
-	
-	
-	
-	
-	
 	
 	public static void main(String[] args){
 		new ControleurPrincipal();
 	}
-
-
-
-
-
 
 	public String resoudreExercice(String regexpUtilisateur) {
 		
@@ -50,5 +43,8 @@ public class ControleurPrincipal {
 		return exoActuel.estResolu();
 	}
 
+	public String getExerciceSolution(){
+		return exoActuel.getSolution();
+	}
 }
 

@@ -61,7 +61,9 @@ public class Exercice {
 	    return clone;
 	}
 	
-
+	public String getSolution(){
+		return regExp;
+	}
 
 	@Override
 	public String toString() {
