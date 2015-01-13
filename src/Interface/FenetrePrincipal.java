@@ -21,14 +21,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
-
-
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -36,9 +34,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
-
 import Controleur.ControleurPrincipal;
-
 
 /**
  * Permet l'affichage de l'interface utilisateur
@@ -47,24 +43,22 @@ import Controleur.ControleurPrincipal;
  *
  */
 public class FenetrePrincipal extends JFrame {
-	
+
 	private JMenuBar barreDeMenu = new JMenuBar();
-	
+
 	private JMenu aide = new JMenu("Aide");
 	private JMenuItem ItemAPropos = new JMenuItem("A Propos");
 
-	
 	private JFrame cetteFenetre;
 	private JLabel texte;
 	private JTextField champDeSaisie = new JTextField();;
-	
+
 	private JButton BoutonDeReponse = new JButton("Réponse");
 	private JButton BoutonDAide = new JButton("Aide");
-	private JButton changerExo =new JButton("switch");
-	
+	private JButton changerExo = new JButton("switch");
+
 	private ControleurPrincipal monControleur;
-	
-	
+
 	private String affReponse = "";
 	private JLabel labReponse = new JLabel();;
 
@@ -90,13 +84,13 @@ public class FenetrePrincipal extends JFrame {
 		super("RegExp");
 		cetteFenetre = this;
 		monControleur = controleurPrincipal;
-		this.setSize(new Dimension(500, 400));
+		this.setSize(new Dimension(500, 300));
 		this.setLayout(new BorderLayout());
 
 		this.add(barreDeMenu, BorderLayout.NORTH);
 		barreDeMenu.add(aide);
 		aide.add(ItemAPropos);
-	
+
 		ItemAPropos.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -104,79 +98,88 @@ public class FenetrePrincipal extends JFrame {
 
 			}
 		});
-		
-		
+
 		// AFFICHAGE
 
 		JPanel conteneur = new JPanel(new BorderLayout());
-		
+
 		JPanel top = new JPanel();
 		JPanel mid = new JPanel();
 		JPanel bot = new JPanel();
-		
+
 		conteneur.add(top, BorderLayout.NORTH);
 		conteneur.add(mid, BorderLayout.CENTER);
 		conteneur.add(bot, BorderLayout.SOUTH);
-		
-		top.setBackground(new Color(125, 174, 163));
-		bot.setBackground(new Color(125, 174, 163));
-		mid.setBackground(new Color(125, 174, 163));
 
-		//---------------------------------------------------
-		//					Panel TOP
-		//---------------------------------------------------
+		
+		/*top.setBackground(new Color(169, 56, 56));
+		 * 
+		 * 	mid.setBackground(new Color(125, 174, 163));
+		 * 
+		 */
+		
+		top.setBackground(new Color(233, 0, 0));
+		mid.setBackground(new Color(243, 251, 0));
+		bot.setBackground(new Color(9, 154, 38));
+		
+		mid.setPreferredSize(new Dimension(100, 100));
+
+		// ---------------------------------------------------
+		// Panel TOP
+		// ---------------------------------------------------
 		texte = new JLabel(monControleur.resoudreExercice(null));
 
 		JPanel petitN = new JPanel();
-		
-		petitN.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.RAISED),
+
+		petitN.setBorder(new CompoundBorder(
+				new BevelBorder(BevelBorder.RAISED),
 				new EmptyBorder(0, 0, 0, 0)));
 		petitN.add(texte);
-		top.add(petitN);	
+		texte.setFont(new Font("Calibri", Font.PLAIN, 15));
+		top.add(petitN);
 		
-		
-		//---------------------------------------------------
-		//					Panel MID
-		//---------------------------------------------------
-		
-	
+		// ---------------------------------------------------
+		// Panel MID
+		// ---------------------------------------------------
+
 		JPanel petitCentre = new JPanel();
-		
+
 		petitCentre.setLayout(new FlowLayout());
 
 		TitledBorder title;
-		title = BorderFactory.createTitledBorder("Veuillez saisir votre regexp :");
+		title = BorderFactory
+				.createTitledBorder("Veuillez saisir votre regexp :");
 		petitCentre.setBorder(title);
 
 		champDeSaisie.setPreferredSize(new Dimension(200, 25));
 
 		petitCentre.add(champDeSaisie);
 		petitCentre.add(BoutonDeReponse);
-		petitCentre.add(BoutonDAide);	
-		
+		petitCentre.add(BoutonDAide);
 
 		BoutonDeReponse.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				affReponse = "La reponse était : " + monControleur.getExerciceSolution();
+				affReponse = "La reponse était : "
+						+ monControleur.getExerciceSolution();
 				labReponse.setText(affReponse);
 				champDeSaisie.setText(exprSolution);
-				//labReponse.setCursor(null);
-				
-				
+				// labReponse.setCursor(null);
+
 			}
 		});
 		BoutonDAide.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				labReponse.setText("http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html");
+				labReponse
+						.setText("http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html");
 				labReponse.setCursor(new Cursor(Cursor.HAND_CURSOR));
 				addListener(labReponse);
 
 			}
 		});
-				
+
 		mid.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.RAISED),
 				new EmptyBorder(0, 0, 0, 0)));
 		mid.add(petitCentre);
@@ -189,21 +192,20 @@ public class FenetrePrincipal extends JFrame {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				
-				
+
 				if (champDeSaisie.getText().equals("")) {
 					texte.setText(monControleur.resoudreExercice(null));
 
 				} else {
 					System.out.println("cc");
-					texte.setText(monControleur.resoudreExercice(champDeSaisie.getText()));
-					//System.out.println(exo.realiserExercice(champDeSaisie.getText()));
+					texte.setText(monControleur.resoudreExercice(champDeSaisie
+							.getText()));
+					// System.out.println(exo.realiserExercice(champDeSaisie.getText()));
 					System.out.println("ha");
 					System.out.println(texte.getText());
-					//System.out.println(exo);
+					// System.out.println(exo);
 					// texte.setText(
 					// AjoutCouleur.ajouterCouleur(sanscouleur,champDeSaisie.getText(),exprSolution));
-					
 
 				}
 
@@ -213,8 +215,6 @@ public class FenetrePrincipal extends JFrame {
 				// /////////////////////////////////////////////
 
 				// System.out.println(vert1);
-
-				
 
 				// System.out.println(rouge1);
 
@@ -244,26 +244,22 @@ public class FenetrePrincipal extends JFrame {
 			public void keyTyped(KeyEvent e) {
 			}
 		});
-		
-		//---------------------------------------------------
-		//					Panel BOT
-		//---------------------------------------------------
-		
+
+		// ---------------------------------------------------
+		// Panel BOT
+		// ---------------------------------------------------
+
 		bot.setLayout(new FlowLayout());
 		bot.add(labReponse);
-		
+
 		bot.add(changerExo);
-		
-		
-		this.add(conteneur);	
+
+		this.add(conteneur);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
+
 	}
 
-	
-	
-	
 	private void addListener(JLabel lb_url) {
 
 		lb_url.addMouseListener(new MouseAdapter() {
