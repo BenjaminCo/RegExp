@@ -122,10 +122,10 @@ public class Importer {
 		ArrayList<String> nomsFichiers=importerTextesRepertoire("textes/Test");
 
 		for(int i=0;i<nomsFichiers.size();i++){
-			String F=nomsFichiers.get(i)+".txt";
+			String Fichier=nomsFichiers.get(i)+".txt";
 			//System.out.println( F);
 			//System.out.println( F.replaceAll(".txt", ".regExp"));
-			map.put(F, F.replaceAll(".txt", ".regExp"));
+			map.put(Fichier, Fichier.replaceAll(".txt", ".regExp"));
 		}
 		return map;
 	}
