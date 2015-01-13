@@ -55,6 +55,56 @@ public class GestionnaireDeFichier {
 		}
 		
 	}
+	
+	//Mappage pour vérifier si on a fait toutes les lignes de regexp(sans ordre) , une fois que l'on a fait toutes les lignes on retourne un boolean visant 
+	// a faire changer le joueur d'exercice
+	public void exerciceSuivantSansOrdre() {
+		if(indiceLigneFichierRegexp < nombreDeLigneDuFichierRegexp){
+			indiceLigneFichierRegexp++;
+			setRegexp(Importer.importerExpression(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
+		}else{
+			indiceFichierActuel++;
+			nomFichierActuel=nomsFichiers.get(indiceFichierActuel);
+			setTexte(Importer.importerTexte(pathRepertoire+"/"+nomFichierActuel+".txt"));
+			
+			indiceLigneFichierRegexp=1;
+			setRegexp(Importer.importerExpression(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
+		}
+		
+	}
+	
+	//Si l'utilisteur veut vraiment changer de regExp a deviner (fichier .regexp)
+	public void RegexpSuivant(){
+		
+		if(indiceLigneFichierRegexp < nombreDeLigneDuFichierRegexp){
+			indiceLigneFichierRegexp++;
+			setRegexp(Importer.importerExpression(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
+		}
+	}
+	
+	public void RegexpPrecedent(){
+		
+		if(indiceLigneFichierRegexp >0){
+			indiceLigneFichierRegexp++;
+			setRegexp(Importer.importerExpression(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
+		}
+	}
+	
+	
+	//Si l'utilisateur veut vraiment changer d'exercice (fichier texte)
+	public void exercicePlusUn(){
+		indiceFichierActuel++;
+		nomFichierActuel=nomsFichiers.get(indiceFichierActuel);
+		setTexte(Importer.importerTexte(pathRepertoire+"/"+nomFichierActuel+".txt"));
+	}
+	
+	public void exerciceMoinsUn(){
+		indiceFichierActuel--;
+		nomFichierActuel=nomsFichiers.get(indiceFichierActuel);
+		setTexte(Importer.importerTexte(pathRepertoire+"/"+nomFichierActuel+".txt"));
+	}
+	
+	
 	/**
 	 * Permet d'obtenir le texte du fichier dernièrement importé.
 	 * @return une String comportant le texte du fichier dernièrement importé.
