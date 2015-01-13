@@ -84,30 +84,50 @@ public class Importer {
 		listefichiers=repertoire.list(); 
 		for (int j = 0; j < listefichiers.length; j++) {
 			if(listefichiers[j].endsWith(".txt")){
-				nomsFichiers.add(listefichiers[j]);
+				nomsFichiers.add(listefichiers[j].substring(0,listefichiers[j].length()-4));
 			}
 		}
 		
 		return nomsFichiers;
 	}
+	
+
+		public static int getNombreLigneFichier(String path) {
+			String str=null;
+			int count=0;
+			try {
+				FileInputStream fis = new FileInputStream(path);
+				LineNumberReader l = new LineNumberReader(new BufferedReader(new InputStreamReader(fis)));
+				while ((str=l.readLine())!=null)
+				{
+					count = l.getLineNumber();
+				}
+				l.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return count;
+			
+		}
+	
+		
 	public static void main(String[] args) {
 		importerTextesRepertoire("textes");
 	}
 	
 	
-	public static Map<String , String > importationTexte_Regxp(){
+	public static Map<String , String > Association_Texte_Regxp(){
 		Map <String,String> map = new HashMap<>();
-		
-		
-		
-		
-		return null;
-		
+		ArrayList<String> nomsFichiers=importerTextesRepertoire("textes/Test");
+
+		for(int i=0;i<nomsFichiers.size();i++){
+			String Fichier=nomsFichiers.get(i)+".txt";
+			//System.out.println( F);
+			//System.out.println( F.replaceAll(".txt", ".regExp"));
+			map.put(Fichier, Fichier.replaceAll(".txt", ".regExp"));
+		}
+		return map;
 	}
-	
-	
-	
-	
-	
 	
 }
