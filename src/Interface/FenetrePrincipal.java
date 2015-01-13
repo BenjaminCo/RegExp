@@ -12,11 +12,15 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -29,6 +33,10 @@ import java.awt.event.KeyListener;
 
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
 
 import Controleur.AjoutCouleur;
 import Controleur.ControleurPrincipal;
@@ -41,14 +49,24 @@ import Controleur.Exercice;
  *
  */
 public class FenetrePrincipal extends JFrame {
+	
 	private JMenuBar barreDeMenu = new JMenuBar();
+	
 	private JMenu aide = new JMenu("Aide");
 	private JMenuItem ItemAPropos = new JMenuItem("A Propos");
 	private JMenuItem Javadoc = new JMenuItem("Javadoc");
+	
 	private JFrame cetteFenetre;
 	private JLabel texte;
-	private JTextField champDeSaisie;
+	private JTextField champDeSaisie = new JTextField();;
+	
+	private JButton BoutonDeReponse = new JButton("Réponse");
+	private JButton BoutonDAide = new JButton("Aide");
+	private JButton changerExo =new JButton("switch");
+	
 	private ControleurPrincipal monControleur;
+	
+	
 	private String sanscouleur = "";
 	private String vert = "";
 	private String vertrouge = "";
@@ -56,7 +74,7 @@ public class FenetrePrincipal extends JFrame {
 	private String vert1 = "";
 	private String rouge1 = "";
 	private String affReponse = "";
-	private JLabel labReponse;
+	private JLabel labReponse = new JLabel();;
 
 	private String exprSolution;
 
@@ -157,10 +175,7 @@ public class FenetrePrincipal extends JFrame {
 		});
 		
 
-
 		// AFFICHAGE
-		
-		
 		
 		
 		//vert=monControleur.resoudreExercice(null);
@@ -172,30 +187,55 @@ public class FenetrePrincipal extends JFrame {
 		
 		//vert = AjoutCouleur.ajouterCouleur(sanscouleur, null, exprSolution);
 		// texte=new JLabel(monControleur.getTexteAfficher());
+		
+		
+		JPanel conteneur = new JPanel(new BorderLayout());
+		
+		JPanel top = new JPanel();
+		JPanel mid = new JPanel();
+		JPanel bot = new JPanel();
+		
+		conteneur.add(top, BorderLayout.NORTH);
+		conteneur.add(mid, BorderLayout.CENTER);
+		conteneur.add(bot, BorderLayout.SOUTH);
+		
+		top.setBackground(new Color(125, 174, 163));
+		bot.setBackground(new Color(125, 174, 163));
+		mid.setBackground(new Color(125, 174, 163));
 
+		//---------------------------------------------------
+		//					Panel TOP
+		//---------------------------------------------------
 		texte = new JLabel(monControleur.resoudreExercice(null));
 
-		JPanel panMilieu = new JPanel();
-		this.add(panMilieu, BorderLayout.CENTER);
-		panMilieu.setLayout(new FlowLayout());
-		panMilieu.add(texte);
+		JPanel petitN = new JPanel();
+		
+		petitN.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.RAISED),
+				new EmptyBorder(0, 0, 0, 0)));
+		petitN.add(texte);
+		top.add(petitN);	
+		
+		
+		//---------------------------------------------------
+		//					Panel MID
+		//---------------------------------------------------
+		
+	
+		JPanel petitCentre = new JPanel();
+		
+		petitCentre.setLayout(new FlowLayout());
 
-		final JPanel panSud = new JPanel();
-		panSud.setLayout(new GridLayout(2, 1));
-		champDeSaisie = new JTextField();
-		champDeSaisie.setPreferredSize(new Dimension(200, 30));
-		JButton BoutonDeReponse = new JButton("Réponse");
-		JButton BoutonDAide = new JButton("Aide");
+		TitledBorder title;
+		title = BorderFactory.createTitledBorder("Veuillez saisir votre regexp :");
+		petitCentre.setBorder(title);
 
-		JPanel pan = new JPanel();
-		pan.add(champDeSaisie);
-		pan.add(BoutonDeReponse);
-		pan.add(BoutonDAide);
-		panSud.add(pan);
-		labReponse = new JLabel(affReponse);
-		panSud.add(labReponse);
-		labReponse.setHorizontalAlignment(JLabel.CENTER);
-		labReponse.setVerticalAlignment(JLabel.CENTER);
+		champDeSaisie.setPreferredSize(new Dimension(200, 25));
+
+		petitCentre.add(champDeSaisie);
+		petitCentre.add(BoutonDeReponse);
+		petitCentre.add(BoutonDAide);	
+		
+
 		BoutonDeReponse.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -215,6 +255,10 @@ public class FenetrePrincipal extends JFrame {
 
 			}
 		});
+				
+		mid.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.RAISED),
+				new EmptyBorder(0, 0, 0, 0)));
+		mid.add(petitCentre);
 
 		champDeSaisie.addKeyListener(new KeyListener() {
 			@Override
@@ -279,8 +323,18 @@ public class FenetrePrincipal extends JFrame {
 			public void keyTyped(KeyEvent e) {
 			}
 		});
-		this.add(panSud, BorderLayout.SOUTH);
-
+		
+		//---------------------------------------------------
+		//					Panel BOT
+		//---------------------------------------------------
+		
+		bot.setLayout(new FlowLayout());
+		bot.add(labReponse);
+		
+		bot.add(changerExo);
+		
+		
+		this.add(conteneur);	
 		this.setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}

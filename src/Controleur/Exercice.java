@@ -31,7 +31,7 @@ public class Exercice {
 	private String texteColore;
 	
 	//Paramètres de coloration
-	public static final String baliseOuvranteCouleurSolution="<span style='background:green'>";
+	public static final String baliseOuvranteCouleurSolution="<span style='background:#7DAEA3'>";
 	public static final String baliseFermanteCouleurSolution="</span>";
 	public static final String baliseOuvranteCouleurUtilisateur="<u style='color:red'>";
 	public static final String baliseFermanteCouleurUtilisateur="</u>";
