@@ -22,7 +22,7 @@ public class ControleurPrincipal {
 		
 		//création d'un nouveau exercice
 		String texte=Importer.importerTexte("textes/texteTest.txt");
-		String regExp=Importer.importerExpression("textes/texteTest.regexp");
+		String regExp=Importer.importerExpression("textes/texteTest.regexp",1);
 		exoActuel=new Exercice(texte,regExp);
 		
 	}

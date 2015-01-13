@@ -48,15 +48,19 @@ public class Importer {
 		
 		return texte;
 	}
-	public static String importerExpression(String path){
-		String texte="";
+	public static String importerExpression(String path,int numeroLigne){
+		String expression="";
 		try {
 			InputStream inputStream=new FileInputStream(path);
 			InputStreamReader inputStreamReader=new InputStreamReader(inputStream);
 			BufferedReader bufferedReader=new BufferedReader(inputStreamReader);
 			String ligne;
+			int numLigneCourante=1;
 			while((ligne=bufferedReader.readLine())!=null){
-				texte+=ligne;
+				if(numLigneCourante==numeroLigne){
+					expression=ligne;
+				}
+				numLigneCourante++;
 			}
 			bufferedReader.close();
 		} catch (FileNotFoundException e) {
@@ -66,8 +70,21 @@ public class Importer {
 			
 			e.printStackTrace();
 		}
-		return texte;
+		return expression;
 		
 	}
+	
+	public static void importerRepertoire(String path) {
+		File repertoire=new File(path);
+		String [] listefichiers; 
 
+		listefichiers=repertoire.list(); 
+		for (int j = 0; j < listefichiers.length; j++) {
+			System.out.println(listefichiers[j]);
+		}
+
+	}
+	public static void main(String[] args) {
+		importerRepertoire("textes");
+	}
 }
