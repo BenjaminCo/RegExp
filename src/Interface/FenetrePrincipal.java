@@ -117,7 +117,7 @@ public class FenetrePrincipal extends JFrame {
 		 * 	mid.setBackground(new Color(125, 174, 163));
 		 * 
 		 */
-		
+		System.out.println();
 		top.setBackground(new Color(233, 0, 0));
 		mid.setBackground(new Color(243, 251, 0));
 		bot.setBackground(new Color(9, 154, 38));
