@@ -1,5 +1,6 @@
 package Model;
 import java.io.*;
+import java.util.ArrayList;
 
 public class Importer {
 
@@ -74,17 +75,20 @@ public class Importer {
 		
 	}
 	
-	public static void importerRepertoire(String path) {
+	public static ArrayList<String> importerTextesRepertoire(String path) {
 		File repertoire=new File(path);
 		String [] listefichiers; 
-
+		ArrayList<String> nomsFichiers=new ArrayList<String>();
 		listefichiers=repertoire.list(); 
 		for (int j = 0; j < listefichiers.length; j++) {
-			System.out.println(listefichiers[j]);
+			if(listefichiers[j].endsWith(".txt")){
+				nomsFichiers.add(listefichiers[j]);
+			}
 		}
-
+		
+		return nomsFichiers;
 	}
 	public static void main(String[] args) {
-		importerRepertoire("textes");
+		importerTextesRepertoire("textes");
 	}
 }
