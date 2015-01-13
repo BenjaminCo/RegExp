@@ -18,9 +18,7 @@ public class ControleurPrincipal {
 	 * Lancement de l'application
 	 */
 	public ControleurPrincipal() {
-		
-		
-		
+				
 		//création d'un nouveau exercice
 		nomsFichiersTxt=Importer.importerTextesRepertoire("textes");
 		
