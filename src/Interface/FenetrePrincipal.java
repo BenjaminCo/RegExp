@@ -50,13 +50,12 @@ public class FenetrePrincipal extends JFrame {
 
 	private JMenu aide = new JMenu("Aide");
 	private JMenu commande = new JMenu("Commande");
-	
+
 	private JMenuItem ItemAPropos = new JMenuItem("A Propos");
 	private JMenuItem RegExpPrecedent = new JMenuItem("RegExpPrecedent");
 	private JMenuItem RegExpSuivant = new JMenuItem("RegExpSuivant");
 	private JMenuItem ExoPrecedent = new JMenuItem("ExoPrecedent");
 	private JMenuItem ExoSuivant = new JMenuItem("ExoSuivant");
-	
 
 	private JFrame cetteFenetre;
 	private JLabel texte;
@@ -101,8 +100,9 @@ public class FenetrePrincipal extends JFrame {
 		this.add(barreDeMenu, BorderLayout.NORTH);
 		barreDeMenu.add(commande);
 		barreDeMenu.add(aide);
-		
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("../logoPtut.jpg")));
+
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(
+				this.getClass().getResource("../logoPtut.jpg")));
 
 		aide.add(ItemAPropos);
 		commande.add(RegExpPrecedent);
@@ -117,7 +117,7 @@ public class FenetrePrincipal extends JFrame {
 
 			}
 		});
-		
+
 		RegExpPrecedent.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -126,7 +126,7 @@ public class FenetrePrincipal extends JFrame {
 
 			}
 		});
-		
+
 		RegExpSuivant.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -134,7 +134,7 @@ public class FenetrePrincipal extends JFrame {
 				texte.setText(monControleur.resoudreExercice(null));
 			}
 		});
-		
+
 		ExoPrecedent.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -142,19 +142,16 @@ public class FenetrePrincipal extends JFrame {
 				texte.setText(monControleur.resoudreExercice(null));
 			}
 		});
-		
+
 		ExoSuivant.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
-				
+
 				monControleur.nouvelExercice("ExoSuivant");
 				texte.setText(monControleur.resoudreExercice(null));
-				
 
 			}
 		});
-		
 
 		// AFFICHAGE
 
@@ -168,22 +165,22 @@ public class FenetrePrincipal extends JFrame {
 		conteneur.add(mid, BorderLayout.CENTER);
 		conteneur.add(bot, BorderLayout.SOUTH);
 
-		
-		/*top.setBackground(new Color(169, 56, 56));
+		/*
+		 * top.setBackground(new Color(169, 56, 56));
 		 * 
-		 * 	mid.setBackground(new Color(125, 174, 163));
-		 * 
+		 * mid.setBackground(new Color(125, 174, 163));
 		 */
-	
+
 		top.setBackground(new Color(233, 0, 0));
 		mid.setBackground(new Color(243, 251, 0));
 		bot.setBackground(new Color(9, 154, 38));
-		
+
 		mid.setPreferredSize(new Dimension(100, 100));
 
 		// ---------------------------------------------------
 		// Panel TOP
 		// ---------------------------------------------------
+		
 		texte = new JLabel(monControleur.resoudreExercice(null));
 
 		JPanel petitN = new JPanel();
@@ -194,7 +191,7 @@ public class FenetrePrincipal extends JFrame {
 		petitN.add(texte);
 		texte.setFont(new Font("Calibri", Font.PLAIN, 15));
 		top.add(petitN);
-		
+
 		// ---------------------------------------------------
 		// Panel MID
 		// ---------------------------------------------------
@@ -217,14 +214,27 @@ public class FenetrePrincipal extends JFrame {
 		BoutonDeReponse.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+			
+				labReponse.addMouseListener(new MouseAdapter() {
+
+					public void mouseEntered(MouseEvent e) {
+						JLabel label = (JLabel) e.getSource();
+						String plainText = label.getText().replaceAll("\\<.*?\\>", "");
+
+						label.setText(plainText);
+					}
+
+				});
+
 				affReponse = "La reponse était : "
 						+ monControleur.getExerciceSolution();
 				labReponse.setText(affReponse);
 				champDeSaisie.setText(exprSolution);
 				// labReponse.setCursor(null);
-
+				labReponse.setCursor(Cursor.getDefaultCursor());
 			}
 		});
+
 		BoutonDAide.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -254,36 +264,33 @@ public class FenetrePrincipal extends JFrame {
 					texte.setText(monControleur.resoudreExercice(null));
 
 				} else {
-					
+
 					texte.setText(monControleur.resoudreExercice(champDeSaisie
 							.getText()));
-					
-					
 
 				}
 
 				// verifier => valider & exprSolution
 				// ///////////////////////////////////////////////
 				// VALIDATION
-				// /////////////////////////////////////////////
-
+				// //////////////////////////////////////////////
 
 				try {
-				if (monControleur.estExerciceResolu()) {
-					affReponse = "Bonne Réponse !";
-					labReponse.setText(affReponse);
-					
+					if (monControleur.estExerciceResolu()) {
+						affReponse = "Bonne Réponse !";
+						labReponse.setText(affReponse);
+
 						wait(2);
-						
+
 					} else {
-					affReponse = "";
-					labReponse.setText(affReponse);
-				}}catch (InterruptedException e1) {
+						affReponse = "";
+						labReponse.setText(affReponse);
+					}
+				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				
 
-			} 
+				}
 
 				// ////////////////////////////////////////:
 
@@ -312,15 +319,14 @@ public class FenetrePrincipal extends JFrame {
 
 		bot.add(changerExo);
 		changerExo.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				monControleur.nouvelExercice();
 				texte.setText(monControleur.resoudreExercice(null));
 			}
 		});
-		
-		
+
 		this.add(conteneur);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -350,7 +356,7 @@ public class FenetrePrincipal extends JFrame {
 			public void mouseEntered(MouseEvent e) {
 				JLabel label = (JLabel) e.getSource();
 				String plainText = label.getText().replaceAll("\\<.*?\\>", "");
-				// Sousligner le texte
+				// Souligner le texte
 				String urlText = "<html><u>" + plainText + "</u></html>";
 				label.setText(urlText);
 			}
