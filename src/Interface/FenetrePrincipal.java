@@ -120,7 +120,7 @@ public class FenetrePrincipal extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				monControleur.nouvelExercice("RegExpPrecedent");
-				
+				texte.setText(monControleur.resoudreExercice(null));
 
 			}
 		});
@@ -129,7 +129,7 @@ public class FenetrePrincipal extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				monControleur.nouvelExercice("RegExpSuivant");
-
+				texte.setText(monControleur.resoudreExercice(null));
 			}
 		});
 		
@@ -137,7 +137,7 @@ public class FenetrePrincipal extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				monControleur.nouvelExercice("ExoPrecedent");
-
+				texte.setText(monControleur.resoudreExercice(null));
 			}
 		});
 		
@@ -147,7 +147,7 @@ public class FenetrePrincipal extends JFrame {
 				
 				
 				monControleur.nouvelExercice("ExoSuivant");
-				
+				texte.setText(monControleur.resoudreExercice(null));
 				
 
 			}
@@ -309,7 +309,16 @@ public class FenetrePrincipal extends JFrame {
 		bot.add(labReponse);
 
 		bot.add(changerExo);
-
+		changerExo.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				monControleur.nouvelExercice();
+				texte.setText(monControleur.resoudreExercice(null));
+			}
+		});
+		
+		
 		this.add(conteneur);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);

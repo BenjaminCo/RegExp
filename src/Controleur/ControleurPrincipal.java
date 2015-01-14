@@ -14,22 +14,14 @@ import Model.GestionnaireDeFichier;
 
 public class ControleurPrincipal {
 	private Exercice exoActuel;
-	//private ArrayList<String> nomsFichiersTxt;
+	
 	private GestionnaireDeFichier monGestionnaireDeFichier=null;
 	/**
 	 * Lancement de l'application
 	 */
 	public ControleurPrincipal() {
 				
-		//création d'un nouveau exercice
-		//nomsFichiersTxt=Importer.importerTextesRepertoire("textes");
 		
-		
-		
-		//String texte=Importer.importerTexte("textes/texteTest.txt");
-		//String regExp=Importer.importerExpression("textes/texteTest.regexp",1);
-		
-		//exoActuel=new Exercice(texte,regExp);
 		nouvelExercice();
 		
 		new FenetrePrincipal(this);
@@ -72,7 +64,7 @@ public class ControleurPrincipal {
 			String texte=monGestionnaireDeFichier.getTexte();
 			String regExp=monGestionnaireDeFichier.getRegexp();
 			exoActuel=new Exercice(texte,regExp);
-			monGestionnaireDeFichier=new GestionnaireDeFichier(exoActuel);
+			
 		}else{
 			monGestionnaireDeFichier.exerciceSuivant();
 			String texte=monGestionnaireDeFichier.getTexte();
@@ -88,7 +80,7 @@ public class ControleurPrincipal {
 			String texte=monGestionnaireDeFichier.getTexte();
 			String regExp=monGestionnaireDeFichier.getRegexp();
 			exoActuel=new Exercice(texte,regExp);
-			monGestionnaireDeFichier=new GestionnaireDeFichier(exoActuel);
+			
 		}else{
 			/////////////////////////////////////
 			switch(choix){

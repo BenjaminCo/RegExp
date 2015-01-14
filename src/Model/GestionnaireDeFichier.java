@@ -16,13 +16,13 @@ public class GestionnaireDeFichier {
 	
 	private String texte;
 	private String regexp;
-	private Exercice exercice;
+
+	
 	/**
 	 *Importe directement les données necessaire à la création d'un nouvel exercice.
 	 *Ainsi on obtient le texte du premier fichier par ordre alphabétique du repertoire {@code pathRepertoire}.
 	 *Et la première ligne du fichier .regexp correspondant correspondant à une expression régulière.
 	 */
-	
 public GestionnaireDeFichier() {
 		
 		
@@ -43,25 +43,9 @@ public GestionnaireDeFichier() {
 	
 	
 	
-	public GestionnaireDeFichier(Exercice exo) {
-		
-		exercice = exo;
-		nomsFichiers=Importer.importerTextesRepertoire(pathRepertoire);
-		
-		indiceFichierActuel=0;
-		nomFichierActuel=nomsFichiers.get(indiceFichierActuel);
-		nombreDeLigneDuFichierRegexp=Importer.getNombreLigneFichier(pathRepertoire+"/"+nomFichierActuel+".regexp");
-		
-		
-		setTexte(Importer.importerTexte(pathRepertoire+"/"+nomFichierActuel+".txt"));
-		
-		indiceLigneFichierRegexp=1;
-		setRegexp(Importer.importerExpression(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
-		
 	
-	}
 	/**
-	 *Importe la ligne suivante du fichier .regexp correspondant correspondant à une expression régulière.
+	 *Importe la ligne suivante du fichier .regexp correspondant à une expression régulière.
 	 *Sinon si on arrive au bout du fichier .regexp: 
 	 *	Importe le texte du fichier suivant par ordre alphabétique du repertoire {@code pathRepertoire}.
 	 *	Et la première ligne du fichier .regexp correspondant correspondant à une expression régulière.
