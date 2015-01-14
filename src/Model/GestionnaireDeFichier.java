@@ -41,9 +41,7 @@ public GestionnaireDeFichier() {
 	
 	}
 	
-	
-	
-	
+		
 	/**
 	 *Importe la ligne suivante du fichier .regexp correspondant à une expression régulière.
 	 *Sinon si on arrive au bout du fichier .regexp: 
@@ -57,6 +55,7 @@ public GestionnaireDeFichier() {
 		}else{
 			indiceFichierActuel++;
 			nomFichierActuel=nomsFichiers.get(indiceFichierActuel);
+			nombreDeLigneDuFichierRegexp=Importer.getNombreLigneFichier(pathRepertoire+"/"+nomFichierActuel+".regexp");
 			setTexte(Importer.importerTexte(pathRepertoire+"/"+nomFichierActuel+".txt"));
 			
 			indiceLigneFichierRegexp=1;

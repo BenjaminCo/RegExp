@@ -23,6 +23,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -101,7 +102,8 @@ public class FenetrePrincipal extends JFrame {
 		barreDeMenu.add(commande);
 		barreDeMenu.add(aide);
 		
-		
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("../logo.png")));
+
 		aide.add(ItemAPropos);
 		commande.add(RegExpPrecedent);
 		commande.add(RegExpSuivant);
