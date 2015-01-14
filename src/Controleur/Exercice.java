@@ -385,4 +385,12 @@ public class Exercice {
 		
 	}
 	
+	public void setTexte(String texte) {
+		this.texte = texte;
+	}
+	
+	public void setRegexp(String regexp) {
+		this.regExp = regexp;
+	}
+	
 }

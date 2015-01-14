@@ -35,6 +35,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 import Controleur.ControleurPrincipal;
+import Model.GestionnaireDeFichier;
 
 /**
  * Permet l'affichage de l'interface utilisateur
@@ -47,7 +48,14 @@ public class FenetrePrincipal extends JFrame {
 	private JMenuBar barreDeMenu = new JMenuBar();
 
 	private JMenu aide = new JMenu("Aide");
+	private JMenu commande = new JMenu("Commande");
+	
 	private JMenuItem ItemAPropos = new JMenuItem("A Propos");
+	private JMenuItem RegExpPrecedent = new JMenuItem("RegExpPrecedent");
+	private JMenuItem RegExpSuivant = new JMenuItem("RegExpSuivant");
+	private JMenuItem ExoPrecedent = new JMenuItem("ExoPrecedent");
+	private JMenuItem ExoSuivant = new JMenuItem("ExoSuivant");
+	
 
 	private JFrame cetteFenetre;
 	private JLabel texte;
@@ -58,11 +66,13 @@ public class FenetrePrincipal extends JFrame {
 	private JButton changerExo = new JButton("switch");
 
 	private ControleurPrincipal monControleur;
+	private ControleurPrincipal monControleur1;
 
 	private String affReponse = "";
 	private JLabel labReponse = new JLabel();;
 
 	private String exprSolution;
+	private int i;
 
 	/**
 	 * Affiche la fenetre principale de l'application
@@ -80,7 +90,7 @@ public class FenetrePrincipal extends JFrame {
 	 * System.out.println(exo); System.out.println(exo.estResolu());
 	 */
 
-	public FenetrePrincipal(ControleurPrincipal controleurPrincipal) {
+	public FenetrePrincipal(final ControleurPrincipal controleurPrincipal) {
 		super("RegExp");
 		cetteFenetre = this;
 		monControleur = controleurPrincipal;
@@ -88,8 +98,15 @@ public class FenetrePrincipal extends JFrame {
 		this.setLayout(new BorderLayout());
 
 		this.add(barreDeMenu, BorderLayout.NORTH);
+		barreDeMenu.add(commande);
 		barreDeMenu.add(aide);
+		
+		
 		aide.add(ItemAPropos);
+		commande.add(RegExpPrecedent);
+		commande.add(RegExpSuivant);
+		commande.add(ExoPrecedent);
+		commande.add(ExoSuivant);
 
 		ItemAPropos.addActionListener(new ActionListener() {
 			@Override
@@ -98,6 +115,44 @@ public class FenetrePrincipal extends JFrame {
 
 			}
 		});
+		
+		RegExpPrecedent.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				monControleur.nouvelExercice("RegExpPrecedent");
+				
+
+			}
+		});
+		
+		RegExpSuivant.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				monControleur.nouvelExercice("RegExpSuivant");
+
+			}
+		});
+		
+		ExoPrecedent.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				monControleur.nouvelExercice("ExoPrecedent");
+
+			}
+		});
+		
+		ExoSuivant.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				
+				monControleur.nouvelExercice("ExoSuivant");
+				
+				
+
+			}
+		});
+		
 
 		// AFFICHAGE
 
@@ -197,15 +252,11 @@ public class FenetrePrincipal extends JFrame {
 					texte.setText(monControleur.resoudreExercice(null));
 
 				} else {
-					System.out.println("cc");
+					
 					texte.setText(monControleur.resoudreExercice(champDeSaisie
 							.getText()));
-					// System.out.println(exo.realiserExercice(champDeSaisie.getText()));
-					System.out.println("ha");
-					System.out.println(texte.getText());
-					// System.out.println(exo);
-					// texte.setText(
-					// AjoutCouleur.ajouterCouleur(sanscouleur,champDeSaisie.getText(),exprSolution));
+					
+					
 
 				}
 
@@ -214,18 +265,23 @@ public class FenetrePrincipal extends JFrame {
 				// VALIDATION
 				// /////////////////////////////////////////////
 
-				// System.out.println(vert1);
 
-				// System.out.println(rouge1);
-
+				try {
 				if (monControleur.estExerciceResolu()) {
-					affReponse = "Bonne Réponse";
+					affReponse = "Bonne Réponse !";
 					labReponse.setText(affReponse);
-
-				} else {
+					
+						wait(2);
+						
+					} else {
 					affReponse = "";
 					labReponse.setText(affReponse);
-				}
+				}}catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				
+
+			} 
 
 				// ////////////////////////////////////////:
 

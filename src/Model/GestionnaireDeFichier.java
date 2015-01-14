@@ -2,6 +2,8 @@ package Model;
 
 import java.util.ArrayList;
 
+import Controleur.Exercice;
+
 public class GestionnaireDeFichier {
 	
 	public static String pathRepertoire="textes";
@@ -14,13 +16,36 @@ public class GestionnaireDeFichier {
 	
 	private String texte;
 	private String regexp;
+	private Exercice exercice;
 	/**
 	 *Importe directement les données necessaire à la création d'un nouvel exercice.
 	 *Ainsi on obtient le texte du premier fichier par ordre alphabétique du repertoire {@code pathRepertoire}.
 	 *Et la première ligne du fichier .regexp correspondant correspondant à une expression régulière.
 	 */
-	public GestionnaireDeFichier() {
+	
+public GestionnaireDeFichier() {
 		
+		
+		nomsFichiers=Importer.importerTextesRepertoire(pathRepertoire);
+		
+		indiceFichierActuel=0;
+		nomFichierActuel=nomsFichiers.get(indiceFichierActuel);
+		nombreDeLigneDuFichierRegexp=Importer.getNombreLigneFichier(pathRepertoire+"/"+nomFichierActuel+".regexp");
+		
+		
+		setTexte(Importer.importerTexte(pathRepertoire+"/"+nomFichierActuel+".txt"));
+		
+		indiceLigneFichierRegexp=1;
+		setRegexp(Importer.importerExpression(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
+		
+	
+	}
+	
+	
+	
+	public GestionnaireDeFichier(Exercice exo) {
+		
+		exercice = exo;
 		nomsFichiers=Importer.importerTextesRepertoire(pathRepertoire);
 		
 		indiceFichierActuel=0;
@@ -58,20 +83,7 @@ public class GestionnaireDeFichier {
 	
 	//Mappage pour vérifier si on a fait toutes les lignes de regexp(sans ordre) , une fois que l'on a fait toutes les lignes on retourne un boolean visant 
 	// a faire changer le joueur d'exercice
-	public void exerciceSuivantSansOrdre() {
-		if(indiceLigneFichierRegexp < nombreDeLigneDuFichierRegexp){
-			indiceLigneFichierRegexp++;
-			setRegexp(Importer.importerExpression(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
-		}else{
-			indiceFichierActuel++;
-			nomFichierActuel=nomsFichiers.get(indiceFichierActuel);
-			setTexte(Importer.importerTexte(pathRepertoire+"/"+nomFichierActuel+".txt"));
-			
-			indiceLigneFichierRegexp=1;
-			setRegexp(Importer.importerExpression(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
-		}
-		
-	}
+	
 	
 	//Si l'utilisteur veut vraiment changer de regExp a deviner (fichier .regexp)
 	public void RegexpSuivant(){
@@ -84,8 +96,8 @@ public class GestionnaireDeFichier {
 	
 	public void RegexpPrecedent(){
 		
-		if(indiceLigneFichierRegexp >0){
-			indiceLigneFichierRegexp++;
+		if(indiceLigneFichierRegexp >1){
+			indiceLigneFichierRegexp--;
 			setRegexp(Importer.importerExpression(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
 		}
 	}
@@ -96,12 +108,16 @@ public class GestionnaireDeFichier {
 		indiceFichierActuel++;
 		nomFichierActuel=nomsFichiers.get(indiceFichierActuel);
 		setTexte(Importer.importerTexte(pathRepertoire+"/"+nomFichierActuel+".txt"));
+		indiceLigneFichierRegexp=1;
+		setRegexp(Importer.importerExpression(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
 	}
 	
 	public void exerciceMoinsUn(){
 		indiceFichierActuel--;
 		nomFichierActuel=nomsFichiers.get(indiceFichierActuel);
 		setTexte(Importer.importerTexte(pathRepertoire+"/"+nomFichierActuel+".txt"));
+		indiceLigneFichierRegexp=1;
+		setRegexp(Importer.importerExpression(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
 	}
 	
 	

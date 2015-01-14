@@ -65,18 +65,80 @@ public class ControleurPrincipal {
 	/**
 	 * Permet créer ou un nouvel exercice ou de passer é l'exercice suivant si il en existe deja un.
 	 */
-	private void nouvelExercice() {
+	public void nouvelExercice() {
 		if(monGestionnaireDeFichier==null){
+			
 			monGestionnaireDeFichier=new GestionnaireDeFichier();
 			String texte=monGestionnaireDeFichier.getTexte();
 			String regExp=monGestionnaireDeFichier.getRegexp();
 			exoActuel=new Exercice(texte,regExp);
+			monGestionnaireDeFichier=new GestionnaireDeFichier(exoActuel);
 		}else{
 			monGestionnaireDeFichier.exerciceSuivant();
 			String texte=monGestionnaireDeFichier.getTexte();
 			String regExp=monGestionnaireDeFichier.getRegexp();
 			exoActuel=new Exercice(texte,regExp);
 		}
+	}
+	
+	public void nouvelExercice(String choix) {
+		if(monGestionnaireDeFichier==null){
+			
+			monGestionnaireDeFichier=new GestionnaireDeFichier();
+			String texte=monGestionnaireDeFichier.getTexte();
+			String regExp=monGestionnaireDeFichier.getRegexp();
+			exoActuel=new Exercice(texte,regExp);
+			monGestionnaireDeFichier=new GestionnaireDeFichier(exoActuel);
+		}else{
+			/////////////////////////////////////
+			switch(choix){
+			
+			case "RegExpPrecedent":
+				monGestionnaireDeFichier.RegexpPrecedent();
+				
+			break;
+			case "RegExpSuivant":
+				monGestionnaireDeFichier.RegexpSuivant();
+				
+			break;
+			case "ExoPrecedent":
+				monGestionnaireDeFichier.exerciceMoinsUn();
+				
+			break;
+			case "ExoSuivant":
+				monGestionnaireDeFichier.exercicePlusUn();
+				
+			break;
+			
+			
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			////////////////////////////
+			String texte=monGestionnaireDeFichier.getTexte();
+			String regExp=monGestionnaireDeFichier.getRegexp();
+			exoActuel=new Exercice(texte,regExp);
+		}
+	}
+	
+	
+	
+	
+	public GestionnaireDeFichier getGestionnaireDeFichier(){
+		return monGestionnaireDeFichier;
 	}
 	
 	/**
