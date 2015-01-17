@@ -102,7 +102,7 @@ public class FenetrePrincipal extends JFrame {
 		barreDeMenu.add(aide);
 
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(
-				this.getClass().getResource("../logoPtut.jpg")));
+				this.getClass().getResource("../logo.png")));
 
 		aide.add(ItemAPropos);
 		commande.add(RegExpPrecedent);
