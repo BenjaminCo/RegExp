@@ -14,6 +14,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -37,6 +38,7 @@ import javax.swing.border.TitledBorder;
 
 import Controleur.ControleurPrincipal;
 import Model.GestionnaireDeFichier;
+import Model.Pays;
 
 /**
  * Permet l'affichage de l'interface utilisateur
@@ -45,11 +47,15 @@ import Model.GestionnaireDeFichier;
  *
  */
 public class FenetrePrincipal extends JFrame {
-
+	private Pays mesPays;
 	private JMenuBar barreDeMenu = new JMenuBar();
 
 	private JMenu aide = new JMenu("Aide");
 	private JMenu commande = new JMenu("Commande");
+	private JMenu OptionPays = new JMenu("Pays");
+
+	
+	
 
 	private JMenuItem ItemAPropos = new JMenuItem("A Propos");
 	private JMenuItem RegExpPrecedent = new JMenuItem("RegExpPrecedent");
@@ -73,6 +79,8 @@ public class FenetrePrincipal extends JFrame {
 
 	private String exprSolution;
 	private int i;
+	
+	
 
 	/**
 	 * Affiche la fenetre principale de l'application
@@ -100,7 +108,16 @@ public class FenetrePrincipal extends JFrame {
 		this.add(barreDeMenu, BorderLayout.NORTH);
 		barreDeMenu.add(commande);
 		barreDeMenu.add(aide);
+		barreDeMenu.add(OptionPays);
+		
+		
+		System.out.println("affichage enum");
 
+		
+		
+		
+		
+	
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(
 				this.getClass().getResource("../logo.png")));
 
@@ -157,9 +174,9 @@ public class FenetrePrincipal extends JFrame {
 
 		JPanel conteneur = new JPanel(new BorderLayout());
 
-		JPanel top = new JPanel();
-		JPanel mid = new JPanel();
-		JPanel bot = new JPanel();
+		final JPanel top = new JPanel();
+		final JPanel mid = new JPanel();
+		final JPanel bot = new JPanel();
 
 		conteneur.add(top, BorderLayout.NORTH);
 		conteneur.add(mid, BorderLayout.CENTER);
@@ -170,11 +187,53 @@ public class FenetrePrincipal extends JFrame {
 		 * 
 		 * mid.setBackground(new Color(125, 174, 163));
 		 */
-
+		
 		top.setBackground(new Color(233, 0, 0));
 		mid.setBackground(new Color(243, 251, 0));
 		bot.setBackground(new Color(9, 154, 38));
 
+		
+		Pays tab[]=mesPays.values();
+		JMenuItem tabOption[]=new JMenuItem[tab.length];
+		
+		for(int i=0;i<tab.length;i++){
+			tabOption[i]=new JMenuItem(tab[i].getName());
+			
+			OptionPays.add(tabOption[i]);
+			tabOption[i].setActionCommand(tabOption[i].getName());
+			
+			
+		}
+		/*  Mise en place des action listenner pour changer les couleur*/
+		for(int i=0;i<tabOption.length;i++){
+				tabOption[i].addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if(e.getActionCommand().equals("Allemagne")){
+						Pays pAllemagne =Pays.Allemagne;
+						top.setBackground(pAllemagne.getColorTop());
+						mid.setBackground(pAllemagne.getColorMid());
+						bot.setBackground(pAllemagne.getColorBot());
+					}
+					if(e.getActionCommand().equals("Armeni")){
+						Pays pArmeni =Pays.Armeni;
+						top.setBackground(pArmeni.getColorTop());
+						mid.setBackground(pArmeni.getColorMid());
+						bot.setBackground(pArmeni.getColorBot());
+					}
+					if(e.getActionCommand().equals("Bolivie")){
+						Pays pBolivie =Pays.Bolivie;
+						top.setBackground(pBolivie.getColorTop());
+						mid.setBackground(pBolivie.getColorMid());
+						bot.setBackground(pBolivie.getColorBot());
+					}
+					
+				}
+			});
+			
+		}
+		
+		
 		mid.setPreferredSize(new Dimension(100, 100));
 
 		// ---------------------------------------------------
