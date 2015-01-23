@@ -23,7 +23,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,7 +36,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 import Controleur.ControleurPrincipal;
-import Model.GestionnaireDeFichier;
 import Model.Pays;
 
 /**
@@ -46,16 +44,14 @@ import Model.Pays;
  * @author Benjamin
  *
  */
+@SuppressWarnings("serial")
 public class FenetrePrincipal extends JFrame {
-	private Pays mesPays;
+
 	private JMenuBar barreDeMenu = new JMenuBar();
 
 	private JMenu aide = new JMenu("Aide");
 	private JMenu commande = new JMenu("Commande");
 	private JMenu OptionPays = new JMenu("Pays");
-
-	
-	
 
 	private JMenuItem ItemAPropos = new JMenuItem("A Propos");
 	private JMenuItem RegExpPrecedent = new JMenuItem("RegExpPrecedent");
@@ -72,15 +68,16 @@ public class FenetrePrincipal extends JFrame {
 	private JButton changerExo = new JButton("switch");
 
 	private ControleurPrincipal monControleur;
-	private ControleurPrincipal monControleur1;
 
 	private String affReponse = "";
 	private JLabel labReponse = new JLabel();;
 
 	private String exprSolution;
-	private int i;
-	
-	
+	private static int i;
+
+	static Pays tab[] = Pays.values();
+	private JMenuItem tabOption[] = new JMenuItem[tab.length];
+
 
 	/**
 	 * Affiche la fenetre principale de l'application
@@ -88,14 +85,6 @@ public class FenetrePrincipal extends JFrame {
 	 * @param controleurPrincipal
 	 *            Le controleurPrincipal de l'application
 	 * 
-	 */
-
-	/*
-	 * Exercice exo=new
-	 * Exercice("textes/texteTest.txt","textes/texteTest.regexp");
-	 * exo.realiserExercice("ce|te");
-	 * 
-	 * System.out.println(exo); System.out.println(exo.estResolu());
 	 */
 
 	public FenetrePrincipal(final ControleurPrincipal controleurPrincipal) {
@@ -109,15 +98,9 @@ public class FenetrePrincipal extends JFrame {
 		barreDeMenu.add(commande);
 		barreDeMenu.add(aide);
 		barreDeMenu.add(OptionPays);
-		
-		
+
 		System.out.println("affichage enum");
 
-		
-		
-		
-		
-	
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(
 				this.getClass().getResource("../logo.png")));
 
@@ -182,64 +165,42 @@ public class FenetrePrincipal extends JFrame {
 		conteneur.add(mid, BorderLayout.CENTER);
 		conteneur.add(bot, BorderLayout.SOUTH);
 
-		/*
-		 * top.setBackground(new Color(169, 56, 56));
-		 * 
-		 * mid.setBackground(new Color(125, 174, 163));
-		 */
-		
 		top.setBackground(new Color(233, 0, 0));
 		mid.setBackground(new Color(243, 251, 0));
 		bot.setBackground(new Color(9, 154, 38));
 
-		
-		Pays tab[]=mesPays.values();
-		JMenuItem tabOption[]=new JMenuItem[tab.length];
-		
-		for(int i=0;i<tab.length;i++){
-			tabOption[i]=new JMenuItem(tab[i].getName());
-			
+		for (i = 0; i < tab.length; i++) {
+			tabOption[i] = new JMenuItem(tab[i].getName());
 			OptionPays.add(tabOption[i]);
 			tabOption[i].setActionCommand(tabOption[i].getName());
-			
-			
 		}
-		/*  Mise en place des action listenner pour changer les couleur*/
-		for(int i=0;i<tabOption.length;i++){
-				tabOption[i].addActionListener(new ActionListener() {
+		
+		/* Mise en place des actions listenner pour changer les couleurs */
+
+		for (i = 0; i < tabOption.length; i++) {
+			final Pays colorPays = tab[i];
+			tabOption[i].addActionListener(new ActionListener() {
 				@Override
-				public void actionPerformed(ActionEvent e) {
-					if(e.getActionCommand().equals("Allemagne")){
-						Pays pAllemagne =Pays.Allemagne;
-						top.setBackground(pAllemagne.getColorTop());
-						mid.setBackground(pAllemagne.getColorMid());
-						bot.setBackground(pAllemagne.getColorBot());
+				public void actionPerformed(ActionEvent e) {				
+				
+					if (e.getActionCommand().equals(colorPays.getName())) {	
+
+						top.setBackground(colorPays.getColorTop());
+						mid.setBackground(colorPays.getColorMid());
+						bot.setBackground(colorPays.getColorBot());
+
 					}
-					if(e.getActionCommand().equals("Armeni")){
-						Pays pArmeni =Pays.Armeni;
-						top.setBackground(pArmeni.getColorTop());
-						mid.setBackground(pArmeni.getColorMid());
-						bot.setBackground(pArmeni.getColorBot());
-					}
-					if(e.getActionCommand().equals("Bolivie")){
-						Pays pBolivie =Pays.Bolivie;
-						top.setBackground(pBolivie.getColorTop());
-						mid.setBackground(pBolivie.getColorMid());
-						bot.setBackground(pBolivie.getColorBot());
-					}
-					
 				}
 			});
-			
+
 		}
-		
-		
+
 		mid.setPreferredSize(new Dimension(100, 100));
 
 		// ---------------------------------------------------
 		// Panel TOP
 		// ---------------------------------------------------
-		
+
 		texte = new JLabel(monControleur.resoudreExercice(null));
 
 		JPanel petitN = new JPanel();
@@ -273,12 +234,13 @@ public class FenetrePrincipal extends JFrame {
 		BoutonDeReponse.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			
+
 				labReponse.addMouseListener(new MouseAdapter() {
 
 					public void mouseEntered(MouseEvent e) {
 						JLabel label = (JLabel) e.getSource();
-						String plainText = label.getText().replaceAll("\\<.*?\\>", "");
+						String plainText = label.getText().replaceAll(
+								"\\<.*?\\>", "");
 
 						label.setText(plainText);
 					}
@@ -289,7 +251,6 @@ public class FenetrePrincipal extends JFrame {
 						+ monControleur.getExerciceSolution();
 				labReponse.setText(affReponse);
 				champDeSaisie.setText(exprSolution);
-				// labReponse.setCursor(null);
 				labReponse.setCursor(Cursor.getDefaultCursor());
 			}
 		});
@@ -299,7 +260,7 @@ public class FenetrePrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				labReponse
-						.setText("http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html");
+				.setText("http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html");
 				labReponse.setCursor(new Cursor(Cursor.HAND_CURSOR));
 				addListener(labReponse);
 
