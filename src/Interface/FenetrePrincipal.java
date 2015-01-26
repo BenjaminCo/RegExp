@@ -113,6 +113,7 @@ public class FenetrePrincipal extends JFrame {
 		ItemAPropos.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				@SuppressWarnings("unused")
 				A_propos fenetreApropos = new A_propos(cetteFenetre, "A Propos");
 
 			}

@@ -1,8 +1,6 @@
 package Model;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Importer {
 
@@ -86,6 +84,7 @@ public class Importer {
 	}
 	
 
+		@SuppressWarnings("unused")
 		public static int getNombreLigneFichier(String path) {
 			String str=null;
 			int count=0;
