@@ -13,12 +13,6 @@ public class Importer {
 	 */
 	public static String importerTexte(String path) {
 		String texte="";
-		double aleat =  Math.random()*10;
-		
-		
-		//System.out.println(aleat);
-		// TODO Auto-generated constructor stub
-		//CC
 			try {
 				
 				
@@ -116,18 +110,5 @@ public class Importer {
 		importerTextesRepertoire("textes");
 	}
 	
-	
-	public static Map<String , String > Association_Texte_Regxp(){
-		Map <String,String> map = new HashMap<>();
-		ArrayList<String> nomsFichiers=importerTextesRepertoire("textes/Test");
-
-		for(int i=0;i<nomsFichiers.size();i++){
-			String Fichier=nomsFichiers.get(i)+".txt";
-			//System.out.println( F);
-			//System.out.println( F.replaceAll(".txt", ".regExp"));
-			map.put(Fichier, Fichier.replaceAll(".txt", ".regExp"));
-		}
-		return map;
-	}
 	
 }

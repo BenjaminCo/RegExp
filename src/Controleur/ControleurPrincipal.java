@@ -1,9 +1,9 @@
 package Controleur;
 
-import java.util.ArrayList;
+
 
 import Interface.FenetrePrincipal;
-import Model.Importer;
+
 import Model.GestionnaireDeFichier;
 
 /**
@@ -104,20 +104,7 @@ public class ControleurPrincipal {
 			
 			
 			}
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+
 			
 			////////////////////////////
 			String texte=monGestionnaireDeFichier.getTexte();

@@ -54,10 +54,10 @@ public class FenetrePrincipal extends JFrame {
 	private JMenu OptionPays = new JMenu("Pays");
 
 	private JMenuItem ItemAPropos = new JMenuItem("A Propos");
-	private JMenuItem RegExpPrecedent = new JMenuItem("RegExpPrecedent");
-	private JMenuItem RegExpSuivant = new JMenuItem("RegExpSuivant");
-	private JMenuItem ExoPrecedent = new JMenuItem("ExoPrecedent");
-	private JMenuItem ExoSuivant = new JMenuItem("ExoSuivant");
+	private JMenuItem RegExpPrecedent = new JMenuItem("RegExp Precedent");
+	private JMenuItem RegExpSuivant = new JMenuItem("RegExp Suivant");
+	private JMenuItem TextePrecedent = new JMenuItem("Texte Precedent");
+	private JMenuItem TexteSuivant = new JMenuItem("Texte Suivant");
 
 	private JFrame cetteFenetre;
 	private JLabel texte;
@@ -65,7 +65,7 @@ public class FenetrePrincipal extends JFrame {
 
 	private JButton BoutonDeReponse = new JButton("Réponse");
 	private JButton BoutonDAide = new JButton("Aide");
-	private JButton changerExo = new JButton("switch");
+	private JButton changerExo = new JButton("Switch");
 
 	private ControleurPrincipal monControleur;
 
@@ -99,7 +99,7 @@ public class FenetrePrincipal extends JFrame {
 		barreDeMenu.add(aide);
 		barreDeMenu.add(OptionPays);
 
-		System.out.println("affichage enum");
+
 
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(
 				this.getClass().getResource("../logo.png")));
@@ -107,8 +107,8 @@ public class FenetrePrincipal extends JFrame {
 		aide.add(ItemAPropos);
 		commande.add(RegExpPrecedent);
 		commande.add(RegExpSuivant);
-		commande.add(ExoPrecedent);
-		commande.add(ExoSuivant);
+		commande.add(TextePrecedent);
+		commande.add(TexteSuivant);
 
 		ItemAPropos.addActionListener(new ActionListener() {
 			@Override
@@ -135,7 +135,7 @@ public class FenetrePrincipal extends JFrame {
 			}
 		});
 
-		ExoPrecedent.addActionListener(new ActionListener() {
+		TextePrecedent.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				monControleur.nouvelExercice("ExoPrecedent");
@@ -143,7 +143,7 @@ public class FenetrePrincipal extends JFrame {
 			}
 		});
 
-		ExoSuivant.addActionListener(new ActionListener() {
+		TexteSuivant.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -246,27 +246,73 @@ public class FenetrePrincipal extends JFrame {
 					}
 
 				});
-
-				affReponse = "La reponse était : "
-						+ monControleur.getExerciceSolution();
-				labReponse.setText(affReponse);
-				champDeSaisie.setText(exprSolution);
-				labReponse.setCursor(Cursor.getDefaultCursor());
+				reponse();
+				
 			}
 		});
 
+		BoutonDeReponse.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				if(arg0.getKeyCode()==KeyEvent.VK_ENTER){
+					reponse();
+				}	
+			}
+			
+			
+
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		
 		BoutonDAide.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				labReponse
-				.setText("http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html");
-				labReponse.setCursor(new Cursor(Cursor.HAND_CURSOR));
-				addListener(labReponse);
+				
+					aide();
+				
+				
+				
 
 			}
 		});
 
+		BoutonDAide.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				if(arg0.getKeyCode()==KeyEvent.VK_ENTER){
+					aide();
+				}
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
 		mid.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.RAISED),
 				new EmptyBorder(0, 0, 0, 0)));
 		mid.add(petitCentre);
@@ -338,6 +384,30 @@ public class FenetrePrincipal extends JFrame {
 		bot.add(labReponse);
 
 		bot.add(changerExo);
+		
+		changerExo.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				if(arg0.getKeyCode()==KeyEvent.VK_ENTER){
+					monControleur.nouvelExercice();
+					texte.setText(monControleur.resoudreExercice(null));
+				}
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+			}
+		});
+		
 		changerExo.addActionListener(new ActionListener() {
 
 			@Override
@@ -352,7 +422,18 @@ public class FenetrePrincipal extends JFrame {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 	}
-
+	private void reponse() {
+		// TODO Auto-generated method stub
+		affReponse = "La reponse était : "+ monControleur.getExerciceSolution();
+		labReponse.setText(affReponse);
+		champDeSaisie.setText(exprSolution);
+		labReponse.setCursor(Cursor.getDefaultCursor());
+	}
+	private void aide(){
+		labReponse.setText("http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html");
+		labReponse.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		addListener(labReponse);
+	}
 	private void addListener(JLabel lb_url) {
 
 		lb_url.addMouseListener(new MouseAdapter() {

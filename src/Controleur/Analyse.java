@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.print.attribute.standard.PrinterResolution;
 
 /**
  * Analyse un texte à l'aide d'une expression régulière et retourne une liste de Plages 
@@ -13,7 +12,7 @@ import javax.print.attribute.standard.PrinterResolution;
  *
  */
 public class Analyse {
-	private static boolean montreException=true;
+	private static boolean montreException=false;
 	/**
 	 * Analyse un texte à l'aide d'une expression régulière et retourne une liste de Plages
 	 * @param texte le texte à analyser

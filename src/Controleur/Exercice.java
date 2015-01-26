@@ -1,14 +1,10 @@
 package Controleur;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+
 import java.util.List;
 
-import javax.swing.DebugGraphics;
 
-import org.hamcrest.core.IsEqual;
-
-import Model.Importer;
 /**
  * Un exercice
  * @author Etudiant

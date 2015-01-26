@@ -2,7 +2,7 @@ package Model;
 
 import java.util.ArrayList;
 
-import Controleur.Exercice;
+
 
 public class GestionnaireDeFichier {
 	
@@ -17,6 +17,7 @@ public class GestionnaireDeFichier {
 	private String texte;
 	private String regexp;
 
+	private int nbFichier;
 	
 	/**
 	 *Importe directement les données necessaire à la création d'un nouvel exercice.
@@ -27,7 +28,7 @@ public GestionnaireDeFichier() {
 		
 		
 		nomsFichiers=Importer.importerTextesRepertoire(pathRepertoire);
-		
+		nbFichier=nomsFichiers.size()-1;
 		indiceFichierActuel=0;
 		nomFichierActuel=nomsFichiers.get(indiceFichierActuel);
 		nombreDeLigneDuFichierRegexp=Importer.getNombreLigneFichier(pathRepertoire+"/"+nomFichierActuel+".regexp");
@@ -53,7 +54,12 @@ public GestionnaireDeFichier() {
 			indiceLigneFichierRegexp++;
 			setRegexp(Importer.importerExpression(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
 		}else{
-			indiceFichierActuel++;
+			if(nbFichier==indiceFichierActuel){
+				indiceFichierActuel=0;
+			}else{
+				indiceFichierActuel++;
+			}
+			
 			nomFichierActuel=nomsFichiers.get(indiceFichierActuel);
 			nombreDeLigneDuFichierRegexp=Importer.getNombreLigneFichier(pathRepertoire+"/"+nomFichierActuel+".regexp");
 			setTexte(Importer.importerTexte(pathRepertoire+"/"+nomFichierActuel+".txt"));
@@ -88,7 +94,12 @@ public GestionnaireDeFichier() {
 	
 	//Si l'utilisateur veut vraiment changer d'exercice (fichier texte)
 	public void exercicePlusUn(){
-		indiceFichierActuel++;
+		if(indiceFichierActuel==0){
+			indiceFichierActuel=nomsFichiers.size()-1;
+		}else{
+			indiceFichierActuel--;
+		}
+		
 		nomFichierActuel=nomsFichiers.get(indiceFichierActuel);
 		setTexte(Importer.importerTexte(pathRepertoire+"/"+nomFichierActuel+".txt"));
 		indiceLigneFichierRegexp=1;
@@ -96,7 +107,12 @@ public GestionnaireDeFichier() {
 	}
 	
 	public void exerciceMoinsUn(){
-		indiceFichierActuel--;
+		if(indiceFichierActuel==0){
+			indiceFichierActuel=nomsFichiers.size()-1;
+		}else{
+			indiceFichierActuel--;
+		}
+		
 		nomFichierActuel=nomsFichiers.get(indiceFichierActuel);
 		setTexte(Importer.importerTexte(pathRepertoire+"/"+nomFichierActuel+".txt"));
 		indiceLigneFichierRegexp=1;
