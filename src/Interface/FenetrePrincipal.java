@@ -61,7 +61,7 @@ public class FenetrePrincipal extends JFrame {
 
 	private JFrame cetteFenetre;
 	private JLabel texte;
-	private JTextField champDeSaisie = new JTextField();;
+	private JTextField champDeSaisie = new JTextField();
 
 	private JButton BoutonDeReponse = new JButton("Réponse");
 	private JButton BoutonDAide = new JButton("Aide");
@@ -70,7 +70,7 @@ public class FenetrePrincipal extends JFrame {
 	private ControleurPrincipal monControleur;
 
 	private String affReponse = "";
-	private JLabel labReponse = new JLabel();;
+	private JLabel labReponse = new JLabel();
 
 	private String exprSolution;
 	private static int i;
@@ -253,13 +253,11 @@ public class FenetrePrincipal extends JFrame {
 
 			@Override
 			public void keyTyped(KeyEvent arg0) {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void keyReleased(KeyEvent arg0) {
-				// TODO Auto-generated method stub
 				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
 					reponse();
 				}
@@ -283,13 +281,11 @@ public class FenetrePrincipal extends JFrame {
 
 			@Override
 			public void keyTyped(KeyEvent arg0) {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void keyReleased(KeyEvent arg0) {
-				// TODO Auto-generated method stub
 				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
 					aide();
 				}
@@ -298,7 +294,6 @@ public class FenetrePrincipal extends JFrame {
 
 			@Override
 			public void keyPressed(KeyEvent arg0) {
-				// TODO Auto-generated method stub
 
 			}
 		});
@@ -343,22 +338,10 @@ public class FenetrePrincipal extends JFrame {
 						labReponse.setText(affReponse);
 					}
 				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
+
 					e1.printStackTrace();
 
 				}
-
-				// ////////////////////////////////////////:
-
-				// System.out.println("saisie : "+champDeSaisie.getText());
-				// System.out.println("vert rouge : "+vertrouge);
-				// texte.setText(AjoutCouleur.ajouterCouleur(monControleur.getTexteAfficher(),
-				// champDeSaisie.getText(),"red"));
-
-				// System.out.println(AjoutCouleur.ajouterCouleur(monControleur.getTexteAfficher(),
-				// champDeSaisie.getText(),"red"));
-
-				// ccc
 			}
 
 			@Override
@@ -379,13 +362,11 @@ public class FenetrePrincipal extends JFrame {
 
 			@Override
 			public void keyTyped(KeyEvent arg0) {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void keyReleased(KeyEvent arg0) {
-				// TODO Auto-generated method stub
 				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
 					monControleur.nouvelExercice();
 					texte.setText(monControleur.resoudreExercice(null));
@@ -394,7 +375,7 @@ public class FenetrePrincipal extends JFrame {
 
 			@Override
 			public void keyPressed(KeyEvent arg0) {
-				// TODO Auto-generated method stub
+
 			}
 		});
 
@@ -414,7 +395,6 @@ public class FenetrePrincipal extends JFrame {
 	}
 
 	private void reponse() {
-		// TODO Auto-generated method stub
 		affReponse = "La reponse était : "
 				+ monControleur.getExerciceSolution();
 		labReponse.setText(affReponse);
@@ -424,7 +404,7 @@ public class FenetrePrincipal extends JFrame {
 
 	private void aide() {
 		labReponse
-				.setText("http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html");
+		.setText("http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html");
 		labReponse.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		addListener(labReponse);
 	}
