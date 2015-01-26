@@ -78,7 +78,6 @@ public class FenetrePrincipal extends JFrame {
 	static Pays tab[] = Pays.values();
 	private JMenuItem tabOption[] = new JMenuItem[tab.length];
 
-
 	/**
 	 * Affiche la fenetre principale de l'application
 	 * 
@@ -98,8 +97,6 @@ public class FenetrePrincipal extends JFrame {
 		barreDeMenu.add(commande);
 		barreDeMenu.add(aide);
 		barreDeMenu.add(OptionPays);
-
-
 
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(
 				this.getClass().getResource("../logo.png")));
@@ -175,16 +172,16 @@ public class FenetrePrincipal extends JFrame {
 			OptionPays.add(tabOption[i]);
 			tabOption[i].setActionCommand(tabOption[i].getName());
 		}
-		
+
 		/* Mise en place des actions listenner pour changer les couleurs */
 
 		for (i = 0; i < tabOption.length; i++) {
 			final Pays colorPays = tab[i];
 			tabOption[i].addActionListener(new ActionListener() {
 				@Override
-				public void actionPerformed(ActionEvent e) {				
-				
-					if (e.getActionCommand().equals(colorPays.getName())) {	
+				public void actionPerformed(ActionEvent e) {
+
+					if (e.getActionCommand().equals(colorPays.getName())) {
 
 						top.setBackground(colorPays.getColorTop());
 						mid.setBackground(colorPays.getColorMid());
@@ -248,72 +245,64 @@ public class FenetrePrincipal extends JFrame {
 
 				});
 				reponse();
-				
+
 			}
 		});
 
 		BoutonDeReponse.addKeyListener(new KeyListener() {
-			
+
 			@Override
 			public void keyTyped(KeyEvent arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void keyReleased(KeyEvent arg0) {
 				// TODO Auto-generated method stub
-				if(arg0.getKeyCode()==KeyEvent.VK_ENTER){
+				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
 					reponse();
-				}	
+				}
 			}
-			
-			
 
 			@Override
 			public void keyPressed(KeyEvent arg0) {
-				// TODO Auto-generated method stub
-				
+
 			}
 		});
-		
-		
+
 		BoutonDAide.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-					aide();
-				
-				
-				
 
+				aide();
 			}
 		});
 
 		BoutonDAide.addKeyListener(new KeyListener() {
-			
+
 			@Override
 			public void keyTyped(KeyEvent arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void keyReleased(KeyEvent arg0) {
 				// TODO Auto-generated method stub
-				if(arg0.getKeyCode()==KeyEvent.VK_ENTER){
+				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
 					aide();
 				}
-				
+
 			}
-			
+
 			@Override
 			public void keyPressed(KeyEvent arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
-		
+
 		mid.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.RAISED),
 				new EmptyBorder(0, 0, 0, 0)));
 		mid.add(petitCentre);
@@ -385,30 +374,30 @@ public class FenetrePrincipal extends JFrame {
 		bot.add(labReponse);
 
 		bot.add(changerExo);
-		
+
 		changerExo.addKeyListener(new KeyListener() {
-			
+
 			@Override
 			public void keyTyped(KeyEvent arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void keyReleased(KeyEvent arg0) {
 				// TODO Auto-generated method stub
-				if(arg0.getKeyCode()==KeyEvent.VK_ENTER){
+				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
 					monControleur.nouvelExercice();
 					texte.setText(monControleur.resoudreExercice(null));
 				}
 			}
-			
+
 			@Override
 			public void keyPressed(KeyEvent arg0) {
 				// TODO Auto-generated method stub
 			}
 		});
-		
+
 		changerExo.addActionListener(new ActionListener() {
 
 			@Override
@@ -423,18 +412,23 @@ public class FenetrePrincipal extends JFrame {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 	}
+
 	private void reponse() {
 		// TODO Auto-generated method stub
-		affReponse = "La reponse était : "+ monControleur.getExerciceSolution();
+		affReponse = "La reponse était : "
+				+ monControleur.getExerciceSolution();
 		labReponse.setText(affReponse);
 		champDeSaisie.setText(exprSolution);
 		labReponse.setCursor(Cursor.getDefaultCursor());
 	}
-	private void aide(){
-		labReponse.setText("http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html");
+
+	private void aide() {
+		labReponse
+				.setText("http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html");
 		labReponse.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		addListener(labReponse);
 	}
+
 	private void addListener(JLabel lb_url) {
 
 		lb_url.addMouseListener(new MouseAdapter() {
