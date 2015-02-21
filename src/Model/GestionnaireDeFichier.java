@@ -9,6 +9,8 @@ public class GestionnaireDeFichier {
 	public static String pathRepertoire="textes";
 	
 	private ArrayList<String> nomsFichiers;
+	
+	
 	private int indiceFichierActuel;
 	private int indiceLigneFichierRegexp;
 	private int nombreDeLigneDuFichierRegexp;
@@ -37,7 +39,7 @@ public GestionnaireDeFichier() {
 		setTexte(Importer.importerTexte(pathRepertoire+"/"+nomFichierActuel+".txt"));
 		
 		indiceLigneFichierRegexp=1;
-		setRegexp(Importer.importerExpression(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
+		setRegexp(Importer.importerLigne(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
 		
 	
 	}
@@ -52,7 +54,7 @@ public GestionnaireDeFichier() {
 	public void exerciceSuivant() {
 		if(indiceLigneFichierRegexp < nombreDeLigneDuFichierRegexp){
 			indiceLigneFichierRegexp++;
-			setRegexp(Importer.importerExpression(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
+			setRegexp(Importer.importerLigne(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
 		}else{
 			if(nbFichier==indiceFichierActuel){
 				indiceFichierActuel=0;
@@ -65,7 +67,7 @@ public GestionnaireDeFichier() {
 			setTexte(Importer.importerTexte(pathRepertoire+"/"+nomFichierActuel+".txt"));
 			
 			indiceLigneFichierRegexp=1;
-			setRegexp(Importer.importerExpression(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
+			setRegexp(Importer.importerLigne(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
 		}
 		
 	}
@@ -79,7 +81,7 @@ public GestionnaireDeFichier() {
 		
 		if(indiceLigneFichierRegexp < nombreDeLigneDuFichierRegexp){
 			indiceLigneFichierRegexp++;
-			setRegexp(Importer.importerExpression(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
+			setRegexp(Importer.importerLigne(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
 		}
 	}
 	
@@ -87,7 +89,7 @@ public GestionnaireDeFichier() {
 		
 		if(indiceLigneFichierRegexp >1){
 			indiceLigneFichierRegexp--;
-			setRegexp(Importer.importerExpression(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
+			setRegexp(Importer.importerLigne(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
 		}
 	}
 	
@@ -103,7 +105,7 @@ public GestionnaireDeFichier() {
 		nomFichierActuel=nomsFichiers.get(indiceFichierActuel);
 		setTexte(Importer.importerTexte(pathRepertoire+"/"+nomFichierActuel+".txt"));
 		indiceLigneFichierRegexp=1;
-		setRegexp(Importer.importerExpression(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
+		setRegexp(Importer.importerLigne(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
 	}
 	
 	public void exerciceMoinsUn(){
@@ -116,7 +118,7 @@ public GestionnaireDeFichier() {
 		nomFichierActuel=nomsFichiers.get(indiceFichierActuel);
 		setTexte(Importer.importerTexte(pathRepertoire+"/"+nomFichierActuel+".txt"));
 		indiceLigneFichierRegexp=1;
-		setRegexp(Importer.importerExpression(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
+		setRegexp(Importer.importerLigne(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
 	}
 	
 	

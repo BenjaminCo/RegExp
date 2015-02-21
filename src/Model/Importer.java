@@ -43,10 +43,16 @@ public class Importer {
 		
 		return texte;
 	}
-	public static String importerExpression(String path,int numeroLigne){
+	/**
+	 * Permet d'obtenir une ligne d'un fichier
+	 * @param pathFichier l'adresse du fichier cible
+	 * @param numeroLigne le numero de la ligne que l'on souhaite obtenir
+	 * @return Une String comportant la ligne cible
+	 */
+	public static String importerLigne(String pathFichier,int numeroLigne){
 		String expression="";
 		try {
-			InputStream inputStream=new FileInputStream(path);
+			InputStream inputStream=new FileInputStream(pathFichier);
 			InputStreamReader inputStreamReader=new InputStreamReader(inputStream);
 			BufferedReader bufferedReader=new BufferedReader(inputStreamReader);
 			String ligne;

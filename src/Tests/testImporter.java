@@ -8,7 +8,7 @@ public class testImporter {
 
 	@Test
 	public void testImpoerterExpression() {
-		assertEquals("plusieurs",Model.Importer.importerExpression("textes/texteTest.regexp", 2));
+		assertEquals("plusieurs",Model.Importer.importerLigne("textes/texteTest.regexp", 2));
 	}
 
 }
