@@ -138,7 +138,7 @@ public class FenetrePrincipal extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				monControleur.nouvelExercice("RegExpPrecedent");
 				texte.setText(monControleur.resoudreExercice(null));
-
+				champDeSaisie.setText("");
 			}
 		});
 
@@ -147,6 +147,7 @@ public class FenetrePrincipal extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				monControleur.nouvelExercice("RegExpSuivant");
 				texte.setText(monControleur.resoudreExercice(null));
+				champDeSaisie.setText("");
 			}
 		});
 
@@ -155,6 +156,7 @@ public class FenetrePrincipal extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				monControleur.nouvelExercice("ExoPrecedent");
 				texte.setText(monControleur.resoudreExercice(null));
+				champDeSaisie.setText("");
 			}
 		});
 
@@ -164,6 +166,7 @@ public class FenetrePrincipal extends JFrame {
 
 				monControleur.nouvelExercice("ExoSuivant");
 				texte.setText(monControleur.resoudreExercice(null));
+				champDeSaisie.setText("");
 
 			}
 		});
@@ -387,6 +390,7 @@ public class FenetrePrincipal extends JFrame {
 				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
 					monControleur.nouvelExercice();
 					texte.setText(monControleur.resoudreExercice(null));
+					champDeSaisie.setText("");
 				}
 			}
 
@@ -402,6 +406,7 @@ public class FenetrePrincipal extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				monControleur.nouvelExercice();
 				texte.setText(monControleur.resoudreExercice(null));
+				champDeSaisie.setText("");
 			}
 		});
 
