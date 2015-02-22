@@ -68,7 +68,8 @@ public class FenetrePrincipal extends JFrame {
 	private JButton BoutonDeReponse = new JButton("Réponse");
 	private JButton BoutonDAide = new JButton("Aide");
 	private JButton changerExo = new JButton("Switch");
-
+	private JButton ajoutExpresion= new JButton("Ajouter expression");
+	
 	private ControleurPrincipal monControleur;
 
 	private String affReponse = "";
@@ -109,7 +110,9 @@ public class FenetrePrincipal extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				monControleur.changeMode();
+				BoutonDeReponse.setVisible(!monControleur.isModeAdmin());
 				
+				ajoutExpresion.setVisible(monControleur.isModeAdmin());
 			}
 		});
 		
@@ -247,7 +250,20 @@ public class FenetrePrincipal extends JFrame {
 
 		petitCentre.add(champDeSaisie);
 		petitCentre.add(BoutonDeReponse);
+		petitCentre.add(ajoutExpresion);
+		ajoutExpresion.setVisible(false);
 		petitCentre.add(BoutonDAide);
+		
+		
+		
+		ajoutExpresion.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				monControleur.ajouterExpression(champDeSaisie.getText());
+				champDeSaisie.setText("");
+			}
+		});
 
 		BoutonDeReponse.addActionListener(new ActionListener() {
 			@Override
