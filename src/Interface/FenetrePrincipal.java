@@ -52,7 +52,9 @@ public class FenetrePrincipal extends JFrame {
 	private JMenu aide = new JMenu("Aide");
 	private JMenu commande = new JMenu("Commande");
 	private JMenu OptionPays = new JMenu("Pays");
-
+	private JMenu admin=new JMenu("Administration");
+	
+	private JMenuItem changeMode=new JMenuItem("Changer mode");
 	private JMenuItem ItemAPropos = new JMenuItem("A Propos");
 	private JMenuItem RegExpPrecedent = new JMenuItem("RegExp Precedent");
 	private JMenuItem RegExpSuivant = new JMenuItem("RegExp Suivant");
@@ -78,6 +80,8 @@ public class FenetrePrincipal extends JFrame {
 	static Pays tab[] = Pays.values();
 	private JMenuItem tabOption[] = new JMenuItem[tab.length];
 
+	
+
 	/**
 	 * Affiche la fenetre principale de l'application
 	 * 
@@ -97,7 +101,18 @@ public class FenetrePrincipal extends JFrame {
 		barreDeMenu.add(commande);
 		barreDeMenu.add(aide);
 		barreDeMenu.add(OptionPays);
-
+		
+		barreDeMenu.add(admin);
+		
+		changeMode.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				monControleur.changeMode();
+				
+			}
+		});
+		
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(
 				this.getClass().getResource("../logo.png")));
 
@@ -106,7 +121,9 @@ public class FenetrePrincipal extends JFrame {
 		commande.add(RegExpSuivant);
 		commande.add(TextePrecedent);
 		commande.add(TexteSuivant);
-
+		
+		admin.add(changeMode);
+		
 		ItemAPropos.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {

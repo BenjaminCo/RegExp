@@ -96,10 +96,10 @@ public GestionnaireDeFichier() {
 	
 	//Si l'utilisateur veut vraiment changer d'exercice (fichier texte)
 	public void exercicePlusUn(){
-		if(indiceFichierActuel==0){
-			indiceFichierActuel=nomsFichiers.size()-1;
+		if(indiceFichierActuel==nomsFichiers.size()-1){
+			indiceFichierActuel=0;
 		}else{
-			indiceFichierActuel--;
+			indiceFichierActuel++;
 		}
 		
 		nomFichierActuel=nomsFichiers.get(indiceFichierActuel);
@@ -121,6 +121,14 @@ public GestionnaireDeFichier() {
 		setRegexp(Importer.importerLigne(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
 	}
 	
+	/**
+	 * Ajouter une expression régulière à l'exercice actuel
+	 * @param expression Une String comportant l'expression régulière à ajouter.
+	 */
+	public void ajouterExpression(String expression){
+		Exporter.ajouterLigne(pathRepertoire+"/"+nomFichierActuel+".regexp", expression);
+		nombreDeLigneDuFichierRegexp++;
+	}
 	
 	/**
 	 * Permet d'obtenir le texte du fichier dernièrement importé.

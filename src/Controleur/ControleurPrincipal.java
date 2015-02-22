@@ -14,19 +14,52 @@ import Model.GestionnaireDeFichier;
 
 public class ControleurPrincipal {
 	private Exercice exoActuel;
-	
 	private GestionnaireDeFichier monGestionnaireDeFichier=null;
+	
+	private boolean modeAdmin;
+	
 	/**
 	 * Lancement de l'application
 	 */
 	public ControleurPrincipal() {
 				
+		modeAdmin=false;
 		
 		nouvelExercice();
 		
 		new FenetrePrincipal(this);
 		
 	}
+	
+	
+	public boolean isModeAdmin() {
+		return modeAdmin;
+	}
+	
+	/**
+	 * Permet de passer du mode normal au mode administrateur et vice-versa
+	 */
+	public void changeMode() {
+		if (modeAdmin) {
+			modeAdmin=false;
+			String texte=monGestionnaireDeFichier.getTexte();
+			String regExp=monGestionnaireDeFichier.getRegexp();
+			exoActuel=new Exercice(texte,regExp);
+		} else {
+			modeAdmin=true;
+			String texte=monGestionnaireDeFichier.getTexte();
+			exoActuel=new Exercice(texte, null);
+		}
+	}
+	
+	/**
+	 * Ajouter une expression régulière à l'exercice actuel
+	 * @param expression Une String comportant l'expression régulière à ajouter.
+	 */
+	public void ajouterExpression(String expression){
+		monGestionnaireDeFichier.ajouterExpression(expression);
+	}
+
 	
 	/**
 	 * Tente de réaliser l'execice actuel.
@@ -55,23 +88,33 @@ public class ControleurPrincipal {
 	}
 	
 	/**
-	 * Permet créer ou un nouvel exercice ou de passer é l'exercice suivant si il en existe deja un.
+	 * Permet de créer ou un nouvel exercice ou de passer à l'exercice suivant si il en existe deja un.
 	 */
 	public void nouvelExercice() {
-		if(monGestionnaireDeFichier==null){
+		if(modeAdmin){
+			if(monGestionnaireDeFichier==null){
+				monGestionnaireDeFichier=new GestionnaireDeFichier();
+			}else{
+				monGestionnaireDeFichier.exercicePlusUn();
+			}
 			
-			monGestionnaireDeFichier=new GestionnaireDeFichier();
 			String texte=monGestionnaireDeFichier.getTexte();
-			String regExp=monGestionnaireDeFichier.getRegexp();
-			exoActuel=new Exercice(texte,regExp);
-			
+			exoActuel=new Exercice(texte, null);
 		}else{
-			monGestionnaireDeFichier.exerciceSuivant();
+			if(monGestionnaireDeFichier==null){
+
+				monGestionnaireDeFichier=new GestionnaireDeFichier();
+
+			}else{
+				monGestionnaireDeFichier.exerciceSuivant();
+				
+			}
 			String texte=monGestionnaireDeFichier.getTexte();
 			String regExp=monGestionnaireDeFichier.getRegexp();
 			exoActuel=new Exercice(texte,regExp);
 		}
 	}
+		
 	
 	public void nouvelExercice(String choix) {
 		if(monGestionnaireDeFichier==null){
@@ -109,7 +152,12 @@ public class ControleurPrincipal {
 			////////////////////////////
 			String texte=monGestionnaireDeFichier.getTexte();
 			String regExp=monGestionnaireDeFichier.getRegexp();
-			exoActuel=new Exercice(texte,regExp);
+			if (modeAdmin) {
+				exoActuel=new Exercice(texte,null);
+			} else {
+				exoActuel=new Exercice(texte,regExp);
+			}
+			
 		}
 	}
 	
