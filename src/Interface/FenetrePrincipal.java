@@ -44,8 +44,13 @@ import Model.Pays;
  * @author Benjamin
  *
  */
-@SuppressWarnings("serial")
+
 public class FenetrePrincipal extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private JMenuBar barreDeMenu = new JMenuBar();
 
@@ -117,7 +122,7 @@ public class FenetrePrincipal extends JFrame {
 		});
 		
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(
-				this.getClass().getResource("../logo.png")));
+				this.getClass().getResource("/logo.png")));
 
 		aide.add(ItemAPropos);
 		commande.add(RegExpPrecedent);
