@@ -117,7 +117,7 @@ public class FenetrePrincipal extends JFrame {
 
 				ajoutExpresion.setVisible(monControleur.isModeAdmin());
 				labReponse.setText("");
-				
+
 			}
 		});
 
@@ -268,7 +268,6 @@ public class FenetrePrincipal extends JFrame {
 			}
 		});
 
-		
 		BoutonDeReponse.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -285,8 +284,7 @@ public class FenetrePrincipal extends JFrame {
 
 					}
 				});
-				
-				//if ()
+
 				reponse();
 
 			}
