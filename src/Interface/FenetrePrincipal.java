@@ -57,9 +57,9 @@ public class FenetrePrincipal extends JFrame {
 	private JMenu aide = new JMenu("Aide");
 	private JMenu commande = new JMenu("Commande");
 	private JMenu OptionPays = new JMenu("Pays");
-	private JMenu admin=new JMenu("Administration");
-	
-	private JMenuItem changeMode=new JMenuItem("Changer mode");
+	private JMenu admin = new JMenu("Administration");
+
+	private JMenuItem changeMode = new JMenuItem("Changer mode");
 	private JMenuItem ItemAPropos = new JMenuItem("A Propos");
 	private JMenuItem RegExpPrecedent = new JMenuItem("RegExp Precedent");
 	private JMenuItem RegExpSuivant = new JMenuItem("RegExp Suivant");
@@ -73,8 +73,8 @@ public class FenetrePrincipal extends JFrame {
 	private JButton BoutonDeReponse = new JButton("Réponse");
 	private JButton BoutonDAide = new JButton("Aide");
 	private JButton changerExo = new JButton("Switch");
-	private JButton ajoutExpresion= new JButton("Ajouter expression");
-	
+	private JButton ajoutExpresion = new JButton("Ajouter expression");
+
 	private ControleurPrincipal monControleur;
 
 	private String affReponse = "";
@@ -85,8 +85,6 @@ public class FenetrePrincipal extends JFrame {
 
 	static Pays tab[] = Pays.values();
 	private JMenuItem tabOption[] = new JMenuItem[tab.length];
-
-	
 
 	/**
 	 * Affiche la fenetre principale de l'application
@@ -107,20 +105,22 @@ public class FenetrePrincipal extends JFrame {
 		barreDeMenu.add(commande);
 		barreDeMenu.add(aide);
 		barreDeMenu.add(OptionPays);
-		
+
 		barreDeMenu.add(admin);
-		
+
 		changeMode.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				monControleur.changeMode();
 				BoutonDeReponse.setVisible(!monControleur.isModeAdmin());
-				
+
 				ajoutExpresion.setVisible(monControleur.isModeAdmin());
+				labReponse.setText("");
+				
 			}
 		});
-		
+
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(
 				this.getClass().getResource("/logo.png")));
 
@@ -129,9 +129,9 @@ public class FenetrePrincipal extends JFrame {
 		commande.add(RegExpSuivant);
 		commande.add(TextePrecedent);
 		commande.add(TexteSuivant);
-		
+
 		admin.add(changeMode);
-		
+
 		ItemAPropos.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -258,11 +258,9 @@ public class FenetrePrincipal extends JFrame {
 		petitCentre.add(ajoutExpresion);
 		ajoutExpresion.setVisible(false);
 		petitCentre.add(BoutonDAide);
-		
-		
-		
+
 		ajoutExpresion.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				monControleur.ajouterExpression(champDeSaisie.getText());
@@ -270,6 +268,7 @@ public class FenetrePrincipal extends JFrame {
 			}
 		});
 
+		
 		BoutonDeReponse.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -277,14 +276,17 @@ public class FenetrePrincipal extends JFrame {
 				labReponse.addMouseListener(new MouseAdapter() {
 
 					public void mouseEntered(MouseEvent e) {
+
 						JLabel label = (JLabel) e.getSource();
 						String plainText = label.getText().replaceAll(
 								"\\<.*?\\>", "");
 
 						label.setText(plainText);
-					}
 
+					}
 				});
+				
+				//if ()
 				reponse();
 
 			}
@@ -447,7 +449,7 @@ public class FenetrePrincipal extends JFrame {
 
 	private void aide() {
 		labReponse
-		.setText("http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html");
+				.setText("http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html");
 		labReponse.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		addListener(labReponse);
 	}
