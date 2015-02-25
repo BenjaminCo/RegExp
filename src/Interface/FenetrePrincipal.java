@@ -147,6 +147,7 @@ public class FenetrePrincipal extends JFrame {
 				monControleur.nouvelExercice("RegExpPrecedent");
 				texte.setText(monControleur.resoudreExercice(null));
 				champDeSaisie.setText("");
+				champDeSaisie.requestFocus();
 			}
 		});
 
@@ -156,6 +157,8 @@ public class FenetrePrincipal extends JFrame {
 				monControleur.nouvelExercice("RegExpSuivant");
 				texte.setText(monControleur.resoudreExercice(null));
 				champDeSaisie.setText("");
+				champDeSaisie.requestFocus();
+
 			}
 		});
 
@@ -165,6 +168,7 @@ public class FenetrePrincipal extends JFrame {
 				monControleur.nouvelExercice("ExoPrecedent");
 				texte.setText(monControleur.resoudreExercice(null));
 				champDeSaisie.setText("");
+				champDeSaisie.requestFocus();
 			}
 		});
 
@@ -175,7 +179,7 @@ public class FenetrePrincipal extends JFrame {
 				monControleur.nouvelExercice("ExoSuivant");
 				texte.setText(monControleur.resoudreExercice(null));
 				champDeSaisie.setText("");
-
+				champDeSaisie.requestFocus();
 			}
 		});
 
@@ -368,11 +372,13 @@ public class FenetrePrincipal extends JFrame {
 				// //////////////////////////////////////////////
 
 				try {
-					if (monControleur.estExerciceResolu()) {
+
+					if (monControleur.estExerciceResolu()
+							&& !monControleur.isModeAdmin()) {
 						affReponse = "Bonne Réponse !";
 						labReponse.setText(affReponse);
-
-						wait(2);
+						changerExo.requestFocus();
+						Thread.sleep(2);
 
 					} else {
 						affReponse = "";
@@ -412,6 +418,8 @@ public class FenetrePrincipal extends JFrame {
 					monControleur.nouvelExercice();
 					texte.setText(monControleur.resoudreExercice(null));
 					champDeSaisie.setText("");
+					champDeSaisie.requestFocus();
+
 				}
 			}
 
@@ -428,6 +436,8 @@ public class FenetrePrincipal extends JFrame {
 				monControleur.nouvelExercice();
 				texte.setText(monControleur.resoudreExercice(null));
 				champDeSaisie.setText("");
+				champDeSaisie.requestFocus();
+				labReponse.setText("");
 			}
 		});
 

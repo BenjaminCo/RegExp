@@ -103,10 +103,21 @@ public class Exercice {
 	public String realiserExercice(String exprReg){
 		utilisateur=Analyse.analyser(texte, exprReg);
 		comparerPlages();
+		
 		coloration();
 		return texteColore;
 	}
-	
+	/**
+	 * Permet de despecialiser les charactères HTML d'un texte.
+	 * @param texte Le texte à despecialiser.
+	 * @return Le texte despecialisé.
+	 */
+	private String despecialisation(String texte) {
+		texte=texte.replaceAll("<", " &lt ");
+		return texte.replaceAll(">", " &gt ");
+		
+	}
+
 	/**
 	 * Permet de créer un texte coloré en fonction des listes de plages: commune,utilisateur,solution
 	 */
