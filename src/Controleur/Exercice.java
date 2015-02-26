@@ -113,8 +113,45 @@ public class Exercice {
 	 * @return Le texte despecialisé.
 	 */
 	private String despecialisation(String texte) {
+		while(texte.indexOf("<")!=-1){
+			int index =texte.indexOf("<");
+			texte.replaceFirst("<", " &lt ");
+			//décalage des plages communes
+			for(int j=0;j<communeBis.size();j++){
+				if (communeBis.get(j).getDebut()>index) {
+					communeBis.get(j).setDebut(communeBis.get(j).getDebut()+4);
+					//car le début est avant la fin pas besoin de faire de deuxième condition
+					communeBis.get(j).setFin(communeBis.get(j).getFin()+4);
+				}else if((communeBis.get(j).getDebut()<=index)&&(communeBis.get(j).getFin()>index)){
+					communeBis.get(j).setFin(communeBis.get(j).getFin()+4);
+				}
+				
+			}
+			//décalage des plages solution
+			for (int k = 0; k < solutionBis.size(); k++) {
+				if (solutionBis.get(k).getDebut()>index) {
+					solutionBis.get(k).setDebut(solutionBis.get(k).getDebut()+4);
+					//car le début est avant la fin pas besoin de faire de deuxième condition
+					solutionBis.get(k).setFin(solutionBis.get(k).getFin()+4);
+				}else if((solutionBis.get(k).getDebut()<=index)&&(solutionBis.get(k).getFin()>index)){
+					solutionBis.get(k).setFin(solutionBis.get(k).getFin()+4);
+				}
+			}
+			//décalage des plagesutilisateur
+			for (int k = 0; k < utilisateurBis.size(); k++) {
+				if (utilisateurBis.get(k).getDebut()>index) {
+					utilisateurBis.get(k).setDebut(utilisateurBis.get(k).getDebut()+4);
+					//car le début est avant la fin pas besoin de faire de deuxième condition
+					utilisateurBis.get(k).setFin(utilisateurBis.get(k).getFin()+4);
+				}else if((utilisateurBis.get(k).getDebut()<=index)&&(utilisateurBis.get(k).getFin()>index)){
+					utilisateurBis.get(k).setFin(utilisateurBis.get(k).getFin()+4);
+				}
+			
+			}
+		}
 		texte=texte.replaceAll("<", " &lt ");
-		return texte.replaceAll(">", " &gt ");
+		//texte.replaceAll(">", " &gt ");
+		return texte;
 		
 	}
 
