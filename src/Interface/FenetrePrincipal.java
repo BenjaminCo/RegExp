@@ -114,7 +114,10 @@ public class FenetrePrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				monControleur.changeMode();
 				BoutonDeReponse.setVisible(!monControleur.isModeAdmin());
-
+				
+				texte.setText(monControleur.resoudreExercice(null));					
+				
+				
 				ajoutExpresion.setVisible(monControleur.isModeAdmin());
 				labReponse.setText("");
 
