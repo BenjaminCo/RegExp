@@ -23,6 +23,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -69,6 +70,7 @@ public class FenetrePrincipal extends JFrame {
 	private JFrame cetteFenetre;
 	private JLabel texte;
 	private JTextField champDeSaisie = new JTextField();
+	
 
 	private JButton BoutonDeReponse = new JButton("Réponse");
 	private JButton BoutonDAide = new JButton("Aide");
@@ -191,7 +193,7 @@ public class FenetrePrincipal extends JFrame {
 		JPanel conteneur = new JPanel(new BorderLayout());
 
 		final JPanel top = new JPanel();
-		final JPanel mid = new JPanel();
+		final JPanel mid = new JPanel(new FlowLayout());
 		final JPanel bot = new JPanel();
 
 		conteneur.add(top, BorderLayout.NORTH);
@@ -249,6 +251,7 @@ public class FenetrePrincipal extends JFrame {
 		// Panel MID
 		// ---------------------------------------------------
 
+		mid.setLayout(new GridLayout(2,1));
 		JPanel petitCentre = new JPanel();
 
 		petitCentre.setLayout(new FlowLayout());
@@ -349,7 +352,10 @@ public class FenetrePrincipal extends JFrame {
 		mid.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.RAISED),
 				new EmptyBorder(0, 0, 0, 0)));
 		mid.add(petitCentre);
-
+		
+		final JLabel EnJava = new JLabel("",JLabel.CENTER);
+		mid.add(EnJava);
+		
 		champDeSaisie.addKeyListener(new KeyListener() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -361,12 +367,14 @@ public class FenetrePrincipal extends JFrame {
 
 				if (champDeSaisie.getText().equals("")) {
 					texte.setText(monControleur.resoudreExercice(null));
-
+					EnJava.setText("");
 				} else {
 
 					texte.setText(monControleur.resoudreExercice(champDeSaisie
 							.getText()));
-
+					//Ajout erreur en dessous du champs de saisie
+					
+					 EnJava.setText("Patern() p = new Patern('"+champDeSaisie.getText() +"')");
 				}
 
 				// verifier => valider & exprSolution
@@ -399,6 +407,13 @@ public class FenetrePrincipal extends JFrame {
 			}
 		});
 
+		//Ajout erreur en dessous du champs de saisie
+		
+		
+		
+		
+		
+		
 		// ---------------------------------------------------
 		// Panel BOT
 		// ---------------------------------------------------
