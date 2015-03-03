@@ -70,7 +70,6 @@ public class FenetrePrincipal extends JFrame {
 	private JFrame cetteFenetre;
 	private JLabel texte;
 	private JTextField champDeSaisie = new JTextField();
-	
 
 	private JButton BoutonDeReponse = new JButton("Réponse");
 	private JButton BoutonDAide = new JButton("Aide");
@@ -116,10 +115,9 @@ public class FenetrePrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				monControleur.changeMode();
 				BoutonDeReponse.setVisible(!monControleur.isModeAdmin());
-				
-				texte.setText(monControleur.resoudreExercice(null));					
-				
-				
+
+				texte.setText(monControleur.resoudreExercice(null));
+
 				ajoutExpresion.setVisible(monControleur.isModeAdmin());
 				labReponse.setText("");
 
@@ -251,7 +249,7 @@ public class FenetrePrincipal extends JFrame {
 		// Panel MID
 		// ---------------------------------------------------
 
-		mid.setLayout(new GridLayout(2,1));
+		mid.setLayout(new GridLayout(2, 1));
 		JPanel petitCentre = new JPanel();
 
 		petitCentre.setLayout(new FlowLayout());
@@ -352,10 +350,10 @@ public class FenetrePrincipal extends JFrame {
 		mid.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.RAISED),
 				new EmptyBorder(0, 0, 0, 0)));
 		mid.add(petitCentre);
-		
-		final JLabel EnJava = new JLabel("",JLabel.CENTER);
+
+		final JLabel EnJava = new JLabel("", JLabel.CENTER);
 		mid.add(EnJava);
-		
+
 		champDeSaisie.addKeyListener(new KeyListener() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -369,12 +367,21 @@ public class FenetrePrincipal extends JFrame {
 					texte.setText(monControleur.resoudreExercice(null));
 					EnJava.setText("");
 				} else {
+					try {
+						texte.setText(monControleur
+								.resoudreExercice(champDeSaisie.getText()));
+						// Ajout erreur en dessous du champs de saisie
+						EnJava.setText("<html><span style='background:white'>Pattern() p = new Pattern('"
+								+ champDeSaisie.getText() + "')</span></html>");
+					} catch (Exception e2) {
 
-					texte.setText(monControleur.resoudreExercice(champDeSaisie
-							.getText()));
-					//Ajout erreur en dessous du champs de saisie
-					
-					 EnJava.setText("Patern() p = new Patern('"+champDeSaisie.getText() +"')");
+						EnJava.setText("<html><span style='background:white'>Le patttern \""
+								+ champDeSaisie.getText()
+								+ "\" produit l'erreur suivante:<br/>"
+								+ e2.getMessage().replaceAll("\n", "<br/>")
+								+ "</span></html>");
+					}
+
 				}
 
 				// verifier => valider & exprSolution
@@ -407,13 +414,8 @@ public class FenetrePrincipal extends JFrame {
 			}
 		});
 
-		//Ajout erreur en dessous du champs de saisie
-		
-		
-		
-		
-		
-		
+		// Ajout erreur en dessous du champs de saisie
+
 		// ---------------------------------------------------
 		// Panel BOT
 		// ---------------------------------------------------

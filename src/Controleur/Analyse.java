@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
  *
  */
 public class Analyse {
-	private static boolean montreException=false;
+	private static boolean montreException=true;
 	/**
 	 * Analyse un texte à l'aide d'une expression régulière et retourne une liste de Plages
 	 * @param texte le texte à analyser
@@ -31,17 +31,18 @@ public class Analyse {
 					listePlage.add(new Plage(m.start(), m.end()));
 			}
 		} catch (Exception e) {
-			if(montreException){
-				System.out.println(e);
-			
+			if(e.toString().equals("java.lang.NullPointerException")){
+				//ne rien faire
+			}else{
+				if(montreException){
+					System.out.println(e);
+					throw e;
+				}
 			}
+			
 		}
 		return listePlage;
 		
 	}
-	//ceci est un test
-	public static void main(String [] args){
-		System.out.println("ceci est un test");
-		System.out.println(analyser("Ce texte est un test/nSur plusieurs lignes/nComme ceci", "ce|test"));
-	}
+	
 }
