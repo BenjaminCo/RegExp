@@ -109,13 +109,13 @@ public class Exercice {
 	}
 	/**
 	 * Permet de despecialiser les charactères HTML d'un texte.
-	 * @param texte Le texte à despecialiser.
+	 * @param texteP Le texte à despecialiser.
 	 * @return Le texte despecialisé.
 	 */
-	private String despecialisation(String texte) {
-		while(texte.indexOf("<")!=-1){
-			int index =texte.indexOf("<");
-			texte.replaceFirst("<", " &lt ");
+	private String despecialisation(String texteP) {
+		while(texteP.indexOf("<")!=-1){
+			int index =texteP.indexOf("<");
+			texteP.replaceFirst("<", " &lt ");
 			//décalage des plages communes
 			for(int j=0;j<communeBis.size();j++){
 				if (communeBis.get(j).getDebut()>index) {
@@ -149,9 +149,45 @@ public class Exercice {
 			
 			}
 		}
-		texte=texte.replaceAll("<", " &lt ");
+		while(texteP.indexOf(">")!=-1){
+			int index =texteP.indexOf(">");
+			texteP.replaceFirst(">", " &gt ");
+			//décalage des plages communes
+			for(int j=0;j<communeBis.size();j++){
+				if (communeBis.get(j).getDebut()>index) {
+					communeBis.get(j).setDebut(communeBis.get(j).getDebut()+4);
+					//car le début est avant la fin pas besoin de faire de deuxième condition
+					communeBis.get(j).setFin(communeBis.get(j).getFin()+4);
+				}else if((communeBis.get(j).getDebut()<=index)&&(communeBis.get(j).getFin()>index)){
+					communeBis.get(j).setFin(communeBis.get(j).getFin()+4);
+				}
+				
+			}
+			//décalage des plages solution
+			for (int k = 0; k < solutionBis.size(); k++) {
+				if (solutionBis.get(k).getDebut()>index) {
+					solutionBis.get(k).setDebut(solutionBis.get(k).getDebut()+4);
+					//car le début est avant la fin pas besoin de faire de deuxième condition
+					solutionBis.get(k).setFin(solutionBis.get(k).getFin()+4);
+				}else if((solutionBis.get(k).getDebut()<=index)&&(solutionBis.get(k).getFin()>index)){
+					solutionBis.get(k).setFin(solutionBis.get(k).getFin()+4);
+				}
+			}
+			//décalage des plagesutilisateur
+			for (int k = 0; k < utilisateurBis.size(); k++) {
+				if (utilisateurBis.get(k).getDebut()>index) {
+					utilisateurBis.get(k).setDebut(utilisateurBis.get(k).getDebut()+4);
+					//car le début est avant la fin pas besoin de faire de deuxième condition
+					utilisateurBis.get(k).setFin(utilisateurBis.get(k).getFin()+4);
+				}else if((utilisateurBis.get(k).getDebut()<=index)&&(utilisateurBis.get(k).getFin()>index)){
+					utilisateurBis.get(k).setFin(utilisateurBis.get(k).getFin()+4);
+				}
+			
+			}
+		}
+		//texteP=texteP.replaceAll("<", " &lt ");
 		//texte.replaceAll(">", " &gt ");
-		return texte;
+		return texteP;
 		
 	}
 
@@ -206,6 +242,9 @@ public class Exercice {
 				 }
 			}
 		}
+		//despecialisation des characère html
+		//texteColore=despecialisation(texteColore);
+		
 		//insertion des couleur pour commune
 		for(int i=0;i<communeBis.size();i++){
 			//insertion des balises ouvrante
@@ -420,8 +459,8 @@ public class Exercice {
 	
 	//Ceci est un test
 	public static void main(String[] args) {
-		Exercice exo=new Exercice("textes/texteTest.txt","textes/texteTest.regexp");
-		exo.realiserExercice("ce|te");
+		Exercice exo=new Exercice("<html> lala </html>","la");
+		exo.realiserExercice("html>");
 		
 		System.out.println(exo +"\n");
 		System.out.println(exo.estResolu());

@@ -86,6 +86,8 @@ public class FenetrePrincipal extends JFrame {
 
 	static Pays tab[] = Pays.values();
 	private JMenuItem tabOption[] = new JMenuItem[tab.length];
+	
+	final JLabel enJava = new JLabel("", JLabel.CENTER);
 
 	/**
 	 * Affiche la fenetre principale de l'application
@@ -94,12 +96,11 @@ public class FenetrePrincipal extends JFrame {
 	 *            Le controleurPrincipal de l'application
 	 * 
 	 */
-
 	public FenetrePrincipal(final ControleurPrincipal controleurPrincipal) {
 		super("RegExp");
 		cetteFenetre = this;
 		monControleur = controleurPrincipal;
-		this.setSize(new Dimension(500, 300));
+		this.setSize(new Dimension(500, 330));
 		this.setLayout(new BorderLayout());
 
 		this.add(barreDeMenu, BorderLayout.NORTH);
@@ -150,6 +151,7 @@ public class FenetrePrincipal extends JFrame {
 				monControleur.nouvelExercice("RegExpPrecedent");
 				texte.setText(monControleur.resoudreExercice(null));
 				champDeSaisie.setText("");
+				enJava.setText("");
 				champDeSaisie.requestFocus();
 			}
 		});
@@ -160,6 +162,7 @@ public class FenetrePrincipal extends JFrame {
 				monControleur.nouvelExercice("RegExpSuivant");
 				texte.setText(monControleur.resoudreExercice(null));
 				champDeSaisie.setText("");
+				enJava.setText("");
 				champDeSaisie.requestFocus();
 
 			}
@@ -171,6 +174,7 @@ public class FenetrePrincipal extends JFrame {
 				monControleur.nouvelExercice("ExoPrecedent");
 				texte.setText(monControleur.resoudreExercice(null));
 				champDeSaisie.setText("");
+				enJava.setText("");
 				champDeSaisie.requestFocus();
 			}
 		});
@@ -182,6 +186,7 @@ public class FenetrePrincipal extends JFrame {
 				monControleur.nouvelExercice("ExoSuivant");
 				texte.setText(monControleur.resoudreExercice(null));
 				champDeSaisie.setText("");
+				enJava.setText("");
 				champDeSaisie.requestFocus();
 			}
 		});
@@ -249,7 +254,7 @@ public class FenetrePrincipal extends JFrame {
 		// Panel MID
 		// ---------------------------------------------------
 
-		mid.setLayout(new GridLayout(2, 1));
+		mid.setLayout(new FlowLayout());
 		JPanel petitCentre = new JPanel();
 
 		petitCentre.setLayout(new FlowLayout());
@@ -351,8 +356,8 @@ public class FenetrePrincipal extends JFrame {
 				new EmptyBorder(0, 0, 0, 0)));
 		mid.add(petitCentre);
 
-		final JLabel EnJava = new JLabel("", JLabel.CENTER);
-		mid.add(EnJava);
+		
+		mid.add(enJava);
 
 		champDeSaisie.addKeyListener(new KeyListener() {
 			@Override
@@ -365,17 +370,17 @@ public class FenetrePrincipal extends JFrame {
 
 				if (champDeSaisie.getText().equals("")) {
 					texte.setText(monControleur.resoudreExercice(null));
-					EnJava.setText("");
+					enJava.setText("");
 				} else {
 					try {
 						texte.setText(monControleur
 								.resoudreExercice(champDeSaisie.getText()));
 						// Ajout erreur en dessous du champs de saisie
-						EnJava.setText("<html><span style='background:white'>Pattern() p = new Pattern('"
+						enJava.setText("<html><span style='background:white'>Pattern() p = new Pattern('"
 								+ champDeSaisie.getText() + "')</span></html>");
 					} catch (Exception e2) {
 
-						EnJava.setText("<html><span style='background:white'>Le patttern \""
+						enJava.setText("<html><span style='background:white'>Le patttern \""
 								+ champDeSaisie.getText()
 								+ "\" produit l'erreur suivante:<br/>"
 								+ e2.getMessage().replaceAll("\n", "<br/>")
@@ -438,6 +443,7 @@ public class FenetrePrincipal extends JFrame {
 					monControleur.nouvelExercice();
 					texte.setText(monControleur.resoudreExercice(null));
 					champDeSaisie.setText("");
+					enJava.setText("");
 					champDeSaisie.requestFocus();
 
 				}
@@ -456,6 +462,7 @@ public class FenetrePrincipal extends JFrame {
 				monControleur.nouvelExercice();
 				texte.setText(monControleur.resoudreExercice(null));
 				champDeSaisie.setText("");
+				enJava.setText("");
 				champDeSaisie.requestFocus();
 				labReponse.setText("");
 			}

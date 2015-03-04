@@ -31,14 +31,16 @@ public class Analyse {
 					listePlage.add(new Plage(m.start(), m.end()));
 			}
 		} catch (Exception e) {
+			
+			
 			if(e.toString().equals("java.lang.NullPointerException")){
 				//ne rien faire
-			}else{
-				if(montreException){
-					System.out.println(e);
-					throw e;
-				}
+				
+			}else if(montreException){
+				
+				throw e;
 			}
+				
 			
 		}
 		return listePlage;
