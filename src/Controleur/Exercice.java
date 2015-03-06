@@ -115,72 +115,72 @@ public class Exercice {
 	private String despecialisation(String texteP) {
 		while(texteP.indexOf("<")!=-1){
 			int index =texteP.indexOf("<");
-			texteP.replaceFirst("<", " &lt ");
+			texteP=texteP.replaceFirst("<", "&lt");
 			//décalage des plages communes
 			for(int j=0;j<communeBis.size();j++){
 				if (communeBis.get(j).getDebut()>index) {
-					communeBis.get(j).setDebut(communeBis.get(j).getDebut()+4);
+					communeBis.get(j).setDebut(communeBis.get(j).getDebut()+2);
 					//car le début est avant la fin pas besoin de faire de deuxième condition
-					communeBis.get(j).setFin(communeBis.get(j).getFin()+4);
+					communeBis.get(j).setFin(communeBis.get(j).getFin()+2);
 				}else if((communeBis.get(j).getDebut()<=index)&&(communeBis.get(j).getFin()>index)){
-					communeBis.get(j).setFin(communeBis.get(j).getFin()+4);
+					communeBis.get(j).setFin(communeBis.get(j).getFin()+2);
 				}
 				
 			}
 			//décalage des plages solution
 			for (int k = 0; k < solutionBis.size(); k++) {
 				if (solutionBis.get(k).getDebut()>index) {
-					solutionBis.get(k).setDebut(solutionBis.get(k).getDebut()+4);
+					solutionBis.get(k).setDebut(solutionBis.get(k).getDebut()+2);
 					//car le début est avant la fin pas besoin de faire de deuxième condition
-					solutionBis.get(k).setFin(solutionBis.get(k).getFin()+4);
+					solutionBis.get(k).setFin(solutionBis.get(k).getFin()+2);
 				}else if((solutionBis.get(k).getDebut()<=index)&&(solutionBis.get(k).getFin()>index)){
-					solutionBis.get(k).setFin(solutionBis.get(k).getFin()+4);
+					solutionBis.get(k).setFin(solutionBis.get(k).getFin()+2);
 				}
 			}
 			//décalage des plagesutilisateur
 			for (int k = 0; k < utilisateurBis.size(); k++) {
 				if (utilisateurBis.get(k).getDebut()>index) {
-					utilisateurBis.get(k).setDebut(utilisateurBis.get(k).getDebut()+4);
+					utilisateurBis.get(k).setDebut(utilisateurBis.get(k).getDebut()+2);
 					//car le début est avant la fin pas besoin de faire de deuxième condition
-					utilisateurBis.get(k).setFin(utilisateurBis.get(k).getFin()+4);
+					utilisateurBis.get(k).setFin(utilisateurBis.get(k).getFin()+2);
 				}else if((utilisateurBis.get(k).getDebut()<=index)&&(utilisateurBis.get(k).getFin()>index)){
-					utilisateurBis.get(k).setFin(utilisateurBis.get(k).getFin()+4);
+					utilisateurBis.get(k).setFin(utilisateurBis.get(k).getFin()+2);
 				}
 			
 			}
 		}
 		while(texteP.indexOf(">")!=-1){
 			int index =texteP.indexOf(">");
-			texteP.replaceFirst(">", " &gt ");
+			texteP=texteP.replaceFirst(">", "&gt");
 			//décalage des plages communes
 			for(int j=0;j<communeBis.size();j++){
 				if (communeBis.get(j).getDebut()>index) {
-					communeBis.get(j).setDebut(communeBis.get(j).getDebut()+4);
+					communeBis.get(j).setDebut(communeBis.get(j).getDebut()+2);
 					//car le début est avant la fin pas besoin de faire de deuxième condition
-					communeBis.get(j).setFin(communeBis.get(j).getFin()+4);
+					communeBis.get(j).setFin(communeBis.get(j).getFin()+2);
 				}else if((communeBis.get(j).getDebut()<=index)&&(communeBis.get(j).getFin()>index)){
-					communeBis.get(j).setFin(communeBis.get(j).getFin()+4);
+					communeBis.get(j).setFin(communeBis.get(j).getFin()+2);
 				}
 				
 			}
 			//décalage des plages solution
 			for (int k = 0; k < solutionBis.size(); k++) {
 				if (solutionBis.get(k).getDebut()>index) {
-					solutionBis.get(k).setDebut(solutionBis.get(k).getDebut()+4);
+					solutionBis.get(k).setDebut(solutionBis.get(k).getDebut()+2);
 					//car le début est avant la fin pas besoin de faire de deuxième condition
-					solutionBis.get(k).setFin(solutionBis.get(k).getFin()+4);
+					solutionBis.get(k).setFin(solutionBis.get(k).getFin()+2);
 				}else if((solutionBis.get(k).getDebut()<=index)&&(solutionBis.get(k).getFin()>index)){
-					solutionBis.get(k).setFin(solutionBis.get(k).getFin()+4);
+					solutionBis.get(k).setFin(solutionBis.get(k).getFin()+2);
 				}
 			}
 			//décalage des plagesutilisateur
 			for (int k = 0; k < utilisateurBis.size(); k++) {
 				if (utilisateurBis.get(k).getDebut()>index) {
-					utilisateurBis.get(k).setDebut(utilisateurBis.get(k).getDebut()+4);
+					utilisateurBis.get(k).setDebut(utilisateurBis.get(k).getDebut()+2);
 					//car le début est avant la fin pas besoin de faire de deuxième condition
-					utilisateurBis.get(k).setFin(utilisateurBis.get(k).getFin()+4);
+					utilisateurBis.get(k).setFin(utilisateurBis.get(k).getFin()+2);
 				}else if((utilisateurBis.get(k).getDebut()<=index)&&(utilisateurBis.get(k).getFin()>index)){
-					utilisateurBis.get(k).setFin(utilisateurBis.get(k).getFin()+4);
+					utilisateurBis.get(k).setFin(utilisateurBis.get(k).getFin()+2);
 				}
 			
 			}
@@ -243,9 +243,9 @@ public class Exercice {
 			}
 		}
 		//despecialisation des characère html
-		//texteColore=despecialisation(texteColore);
+		texteColore=despecialisation(texteColore);
 		
-		//insertion des couleur pour commune
+		//insertion des couleurs pour commune
 		for(int i=0;i<communeBis.size();i++){
 			//insertion des balises ouvrante
 			int index=communeBis.get(i).getDebut();
@@ -459,8 +459,8 @@ public class Exercice {
 	
 	//Ceci est un test
 	public static void main(String[] args) {
-		Exercice exo=new Exercice("<html> lala </html>","la");
-		exo.realiserExercice("html>");
+		Exercice exo=new Exercice("<html> lala </html>","<html");
+		exo.realiserExercice("<html");
 		
 		System.out.println(exo +"\n");
 		System.out.println(exo.estResolu());

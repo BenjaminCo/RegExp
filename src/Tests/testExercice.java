@@ -33,5 +33,10 @@ public class testExercice {
 		assertTrue(exo.estResolu());
 		
 	}
-
+	@Test
+	public void testDespecialisation(){
+		Exercice exo=new Exercice("<html> lala </html>","<html");
+		
+		assertEquals("<html><span style='background:#7DAEA3'><u style='color:red'>&lthtml</u></span>&gt lala &lt/html&gt</html>", exo.realiserExercice("<html"));
+	}
 }
