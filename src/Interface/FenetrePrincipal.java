@@ -24,7 +24,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -49,26 +48,22 @@ import Model.Pays;
 
 public class FenetrePrincipal extends JFrame {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	private JMenuBar barreDeMenu = new JMenuBar();
-
 	private JMenu aide = new JMenu("Aide");
 	private JMenu commande = new JMenu("Commande");
 	private JMenu OptionPays = new JMenu("Pays");
 	private JMenu admin = new JMenu("Administration");
-	private JMenu choixTexte =new JMenu("Choix texte");
+	private JMenu choixTexte = new JMenu("Choix texte");
 	private JMenuItem changeMode = new JMenuItem("Changer mode");
 	private JMenuItem ItemAPropos = new JMenuItem("A Propos");
 	private JMenuItem RegExpPrecedent = new JMenuItem("RegExp Precedent");
 	private JMenuItem RegExpSuivant = new JMenuItem("RegExp Suivant");
 	private JMenuItem TextePrecedent = new JMenuItem("Texte Precedent");
 	private JMenuItem TexteSuivant = new JMenuItem("Texte Suivant");
-	
-	
+
 	private JFrame cetteFenetre;
 	private JLabel texte;
 	private JTextField champDeSaisie = new JTextField();
@@ -88,7 +83,7 @@ public class FenetrePrincipal extends JFrame {
 
 	static Pays tab[] = Pays.values();
 	private JMenuItem tabOption[] = new JMenuItem[tab.length];
-	private JMenuItem itemChoixTexte [];
+	private JMenuItem itemChoixTexte[];
 	final JLabel enJava = new JLabel("", JLabel.CENTER);
 
 	/**
@@ -98,6 +93,7 @@ public class FenetrePrincipal extends JFrame {
 	 *            Le controleurPrincipal de l'application
 	 * 
 	 */
+
 	public FenetrePrincipal(final ControleurPrincipal controleurPrincipal) {
 		super("RegExp");
 		cetteFenetre = this;
@@ -106,12 +102,13 @@ public class FenetrePrincipal extends JFrame {
 		this.setLayout(new BorderLayout());
 
 		this.add(barreDeMenu, BorderLayout.NORTH);
-		barreDeMenu.add(commande);
-		barreDeMenu.add(aide);
-		barreDeMenu.add(OptionPays);
 
-		barreDeMenu.add(admin);
+		barreDeMenu.add(commande);
 		barreDeMenu.add(choixTexte);
+		barreDeMenu.add(admin);
+		barreDeMenu.add(OptionPays);
+		barreDeMenu.add(aide);
+
 		changeMode.addActionListener(new ActionListener() {
 
 			@Override
@@ -189,36 +186,28 @@ public class FenetrePrincipal extends JFrame {
 				champDeSaisie.requestFocus();
 			}
 		});
-		//on récupere la liste qui contient tous les noms des fichier de type txt :
-				final ArrayList<String> nomFichiers=monControleur.getGestionnaireDeFichier().getNomsFichiers();
-				
-				
-				itemChoixTexte = new JMenuItem[nomFichiers.size()];
-				for (int i=0;i<nomFichiers.size();i++){
-					itemChoixTexte[i]= new JMenuItem(nomFichiers.get(i));
-					choixTexte.add(itemChoixTexte[i]);
-					itemChoixTexte[i].setActionCommand(""+i);
-					itemChoixTexte[i].addActionListener(new ActionListener() {
-						@Override
-						public void actionPerformed(ActionEvent e) {
-							// TODO Auto-generated method stub
-							
-							
-							int indice = Integer.parseInt(e.getActionCommand());
-							
-							
-							monControleur.choixExercice(nomFichiers.get(indice),indice);
-						    
-						    
-						    
-							renitialise();
-							
-							texte.setText(monControleur.resoudreExercice(null));
-							
-						}
-					});
-					
+		// on récupere la liste qui contient tous les noms des fichier de type txt :
+		
+		final ArrayList<String> nomFichiers = monControleur
+				.getGestionnaireDeFichier().getNomsFichiers();
+
+		itemChoixTexte = new JMenuItem[nomFichiers.size()];
+		for (int i = 0; i < nomFichiers.size(); i++) {
+			itemChoixTexte[i] = new JMenuItem(nomFichiers.get(i));
+			choixTexte.add(itemChoixTexte[i]);
+			itemChoixTexte[i].setActionCommand("" + i);
+			itemChoixTexte[i].addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+
+					int indice = Integer.parseInt(e.getActionCommand());
+					monControleur.choixExercice(nomFichiers.get(indice), indice);
+					renitialise();
+					texte.setText(monControleur.resoudreExercice(null));
 				}
+			});
+		}
+		
 		// AFFICHAGE
 
 		JPanel conteneur = new JPanel(new BorderLayout());
@@ -254,11 +243,9 @@ public class FenetrePrincipal extends JFrame {
 						top.setBackground(colorPays.getColorTop());
 						mid.setBackground(colorPays.getColorMid());
 						bot.setBackground(colorPays.getColorBot());
-
 					}
 				}
 			});
-
 		}
 
 		mid.setPreferredSize(new Dimension(100, 100));
@@ -327,7 +314,6 @@ public class FenetrePrincipal extends JFrame {
 				});
 
 				reponse();
-
 			}
 		});
 
@@ -335,7 +321,6 @@ public class FenetrePrincipal extends JFrame {
 
 			@Override
 			public void keyTyped(KeyEvent arg0) {
-
 			}
 
 			@Override
@@ -347,14 +332,12 @@ public class FenetrePrincipal extends JFrame {
 
 			@Override
 			public void keyPressed(KeyEvent arg0) {
-
 			}
 		});
 
 		BoutonDAide.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
 				aide();
 			}
 		});
@@ -363,7 +346,6 @@ public class FenetrePrincipal extends JFrame {
 
 			@Override
 			public void keyTyped(KeyEvent arg0) {
-
 			}
 
 			@Override
@@ -371,12 +353,10 @@ public class FenetrePrincipal extends JFrame {
 				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
 					aide();
 				}
-
 			}
 
 			@Override
 			public void keyPressed(KeyEvent arg0) {
-
 			}
 		});
 
@@ -384,7 +364,6 @@ public class FenetrePrincipal extends JFrame {
 				new EmptyBorder(0, 0, 0, 0)));
 		mid.add(petitCentre);
 
-		
 		mid.add(enJava);
 
 		champDeSaisie.addKeyListener(new KeyListener() {
@@ -414,13 +393,11 @@ public class FenetrePrincipal extends JFrame {
 								+ e2.getMessage().replaceAll("\n", "<br/>")
 								+ "</span></html>");
 					}
-
 				}
 
-				// verifier => valider & exprSolution
-				// ///////////////////////////////////////////////
-				// VALIDATION
-				// //////////////////////////////////////////////
+				/////////////////////////////////////////////////
+				//				VALIDATION                     //
+				////////////////////////////////////////////////
 
 				try {
 
@@ -462,7 +439,6 @@ public class FenetrePrincipal extends JFrame {
 
 			@Override
 			public void keyTyped(KeyEvent arg0) {
-
 			}
 
 			@Override
@@ -472,13 +448,11 @@ public class FenetrePrincipal extends JFrame {
 					texte.setText(monControleur.resoudreExercice(null));
 					renitialise();
 					champDeSaisie.requestFocus();
-
 				}
 			}
 
 			@Override
 			public void keyPressed(KeyEvent arg0) {
-
 			}
 		});
 
@@ -553,11 +527,9 @@ public class FenetrePrincipal extends JFrame {
 		});
 	}
 
-	public void renitialise(){
+	public void renitialise() {
 		champDeSaisie.setText("");
 		labReponse.setText("");
 		enJava.setText("");
-		
 	}
-	
 }

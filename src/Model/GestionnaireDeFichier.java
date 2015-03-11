@@ -2,172 +2,203 @@ package Model;
 
 import java.util.ArrayList;
 
-
-
 public class GestionnaireDeFichier {
-	
-	public static String pathRepertoire="textes";
-	
+
+	public static String pathRepertoire = "textes";
+
 	private ArrayList<String> nomsFichiers;
-	
-	
+
 	private int indiceFichierActuel;
 	private int indiceLigneFichierRegexp;
 	private int nombreDeLigneDuFichierRegexp;
 	private String nomFichierActuel;
-	
+
 	private String texte;
 	private String regexp;
 
 	private int nbFichier;
-	
+
 	/**
-	 *Importe directement les données necessaire à la création d'un nouvel exercice.
-	 *Ainsi on obtient le texte du premier fichier par ordre alphabétique du repertoire {@code pathRepertoire}.
-	 *Et la première ligne du fichier .regexp correspondant correspondant à une expression régulière.
+	 * Importe directement les données necessaire à la création d'un nouvel
+	 * exercice. Ainsi on obtient le texte du premier fichier par ordre
+	 * alphabétique du repertoire {@code pathRepertoire}. Et la première ligne
+	 * du fichier .regexp correspondant correspondant à une expression
+	 * régulière.
 	 */
-public GestionnaireDeFichier() {
-		
-		
-		nomsFichiers=Importer.importerTextesRepertoire(pathRepertoire);
-		nbFichier=nomsFichiers.size()-1;
-		indiceFichierActuel=0;
-		nomFichierActuel=nomsFichiers.get(indiceFichierActuel);
-		nombreDeLigneDuFichierRegexp=Importer.getNombreLigneFichier(pathRepertoire+"/"+nomFichierActuel+".regexp");
-		
-		
-		setTexte(Importer.importerTexte(pathRepertoire+"/"+nomFichierActuel+".txt"));
-		
-		indiceLigneFichierRegexp=1;
-		setRegexp(Importer.importerLigne(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
-		
 	
+	public GestionnaireDeFichier() {
+
+		nomsFichiers = Importer.importerTextesRepertoire(pathRepertoire);
+		nbFichier = nomsFichiers.size() - 1;
+		indiceFichierActuel = 0;
+		nomFichierActuel = nomsFichiers.get(indiceFichierActuel);
+		nombreDeLigneDuFichierRegexp = Importer
+				.getNombreLigneFichier(pathRepertoire + "/" + nomFichierActuel
+						+ ".regexp");
+
+		setTexte(Importer.importerTexte(pathRepertoire + "/" + nomFichierActuel
+				+ ".txt"));
+
+		indiceLigneFichierRegexp = 1;
+		setRegexp(Importer.importerLigne(pathRepertoire + "/"
+				+ nomFichierActuel + ".regexp", indiceLigneFichierRegexp));
+
 	}
-	
-		
+
 	/**
-	 *Importe la ligne suivante du fichier .regexp correspondant à une expression régulière.
-	 *Sinon si on arrive au bout du fichier .regexp: 
-	 *	Importe le texte du fichier suivant par ordre alphabétique du repertoire {@code pathRepertoire}.
-	 *	Et la première ligne du fichier .regexp correspondant correspondant à une expression régulière.
+	 * Importe la ligne suivante du fichier .regexp correspondant à une
+	 * expression régulière. Sinon si on arrive au bout du fichier .regexp:
+	 * Importe le texte du fichier suivant par ordre alphabétique du repertoire
+	 * {@code pathRepertoire}. Et la première ligne du fichier .regexp
+	 * correspondant correspondant à une expression régulière.
 	 */
+	
 	public void exerciceSuivant() {
-		if(indiceLigneFichierRegexp < nombreDeLigneDuFichierRegexp){
+		if (indiceLigneFichierRegexp < nombreDeLigneDuFichierRegexp) {
 			indiceLigneFichierRegexp++;
-			setRegexp(Importer.importerLigne(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
-		}else{
-			if(nbFichier==indiceFichierActuel){
-				indiceFichierActuel=0;
-			}else{
+			setRegexp(Importer.importerLigne(pathRepertoire + "/"
+					+ nomFichierActuel + ".regexp", indiceLigneFichierRegexp));
+		} else {
+			if (nbFichier == indiceFichierActuel) {
+				indiceFichierActuel = 0;
+			} else {
 				indiceFichierActuel++;
 			}
-			
-			nomFichierActuel=nomsFichiers.get(indiceFichierActuel);
-			nombreDeLigneDuFichierRegexp=Importer.getNombreLigneFichier(pathRepertoire+"/"+nomFichierActuel+".regexp");
-			setTexte(Importer.importerTexte(pathRepertoire+"/"+nomFichierActuel+".txt"));
-			
-			indiceLigneFichierRegexp=1;
-			setRegexp(Importer.importerLigne(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
+
+			nomFichierActuel = nomsFichiers.get(indiceFichierActuel);
+			nombreDeLigneDuFichierRegexp = Importer
+					.getNombreLigneFichier(pathRepertoire + "/"
+							+ nomFichierActuel + ".regexp");
+			setTexte(Importer.importerTexte(pathRepertoire + "/"
+					+ nomFichierActuel + ".txt"));
+
+			indiceLigneFichierRegexp = 1;
+			setRegexp(Importer.importerLigne(pathRepertoire + "/"
+					+ nomFichierActuel + ".regexp", indiceLigneFichierRegexp));
 		}
-		
+
 	}
-	
-	//Mappage pour vérifier si on a fait toutes les lignes de regexp(sans ordre) , une fois que l'on a fait toutes les lignes on retourne un boolean visant 
+
+	// Mappage pour vérifier si on a fait toutes les lignes de regexp(sans
+	// ordre) , une fois que l'on a fait toutes les lignes on retourne un
+	// boolean visant
 	// a faire changer le joueur d'exercice
-	
-	
-	//Si l'utilisteur veut vraiment changer de regExp a deviner (fichier .regexp)
-	public void RegexpSuivant(){
-		
-		if(indiceLigneFichierRegexp < nombreDeLigneDuFichierRegexp){
+
+	// Si l'utilisteur veut vraiment changer de regExp a deviner (fichier
+	// .regexp)
+	public void RegexpSuivant() {
+
+		if (indiceLigneFichierRegexp < nombreDeLigneDuFichierRegexp) {
 			indiceLigneFichierRegexp++;
-			setRegexp(Importer.importerLigne(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
+			setRegexp(Importer.importerLigne(pathRepertoire + "/"
+					+ nomFichierActuel + ".regexp", indiceLigneFichierRegexp));
 		}
 	}
-	
-	public void RegexpPrecedent(){
-		
-		if(indiceLigneFichierRegexp >1){
+
+	public void RegexpPrecedent() {
+
+		if (indiceLigneFichierRegexp > 1) {
 			indiceLigneFichierRegexp--;
-			setRegexp(Importer.importerLigne(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
+			setRegexp(Importer.importerLigne(pathRepertoire + "/"
+					+ nomFichierActuel + ".regexp", indiceLigneFichierRegexp));
 		}
 	}
+
+	// Si l'utilisateur veut vraiment changer d'exercice (fichier texte)
 	
-	
-	//Si l'utilisateur veut vraiment changer d'exercice (fichier texte)
-	public void exercicePlusUn(){
-		if(indiceFichierActuel==nomsFichiers.size()-1){
-			indiceFichierActuel=0;
-		}else{
+	public void exercicePlusUn() {
+		if (indiceFichierActuel == nomsFichiers.size() - 1) {
+			indiceFichierActuel = 0;
+		} else {
 			indiceFichierActuel++;
 		}
-		
-		nomFichierActuel=nomsFichiers.get(indiceFichierActuel);
-		setTexte(Importer.importerTexte(pathRepertoire+"/"+nomFichierActuel+".txt"));
-		indiceLigneFichierRegexp=1;
-		setRegexp(Importer.importerLigne(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
+
+		nomFichierActuel = nomsFichiers.get(indiceFichierActuel);
+		setTexte(Importer.importerTexte(pathRepertoire + "/" + nomFichierActuel
+				+ ".txt"));
+		indiceLigneFichierRegexp = 1;
+		setRegexp(Importer.importerLigne(pathRepertoire + "/"
+				+ nomFichierActuel + ".regexp", indiceLigneFichierRegexp));
 	}
-	
-	public void exerciceMoinsUn(){
-		if(indiceFichierActuel==0){
-			indiceFichierActuel=nomsFichiers.size()-1;
-		}else{
+
+	public void exerciceMoinsUn() {
+		if (indiceFichierActuel == 0) {
+			indiceFichierActuel = nomsFichiers.size() - 1;
+		} else {
 			indiceFichierActuel--;
 		}
-		
-		nomFichierActuel=nomsFichiers.get(indiceFichierActuel);
-		setTexte(Importer.importerTexte(pathRepertoire+"/"+nomFichierActuel+".txt"));
-		indiceLigneFichierRegexp=1;
-		setRegexp(Importer.importerLigne(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
+
+		nomFichierActuel = nomsFichiers.get(indiceFichierActuel);
+		setTexte(Importer.importerTexte(pathRepertoire + "/" + nomFichierActuel
+				+ ".txt"));
+		indiceLigneFichierRegexp = 1;
+		setRegexp(Importer.importerLigne(pathRepertoire + "/"
+				+ nomFichierActuel + ".regexp", indiceLigneFichierRegexp));
 	}
-	
+
 	/**
 	 * Ajouter une expression régulière à l'exercice actuel
-	 * @param expression Une String comportant l'expression régulière à ajouter.
+	 * 
+	 * @param expression
+	 *            Une String comportant l'expression régulière à ajouter.
 	 */
-	public void ajouterExpression(String expression){
-		Exporter.ajouterLigne(pathRepertoire+"/"+nomFichierActuel+".regexp", expression);
+	
+	public void ajouterExpression(String expression) {
+		Exporter.ajouterLigne(pathRepertoire + "/" + nomFichierActuel
+				+ ".regexp", expression);
 		nombreDeLigneDuFichierRegexp++;
 	}
-	
+
 	/**
 	 * Permet d'obtenir le texte du fichier dernièrement importé.
+	 * 
 	 * @return une String comportant le texte du fichier dernièrement importé.
 	 */
+
 	public String getTexte() {
 		return texte;
 	}
-	
+
 	private void setTexte(String texte) {
 		this.texte = texte;
 	}
+
 	/**
 	 * Permet d'obtenir l'expression régulière du fichier dernièrement importé.
-	 * @return une String comportant l'expression du fichier dernièrement importé.
+	 * 
+	 * @return une String comportant l'expression du fichier dernièrement
+	 *         importé.
 	 */
+	
 	public String getRegexp() {
 		return regexp;
 	}
-	
+
 	private void setRegexp(String regexp) {
 		this.regexp = regexp;
 	}
-	public ArrayList<String> getNomsFichiers(){
+
+	public ArrayList<String> getNomsFichiers() {
 		return nomsFichiers;
 	}
 
 	/**
 	 * Permet de changer d'exercice à partir de son nom et de son indice
 	 * 
-	 * @param nomTexte le nom d'un fichier
-	 * @param indice l'indice du fichier dans la liste
+	 * @param nomTexte
+	 *            le nom d'un fichier
+	 * @param indice
+	 *            l'indice du fichier dans la liste
 	 */
-	public void choixExercice(String nomTexte,int indice){
-		
-		nomFichierActuel=nomTexte;
-		indiceFichierActuel=indice;
-		indiceLigneFichierRegexp=1;
-		setTexte(Importer.importerTexte(pathRepertoire+"/"+nomFichierActuel+".txt"));
-		setRegexp(Importer.importerLigne(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
+	
+	public void choixExercice(String nomTexte, int indice) {
+
+		nomFichierActuel = nomTexte;
+		indiceFichierActuel = indice;
+		indiceLigneFichierRegexp = 1;
+		setTexte(Importer.importerTexte(pathRepertoire + "/" + nomFichierActuel
+				+ ".txt"));
+		setRegexp(Importer.importerLigne(pathRepertoire + "/"
+				+ nomFichierActuel + ".regexp", indiceLigneFichierRegexp));
 	}
 }
