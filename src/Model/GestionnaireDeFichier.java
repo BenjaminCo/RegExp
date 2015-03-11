@@ -152,4 +152,22 @@ public GestionnaireDeFichier() {
 	private void setRegexp(String regexp) {
 		this.regexp = regexp;
 	}
+	public ArrayList<String> getNomsFichiers(){
+		return nomsFichiers;
+	}
+
+	/**
+	 * Permet de changer d'exercice à partir de son nom et de son indice
+	 * 
+	 * @param nomTexte le nom d'un fichier
+	 * @param indice l'indice du fichier dans la liste
+	 */
+	public void choixExercice(String nomTexte,int indice){
+		
+		nomFichierActuel=nomTexte;
+		indiceFichierActuel=indice;
+		indiceLigneFichierRegexp=1;
+		setTexte(Importer.importerTexte(pathRepertoire+"/"+nomFichierActuel+".txt"));
+		setRegexp(Importer.importerLigne(pathRepertoire+"/"+nomFichierActuel+".regexp", indiceLigneFichierRegexp));
+	}
 }

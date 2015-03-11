@@ -3,7 +3,6 @@ package Controleur;
 
 
 import Interface.FenetrePrincipal;
-
 import Model.GestionnaireDeFichier;
 
 /**
@@ -174,6 +173,20 @@ public class ControleurPrincipal {
 	 */
 	public static void main(String[] args){
 		new ControleurPrincipal();
+	}
+
+
+	public void choixExercice(String string, int indice) {
+		
+		monGestionnaireDeFichier.choixExercice(string,indice);
+		String texte=monGestionnaireDeFichier.getTexte();
+		String regExp=monGestionnaireDeFichier.getRegexp();
+		if (modeAdmin) {
+			exoActuel=new Exercice(texte,null);
+		} else {
+			exoActuel=new Exercice(texte,regExp);
+		}
+		
 	}
 
 

@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -59,14 +60,15 @@ public class FenetrePrincipal extends JFrame {
 	private JMenu commande = new JMenu("Commande");
 	private JMenu OptionPays = new JMenu("Pays");
 	private JMenu admin = new JMenu("Administration");
-
+	private JMenu choixTexte =new JMenu("Choix texte");
 	private JMenuItem changeMode = new JMenuItem("Changer mode");
 	private JMenuItem ItemAPropos = new JMenuItem("A Propos");
 	private JMenuItem RegExpPrecedent = new JMenuItem("RegExp Precedent");
 	private JMenuItem RegExpSuivant = new JMenuItem("RegExp Suivant");
 	private JMenuItem TextePrecedent = new JMenuItem("Texte Precedent");
 	private JMenuItem TexteSuivant = new JMenuItem("Texte Suivant");
-
+	
+	
 	private JFrame cetteFenetre;
 	private JLabel texte;
 	private JTextField champDeSaisie = new JTextField();
@@ -86,7 +88,7 @@ public class FenetrePrincipal extends JFrame {
 
 	static Pays tab[] = Pays.values();
 	private JMenuItem tabOption[] = new JMenuItem[tab.length];
-	
+	private JMenuItem itemChoixTexte [];
 	final JLabel enJava = new JLabel("", JLabel.CENTER);
 
 	/**
@@ -109,7 +111,7 @@ public class FenetrePrincipal extends JFrame {
 		barreDeMenu.add(OptionPays);
 
 		barreDeMenu.add(admin);
-
+		barreDeMenu.add(choixTexte);
 		changeMode.addActionListener(new ActionListener() {
 
 			@Override
@@ -187,7 +189,36 @@ public class FenetrePrincipal extends JFrame {
 				champDeSaisie.requestFocus();
 			}
 		});
-
+		//on récupere la liste qui contient tous les noms des fichier de type txt :
+				final ArrayList<String> nomFichiers=monControleur.getGestionnaireDeFichier().getNomsFichiers();
+				
+				
+				itemChoixTexte = new JMenuItem[nomFichiers.size()];
+				for (int i=0;i<nomFichiers.size();i++){
+					itemChoixTexte[i]= new JMenuItem(nomFichiers.get(i));
+					choixTexte.add(itemChoixTexte[i]);
+					itemChoixTexte[i].setActionCommand(""+i);
+					itemChoixTexte[i].addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							// TODO Auto-generated method stub
+							
+							
+							int indice = Integer.parseInt(e.getActionCommand());
+							
+							
+							monControleur.choixExercice(nomFichiers.get(indice),indice);
+						    
+						    
+						    
+							renitialise();
+							
+							texte.setText(monControleur.resoudreExercice(null));
+							
+						}
+					});
+					
+				}
 		// AFFICHAGE
 
 		JPanel conteneur = new JPanel(new BorderLayout());
