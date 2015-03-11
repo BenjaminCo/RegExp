@@ -161,8 +161,7 @@ public class FenetrePrincipal extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				monControleur.nouvelExercice("RegExpSuivant");
 				texte.setText(monControleur.resoudreExercice(null));
-				champDeSaisie.setText("");
-				enJava.setText("");
+				renitialise();
 				champDeSaisie.requestFocus();
 
 			}
@@ -173,8 +172,7 @@ public class FenetrePrincipal extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				monControleur.nouvelExercice("ExoPrecedent");
 				texte.setText(monControleur.resoudreExercice(null));
-				champDeSaisie.setText("");
-				enJava.setText("");
+				renitialise();
 				champDeSaisie.requestFocus();
 			}
 		});
@@ -185,8 +183,7 @@ public class FenetrePrincipal extends JFrame {
 
 				monControleur.nouvelExercice("ExoSuivant");
 				texte.setText(monControleur.resoudreExercice(null));
-				champDeSaisie.setText("");
-				enJava.setText("");
+				renitialise();
 				champDeSaisie.requestFocus();
 			}
 		});
@@ -277,7 +274,7 @@ public class FenetrePrincipal extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				monControleur.ajouterExpression(champDeSaisie.getText());
-				champDeSaisie.setText("");
+				renitialise();
 			}
 		});
 
@@ -370,7 +367,7 @@ public class FenetrePrincipal extends JFrame {
 
 				if (champDeSaisie.getText().equals("")) {
 					texte.setText(monControleur.resoudreExercice(null));
-					enJava.setText("");
+					renitialise();
 				} else {
 					try {
 						texte.setText(monControleur
@@ -442,8 +439,7 @@ public class FenetrePrincipal extends JFrame {
 				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
 					monControleur.nouvelExercice();
 					texte.setText(monControleur.resoudreExercice(null));
-					champDeSaisie.setText("");
-					enJava.setText("");
+					renitialise();
 					champDeSaisie.requestFocus();
 
 				}
@@ -461,10 +457,8 @@ public class FenetrePrincipal extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				monControleur.nouvelExercice();
 				texte.setText(monControleur.resoudreExercice(null));
-				champDeSaisie.setText("");
-				enJava.setText("");
+				renitialise();
 				champDeSaisie.requestFocus();
-				labReponse.setText("");
 			}
 		});
 
@@ -528,4 +522,11 @@ public class FenetrePrincipal extends JFrame {
 		});
 	}
 
+	public void renitialise(){
+		champDeSaisie.setText("");
+		labReponse.setText("");
+		enJava.setText("");
+		
+	}
+	
 }
